@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">YACRUK</string>
+    <string name="title_activity_yacruk">YacrukActivity</string>
 </resources>
