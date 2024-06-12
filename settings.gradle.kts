@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "YACRUK"
 include(":sample")
+include(":yacruk")
