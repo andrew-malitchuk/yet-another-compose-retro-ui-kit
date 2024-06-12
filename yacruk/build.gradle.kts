@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.yaghm)
     id("org.jmailen.kotlinter") version "4.3.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 android {
@@ -60,4 +61,5 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.20")
 }
