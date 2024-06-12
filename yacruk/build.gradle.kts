@@ -1,7 +1,17 @@
+import dev.yaghm.plugin.internal.core.dsl.bash.Interpreter
+import dev.yaghm.plugin.internal.core.dsl.githook.action
+import dev.yaghm.plugin.internal.core.dsl.githook.doFirst
+import dev.yaghm.plugin.internal.core.dsl.githook.doLast
+import dev.yaghm.plugin.internal.core.dsl.githook.gradle
+import dev.yaghm.plugin.internal.core.dsl.githook.preCommit
+import dev.yaghm.plugin.internal.core.dsl.githook.useShebang
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.yaghm)
+    id("org.jmailen.kotlinter") version "4.3.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 android {
@@ -21,6 +31,28 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom("$projectDir/config/detekt/detekt.yml")
+}
+
+yaghm {
+    gitHook {
+        preCommit {
+            doFirst {
+                gradle("lintKotlin")
+            }
+            doLast {
+                gradle("detekt")
+            }
+            useShebang {
+                Interpreter.BASH
+            }
+        }
     }
 }
 
