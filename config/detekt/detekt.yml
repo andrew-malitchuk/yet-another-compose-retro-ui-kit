@@ -14,7 +14,7 @@ complexity:
     ignoreDefaultParameters: true
     ignoreDataClasses: true
     ignoreAnnotatedParameter: [ ]
-    ignoreAnnotated: ["javax.inject.Inject,javax.annotation.Generated"]
+    ignoreAnnotated: [ "javax.inject.Inject,javax.annotation.Generated" ]
   LongMethod:
     active: true
     threshold: 100
@@ -82,3 +82,7 @@ naming:
     active: false
   FunctionNaming:
     active: false
+    aliases: [ 'FunctionName' ]
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**' ]
+    functionPattern: '[a-z][a-zA-Z0-9]*'
+    excludeClassPattern: '$^'
