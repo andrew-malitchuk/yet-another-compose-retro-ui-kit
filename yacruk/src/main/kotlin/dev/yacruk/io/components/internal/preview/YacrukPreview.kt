@@ -5,10 +5,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun YacrukRuntimePreview() {
-
 }
 
 @Preview
 @Composable
-fun YacrukPreview()  {
+fun YacrukPreview() {
 }

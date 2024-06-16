@@ -14,6 +14,7 @@
             android:name=".YacrukActivity"
             android:exported="true"
             android:label="@string/title_activity_yacruk"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.YACRUK">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
