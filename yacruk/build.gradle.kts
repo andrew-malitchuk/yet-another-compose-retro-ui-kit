@@ -7,7 +7,7 @@ import dev.yaghm.plugin.internal.core.dsl.githook.preCommit
 import dev.yaghm.plugin.internal.core.dsl.githook.useShebang
 
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.library")
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.yaghm)
     id("org.jmailen.kotlinter") version "4.3.0"
@@ -20,11 +20,14 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "dev.yacruk.io"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -61,6 +64,12 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
 
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

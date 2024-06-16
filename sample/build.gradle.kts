@@ -17,7 +17,6 @@ android {
             useSupportLibrary = true
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -51,6 +50,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-//    implementation(project(":yacruk"))
+    implementation(project(":yacruk"))
 
 }
