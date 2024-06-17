@@ -1,5 +1,6 @@
 package dev.yacruk.sample
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.components.uikit.button.YacrukButton
@@ -50,7 +53,15 @@ class YacrukActivity : ComponentActivity() {
                         textStyle = YacrukTheme.typography.body,
                         color = YacrukTheme.colors.primary
                     )
-                    YacrukButton(strokeWidth = 4.dp)
+                    YacrukButton(
+                        strokeWidth = 4.dp,
+                        icon = {
+                            Icon(
+                                painterResource(id = com.google.android.material.R.drawable.ic_call_answer),
+                                contentDescription = ""
+                            )
+                        }
+                    )
                 }
             }
         }
