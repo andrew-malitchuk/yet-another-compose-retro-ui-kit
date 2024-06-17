@@ -12,9 +12,11 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import dev.yacruk.io.core.ext.noRippleClickable
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
+import dev.yacruk.io.core.theme.source.fontSize
 
 // TODO: preview
 @OptIn(ExperimentalFoundationApi::class)
@@ -24,6 +26,8 @@ fun YacrukText(
     text: String,
     color: Color = Color.Unspecified,
     textStyle: TextStyle,
+    fontSize: TextUnit? = null,
+    lineHeight: TextUnit? = null,
     textAlign: TextAlign? = null,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
@@ -39,6 +43,8 @@ fun YacrukText(
         color = color,
         style = textStyle,
         textAlign = textAlign,
+        fontSize = fontSize ?: TextUnit.Unspecified,
+        lineHeight = lineHeight ?: TextUnit.Unspecified,
         maxLines = maxLines,
         minLines = minLines,
         onTextLayout = onTextLayout,
@@ -52,6 +58,8 @@ fun YacrukText(
     @StringRes textResId: Int,
     color: Color = Color.Unspecified,
     textStyle: TextStyle,
+    fontSize: TextUnit? = null,
+    lineHeight: TextUnit = TextUnit.Unspecified,
     textAlign: TextAlign? = null,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
@@ -64,7 +72,9 @@ fun YacrukText(
         text = context.getText(textResId).toString(),
         color = color,
         textStyle = textStyle,
+        fontSize = fontSize,
         textAlign = textAlign,
+        lineHeight = lineHeight,
         maxLines = maxLines,
         minLines = minLines,
         onTextLayout = onTextLayout,
