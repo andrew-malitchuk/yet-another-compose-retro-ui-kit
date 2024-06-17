@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.PointerEvent
@@ -16,6 +17,7 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
     composed {
@@ -64,12 +66,21 @@ fun Modifier.yacrukBorder(
 ): Modifier =
     this.drawBehind {
         drawRect(
-            color = backgroundColor,
-        )
-        drawRect(
             color = borderColor,
             style = Stroke(width = strokeWidth.toPx()),
         )
+        drawRect(
+            color = backgroundColor,
+            topLeft = Offset(
+                strokeWidth.toPx()/2,
+                strokeWidth.toPx()/2,
+            ),
+            size = Size(
+                width = (size.width-strokeWidth.toPx()),
+                height = (size.height-strokeWidth.toPx())
+            )
+        )
+        // horizontal
         drawLine(
             color = borderColorAlt,
             start =
@@ -84,12 +95,13 @@ fun Modifier.yacrukBorder(
                 ),
             strokeWidth = strokeWidth.toPx(),
         )
+        // vertical
         drawLine(
             color = borderColorAlt,
             start =
                 Offset(
                     strokeWidth.toPx(),
-                    strokeWidth.toPx(),
+                    strokeWidth.toPx()+strokeWidth.toPx()/2,
                 ),
             end =
                 Offset(
