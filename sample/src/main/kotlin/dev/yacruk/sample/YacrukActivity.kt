@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.button.YacrukButton
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.theme.common.YacrukTheme
@@ -57,7 +58,7 @@ class YacrukActivity : ComponentActivity() {
                         strokeWidth = 4.dp,
                         icon = {
                             Icon(
-                                painterResource(id = com.google.android.material.R.drawable.ic_call_answer),
+                                painterResource(id = R.drawable.icon_check_24),
                                 contentDescription = ""
                             )
                         }

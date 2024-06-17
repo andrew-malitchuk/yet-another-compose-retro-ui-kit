@@ -21,11 +21,15 @@ import androidx.compose.ui.unit.dp
 
 fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
     composed {
-        this.clickable(
-            indication = null,
-            interactionSource = remember { MutableInteractionSource() },
-        ) {
-            onClick?.invoke()
+        if(onClick!=null) {
+            this.clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() },
+            ) {
+                onClick.invoke()
+            }
+        }else{
+            this
         }
     }
 
@@ -57,6 +61,15 @@ fun Modifier.onTouch(
             }
         }
     }
+
+fun Modifier.disableClickAndRipple(): Modifier = composed {
+    this.clickable(
+        enabled = false,
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() },
+        onClick = { },
+    )
+}
 
 fun Modifier.yacrukBorder(
     strokeWidth: Dp,

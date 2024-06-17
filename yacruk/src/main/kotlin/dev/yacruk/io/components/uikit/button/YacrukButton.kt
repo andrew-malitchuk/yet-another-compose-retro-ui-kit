@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.components.uikit.button.YacrukButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
+import dev.yacruk.io.core.ext.disableClickAndRipple
 import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
@@ -180,7 +181,7 @@ fun YacrukButton(
                 Box(modifier = Modifier.scale(sizeState)) {
                     it()
                 }
-                Spacer(modifier = Modifier.width(iconOffset))
+                Spacer(modifier = Modifier.width(iconOffset * sizeState))
             }
             Row(
                 modifier =
