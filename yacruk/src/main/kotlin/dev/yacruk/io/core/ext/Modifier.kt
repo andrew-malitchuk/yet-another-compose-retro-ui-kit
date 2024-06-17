@@ -17,18 +17,17 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
     composed {
-        if(onClick!=null) {
+        if (onClick != null) {
             this.clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() },
             ) {
                 onClick.invoke()
             }
-        }else{
+        } else {
             this
         }
     }
@@ -62,14 +61,15 @@ fun Modifier.onTouch(
         }
     }
 
-fun Modifier.disableClickAndRipple(): Modifier = composed {
-    this.clickable(
-        enabled = false,
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() },
-        onClick = { },
-    )
-}
+fun Modifier.disableClickAndRipple(): Modifier =
+    composed {
+        this.clickable(
+            enabled = false,
+            indication = null,
+            interactionSource = remember { MutableInteractionSource() },
+            onClick = { },
+        )
+    }
 
 fun Modifier.yacrukBorder(
     strokeWidth: Dp,
@@ -84,14 +84,16 @@ fun Modifier.yacrukBorder(
         )
         drawRect(
             color = backgroundColor,
-            topLeft = Offset(
-                strokeWidth.toPx()/2,
-                strokeWidth.toPx()/2,
-            ),
-            size = Size(
-                width = (size.width-strokeWidth.toPx()),
-                height = (size.height-strokeWidth.toPx())
-            )
+            topLeft =
+                Offset(
+                    strokeWidth.toPx() / 2,
+                    strokeWidth.toPx() / 2,
+                ),
+            size =
+                Size(
+                    width = (size.width - strokeWidth.toPx()),
+                    height = (size.height - strokeWidth.toPx()),
+                ),
         )
         // horizontal
         drawLine(
@@ -114,7 +116,7 @@ fun Modifier.yacrukBorder(
             start =
                 Offset(
                     strokeWidth.toPx(),
-                    strokeWidth.toPx()+strokeWidth.toPx()/2,
+                    strokeWidth.toPx() + strokeWidth.toPx() / 2,
                 ),
             end =
                 Offset(

@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.components.uikit.button.YacrukButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
-import dev.yacruk.io.core.ext.disableClickAndRipple
 import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
@@ -58,7 +57,7 @@ fun YacrukButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     icon: (@Composable () -> Unit)? = null,
     iconOffset: Dp = YacrukTheme.spacing.small,
-    isDisabled: Boolean = false
+    isDisabled: Boolean = false,
 ) {
     val haptic = LocalHapticFeedback.current
 
@@ -68,7 +67,6 @@ fun YacrukButton(
     var hoverStateState: YacrukButtonHoverState by remember {
         mutableStateOf(YacrukButtonHoverState.Default)
     }
-
 
     when {
         isDisabled -> {
@@ -81,7 +79,6 @@ fun YacrukButton(
         }
     }
 
-
     val backgroundColor = renkon_beige
     val borderColor = black_mesa
     val borderColorAlt = rustling_leaves
@@ -90,40 +87,40 @@ fun YacrukButton(
 
     val offset by animateDpAsState(
         targetValue =
-        when (clickState) {
-            YacrukButtonClickState.Clicked -> (strokeWidth * 2) + strokeWidth
-            YacrukButtonClickState.Enabled -> (strokeWidth * 2)
-            else -> (strokeWidth * 2)
-        },
+            when (clickState) {
+                YacrukButtonClickState.Clicked -> (strokeWidth * 2) + strokeWidth
+                YacrukButtonClickState.Enabled -> (strokeWidth * 2)
+                else -> (strokeWidth * 2)
+            },
         label = "offset",
     )
 
     val borderColorAltState by animateColorAsState(
         targetValue =
-        when (clickState) {
-            YacrukButtonClickState.Clicked -> borderColorAlt
-            YacrukButtonClickState.Disabled -> disableColor
-            else -> Color.Transparent
-        },
+            when (clickState) {
+                YacrukButtonClickState.Clicked -> borderColorAlt
+                YacrukButtonClickState.Disabled -> disableColor
+                else -> Color.Transparent
+            },
         label = "borderColorAltState",
     )
 
     val backgroundColorState by animateColorAsState(
         targetValue =
-        when (hoverStateState) {
-            YacrukButtonHoverState.Hovered -> hoverColor
-            YacrukButtonHoverState.Disabled -> disableColor
-            else -> backgroundColor
-        },
+            when (hoverStateState) {
+                YacrukButtonHoverState.Hovered -> hoverColor
+                YacrukButtonHoverState.Disabled -> disableColor
+                else -> backgroundColor
+            },
         label = "backgroundColorAltState",
     )
 
     val sizeState by animateFloatAsState(
         targetValue =
-        when (clickState) {
-            YacrukButtonClickState.Clicked -> 0.9f
-            else -> 1f
-        },
+            when (clickState) {
+                YacrukButtonClickState.Clicked -> 0.9f
+                else -> 1f
+            },
         label = "borderColorAltState",
     )
 
@@ -172,35 +169,35 @@ fun YacrukButton(
 
     Box(
         modifier =
-        modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                enabled = true,
-                onClick = {
-                    if (!isDisabled) {
-                        onClick?.invoke()
-                    }
-                }
-            )
-            .yacrukBorder(
-                strokeWidth = strokeWidth,
-                borderColor = borderColor,
-                backgroundColor = backgroundColorState,
-                borderColorAlt = borderColorAltState,
-            )
-    ) {
-
-        Row(
-            modifier = Modifier
+            modifier
                 .fillMaxWidth()
-                .padding(
-                    horizontal = offset,
-                    vertical = strokeWidth * 2,
+                .wrapContentHeight()
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                    enabled = true,
+                    onClick = {
+                        if (!isDisabled) {
+                            onClick?.invoke()
+                        }
+                    },
+                )
+                .yacrukBorder(
+                    strokeWidth = strokeWidth,
+                    borderColor = borderColor,
+                    backgroundColor = backgroundColorState,
+                    borderColorAlt = borderColorAltState,
                 ),
-            verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = offset,
+                        vertical = strokeWidth * 2,
+                    ),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             icon?.let {
                 Box(modifier = Modifier.scale(sizeState)) {
@@ -210,24 +207,25 @@ fun YacrukButton(
             }
             Row(
                 modifier =
-                Modifier
-                    .height(
-                        YacrukTheme.typography.headline.lineHeight.value.dp,
-                    ),
-                verticalAlignment = Alignment.CenterVertically
+                    Modifier
+                        .height(
+                            YacrukTheme.typography.headline.lineHeight.value.dp,
+                        ),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 YacrukText(
                     modifier =
-                    Modifier
-                        .height(
-                            YacrukTheme.typography.headline.lineHeight.value.dp * sizeState,
-                        ),
+                        Modifier
+                            .height(
+                                YacrukTheme.typography.headline.lineHeight.value.dp * sizeState,
+                            ),
                     text = "foobar",
                     textStyle = YacrukTheme.typography.headline,
-                    fontSize = TextUnit(
-                        value = YacrukTheme.typography.headline.fontSize.value * sizeState,
-                        TextUnitType.Sp
-                    ),
+                    fontSize =
+                        TextUnit(
+                            value = YacrukTheme.typography.headline.fontSize.value * sizeState,
+                            TextUnitType.Sp,
+                        ),
                 )
             }
         }
@@ -251,6 +249,7 @@ sealed class YacrukButtonClickState {
 
 sealed class YacrukButtonHoverState {
     data object Hovered : YacrukButtonHoverState()
+
     data object Disabled : YacrukButtonHoverState()
 
     data object Default : YacrukButtonHoverState()
@@ -264,7 +263,7 @@ fun PreviewYacrukButton() {
             YacrukButton(
                 strokeWidth = 4.dp,
                 primaryState = YacrukButtonClickState.Clicked,
-                isDisabled = false
+                isDisabled = false,
             )
         }
     }
