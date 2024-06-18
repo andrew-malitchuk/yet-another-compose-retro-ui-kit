@@ -131,18 +131,16 @@ fun YacrukButton(
             when (interaction) {
                 is PressInteraction.Press -> {
                     hoverStateState = YacrukButtonHoverState.Hovered
-                    if (!isDisabled) {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    }
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     interactions.add(interaction)
                 }
 
                 is Release -> {
                     hoverStateState = YacrukButtonHoverState.Default
                     clickState = clickState.toggleClick()
-                    if (!isDisabled) {
-                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                    }
+//                    if (!isDisabled) {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+//                    }
                     interactions.remove(interaction.press)
                 }
 
@@ -266,7 +264,7 @@ fun PreviewYacrukButton() {
                 strokeWidth = 4.dp,
                 primaryState = YacrukButtonClickState.Clicked,
                 isDisabled = false,
-                text="foobar"
+                text = "foobar",
             )
         }
     }

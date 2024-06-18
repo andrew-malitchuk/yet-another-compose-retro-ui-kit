@@ -1,10 +1,7 @@
 package dev.yacruk.io.components.uikit.label
 
-import android.hardware.camera2.CameraExtensionSession.StillCaptureLatency
-import android.widget.Space
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -24,11 +21,12 @@ fun YacrukLabel(
     padding: Dp = YacrukTheme.spacing.small,
     textStyle: TextStyle,
     color: Color = Color.Unspecified,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Column(
-        modifier = modifier
-            .wrapContentHeight()
+        modifier =
+            modifier
+                .wrapContentHeight(),
     ) {
         YacrukText(text = title, textStyle = textStyle, color = color)
         Spacer(modifier = Modifier.height(padding))
@@ -43,15 +41,15 @@ fun YacrukLabel(
     padding: Dp = YacrukTheme.spacing.small,
     textStyle: TextStyle,
     color: Color = Color.Unspecified,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Column(
-        modifier = modifier
-            .wrapContentHeight()
+        modifier =
+            modifier
+                .wrapContentHeight(),
     ) {
         YacrukText(textResId = titleResId, textStyle = textStyle, color = color)
         Spacer(modifier = Modifier.height(padding))
         content()
     }
 }
-

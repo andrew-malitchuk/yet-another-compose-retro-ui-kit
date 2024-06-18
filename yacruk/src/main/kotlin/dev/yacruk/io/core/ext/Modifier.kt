@@ -87,44 +87,44 @@ fun Modifier.yacrukBorder(
         drawRect(
             color = backgroundColor,
             topLeft =
-            Offset(
-                strokeWidth.toPx() / 2,
-                strokeWidth.toPx() / 2,
-            ),
+                Offset(
+                    strokeWidth.toPx() / 2,
+                    strokeWidth.toPx() / 2,
+                ),
             size =
-            Size(
-                width = (size.width - strokeWidth.toPx()),
-                height = (size.height - strokeWidth.toPx()),
-            ),
+                Size(
+                    width = (size.width - strokeWidth.toPx()),
+                    height = (size.height - strokeWidth.toPx()),
+                ),
         )
         // horizontal
         drawLine(
             color = borderColorAlt,
             start =
-            Offset(
-                (strokeWidth / 2).toPx(),
-                strokeWidth.toPx(),
-            ),
+                Offset(
+                    (strokeWidth / 2).toPx(),
+                    strokeWidth.toPx(),
+                ),
             end =
-            Offset(
-                x = size.width - (strokeWidth / 2).toPx(),
-                y = strokeWidth.toPx(),
-            ),
+                Offset(
+                    x = size.width - (strokeWidth / 2).toPx(),
+                    y = strokeWidth.toPx(),
+                ),
             strokeWidth = strokeWidth.toPx(),
         )
         // vertical
         drawLine(
             color = borderColorAlt,
             start =
-            Offset(
-                strokeWidth.toPx(),
-                strokeWidth.toPx() + strokeWidth.toPx() / 2,
-            ),
+                Offset(
+                    strokeWidth.toPx(),
+                    strokeWidth.toPx() + strokeWidth.toPx() / 2,
+                ),
             end =
-            Offset(
-                x = strokeWidth.toPx(),
-                y = size.height - (strokeWidth / 2).toPx(),
-            ),
+                Offset(
+                    x = strokeWidth.toPx(),
+                    y = size.height - (strokeWidth / 2).toPx(),
+                ),
             strokeWidth = strokeWidth.toPx(),
         )
     }
