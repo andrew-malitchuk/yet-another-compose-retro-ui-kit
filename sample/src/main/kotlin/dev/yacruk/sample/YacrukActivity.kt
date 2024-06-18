@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.button.YacrukButton
+import dev.yacruk.io.components.uikit.label.YacrukLabel
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
@@ -60,29 +61,30 @@ class YacrukActivity : ComponentActivity() {
                         .navigationBarsPadding()
                         .padding(YacrukTheme.spacing.medium)
                 ) {
-                    YacrukText(
-                        text = "foobar",
-                        textStyle = YacrukTheme.typography.body,
-                        color = YacrukTheme.colors.primary
-                    )
                     var foo by remember {
                         mutableStateOf(true)
                     }
-                    YacrukButton(
-                        strokeWidth = 4.dp,
-                        icon = {
-                            Icon(
-                                painterResource(id = R.drawable.icon_check_24),
-                                contentDescription = ""
-                            )
-                        },
-                        isDisabled = foo,
-                        onClick = {
-                            coroutineContext.launch {
-                                Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
+                    YacrukLabel(
+                        title = "foobar",
+                        textStyle = YacrukTheme.typography.body,
+                    ) {
+                        YacrukButton(
+                            strokeWidth = 4.dp,
+                            icon = {
+                                Icon(
+                                    painterResource(id = R.drawable.icon_check_24),
+                                    contentDescription = ""
+                                )
+                            },
+                            text = "foobarfoobarfoobarfoobarfoobarfoobar",
+                            isDisabled = foo,
+                            onClick = {
+                                coroutineContext.launch {
+                                    Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
+                                }
                             }
-                        }
-                    )
+                        )
+                    }
                     Switch(checked = foo, onCheckedChange = {
                         foo = it
                     })
