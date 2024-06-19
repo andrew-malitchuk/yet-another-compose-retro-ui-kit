@@ -95,10 +95,10 @@ class YacrukActivity : ComponentActivity() {
                         value = foobar,
                         onValueChanged = { foobar = it },
                         modifier = Modifier
-                            .padding(horizontal = 8.dp)
+                            .padding(8.dp)
                             .fillMaxWidth(),
                         valueRange = 0f..30f,
-                        stepSize = 1f,
+                        stepSize = 2f,
                         strokeWidth = 4.dp,
                         pointerSize = 12.dp,
                     )
