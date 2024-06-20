@@ -29,7 +29,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.R
-import dev.yacruk.io.components.uikit.button.YacrukButton
+import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
+import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
 import dev.yacruk.io.components.uikit.label.YacrukLabel
 import dev.yacruk.io.components.uikit.slider.YacrukSlider
 import dev.yacruk.io.core.theme.common.YacrukTheme
@@ -90,7 +91,6 @@ class YacrukActivity : ComponentActivity() {
                         mutableFloatStateOf(0f)
                     }
 
-
                     YacrukSlider(
                         value = foobar,
                         onValueChanged = { foobar = it },
@@ -101,6 +101,19 @@ class YacrukActivity : ComponentActivity() {
                         stepSize = 2f,
                         strokeWidth = 4.dp,
                         pointerSize = 12.dp,
+                    )
+
+                    YacrukIconButton(
+                        strokeWidth = 4.dp,
+                        icon = R.drawable.icon_check_24,
+                        isDisabled = foo,
+                        iconSize = 48.dp,
+                        iconOffset = 2.dp,
+                        onClick = {
+                            coroutineContext.launch {
+                                Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     )
                 }
             }
