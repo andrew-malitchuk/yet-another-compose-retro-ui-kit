@@ -2,7 +2,6 @@ package dev.yacruk.io.components.uikit.text
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.basicMarquee
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +12,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
+import dev.yacruk.io.core.ext.marquee
 import dev.yacruk.io.core.ext.noRippleClickable
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
@@ -33,13 +33,14 @@ fun YacrukText(
     minLines: Int = 1,
     onTextLayout: ((TextLayoutResult) -> Unit)? = null,
     onClick: (() -> Unit)? = null,
+    isMarqueeEnabled: Boolean = true,
 ) {
     Text(
         text = text,
         modifier =
             modifier
                 .noRippleClickable(onClick)
-                .basicMarquee(),
+                .marquee(isMarqueeEnabled),
         color = color,
         style = textStyle,
         textAlign = textAlign,

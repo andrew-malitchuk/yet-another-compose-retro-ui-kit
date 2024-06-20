@@ -1,5 +1,7 @@
 package dev.yacruk.io.core.ext
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -126,3 +128,12 @@ fun Modifier.yacrukBorder(
             strokeWidth = strokeWidth.toPx(),
         )
     }
+
+@OptIn(ExperimentalFoundationApi::class)
+fun Modifier.marquee(isEnabled: Boolean): Modifier {
+    return if (isEnabled) {
+        this.basicMarquee()
+    } else {
+        this
+    }
+}

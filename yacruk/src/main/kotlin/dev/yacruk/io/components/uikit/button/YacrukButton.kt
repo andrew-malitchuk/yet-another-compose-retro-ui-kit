@@ -53,6 +53,7 @@ fun YacrukButton(
     modifier: Modifier = Modifier,
     strokeWidth: Dp,
     primaryState: YacrukButtonClickState = YacrukButtonClickState.Enabled,
+    text: String,
     onClick: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     icon: (@Composable () -> Unit)? = null,
@@ -130,18 +131,16 @@ fun YacrukButton(
             when (interaction) {
                 is PressInteraction.Press -> {
                     hoverStateState = YacrukButtonHoverState.Hovered
-                    if (!isDisabled) {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    }
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     interactions.add(interaction)
                 }
 
                 is Release -> {
                     hoverStateState = YacrukButtonHoverState.Default
                     clickState = clickState.toggleClick()
-                    if (!isDisabled) {
-                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                    }
+//                    if (!isDisabled) {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+//                    }
                     interactions.remove(interaction.press)
                 }
 
@@ -194,8 +193,9 @@ fun YacrukButton(
                 Modifier
                     .fillMaxWidth()
                     .padding(
-                        horizontal = offset,
-                        vertical = strokeWidth * 2,
+                        start = offset,
+                        bottom = strokeWidth * 2,
+                        top = strokeWidth * 2,
                     ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -219,7 +219,7 @@ fun YacrukButton(
                             .height(
                                 YacrukTheme.typography.headline.lineHeight.value.dp * sizeState,
                             ),
-                    text = "foobar",
+                    text = text,
                     textStyle = YacrukTheme.typography.headline,
                     fontSize =
                         TextUnit(
@@ -264,6 +264,7 @@ fun PreviewYacrukButton() {
                 strokeWidth = 4.dp,
                 primaryState = YacrukButtonClickState.Clicked,
                 isDisabled = false,
+                text = "foobar",
             )
         }
     }
