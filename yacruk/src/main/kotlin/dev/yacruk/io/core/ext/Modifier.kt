@@ -129,6 +129,31 @@ fun Modifier.yacrukBorder(
         )
     }
 
+fun Modifier.yacrukIconBorder(
+    strokeWidth: Dp,
+    backgroundColor: Color,
+    borderColor: Color,
+): Modifier =
+    this.drawBehind {
+        drawRect(
+            color = borderColor,
+            style = Stroke(width = strokeWidth.toPx()),
+        )
+        drawRect(
+            color = backgroundColor,
+            topLeft =
+                Offset(
+                    strokeWidth.toPx() / 2,
+                    strokeWidth.toPx() / 2,
+                ),
+            size =
+                Size(
+                    width = (size.width - strokeWidth.toPx()),
+                    height = (size.height - strokeWidth.toPx()),
+                ),
+        )
+    }
+
 @OptIn(ExperimentalFoundationApi::class)
 fun Modifier.marquee(isEnabled: Boolean): Modifier {
     return if (isEnabled) {
