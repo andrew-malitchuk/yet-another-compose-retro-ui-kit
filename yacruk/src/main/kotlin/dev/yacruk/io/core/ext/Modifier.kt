@@ -6,10 +6,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.isImeVisible
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -18,6 +26,7 @@ import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.Dp
 
 fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
@@ -129,6 +138,62 @@ fun Modifier.yacrukBorder(
         )
     }
 
+fun Modifier.foo(
+    strokeWidth: Dp,
+    backgroundColor: Color,
+    borderColor: Color,
+    borderColorAlt: Color,
+): Modifier =
+    this.drawBehind {
+        drawRect(
+            color = borderColor,
+            style = Stroke(width = strokeWidth.toPx()),
+        )
+        drawRect(
+            color = backgroundColor,
+            topLeft =
+                Offset(
+                    strokeWidth.toPx() / 2,
+                    strokeWidth.toPx() / 2,
+                ),
+            size =
+                Size(
+                    width = (size.width - strokeWidth.toPx()),
+                    height = (size.height - strokeWidth.toPx()),
+                ),
+        )
+        // horizontal
+        drawLine(
+            color = borderColorAlt,
+            start =
+                Offset(
+                    (strokeWidth / 2).toPx(),
+                    strokeWidth.toPx(),
+                ),
+            end =
+                Offset(
+                    x = size.width - (strokeWidth / 2).toPx(),
+                    y = strokeWidth.toPx(),
+                ),
+            strokeWidth = strokeWidth.toPx(),
+        )
+        // vertical
+        drawLine(
+            color = borderColorAlt,
+            start =
+                Offset(
+                    strokeWidth.toPx(),
+                    strokeWidth.toPx() + strokeWidth.toPx() / 2,
+                ),
+            end =
+                Offset(
+                    x = strokeWidth.toPx(),
+                    y = size.height - (strokeWidth / 2).toPx(),
+                ),
+            strokeWidth = strokeWidth.toPx(),
+        )
+    }
+
 fun Modifier.yacrukIconBorder(
     strokeWidth: Dp,
     backgroundColor: Color,
@@ -162,3 +227,32 @@ fun Modifier.marquee(isEnabled: Boolean): Modifier {
         this
     }
 }
+
+/**
+ * Remove focus from keyboard
+ */
+@OptIn(ExperimentalLayoutApi::class)
+fun Modifier.clearFocusOnKeyboardDismiss(initial: Boolean = false): Modifier =
+    composed {
+        var isFocused by remember { mutableStateOf(initial) }
+        var keyboardAppearedSinceLastFocused by remember { mutableStateOf(initial) }
+        if (isFocused) {
+            val imeIsVisible = WindowInsets.isImeVisible
+            val focusManager = LocalFocusManager.current
+            LaunchedEffect(imeIsVisible) {
+                if (imeIsVisible) {
+                    keyboardAppearedSinceLastFocused = true
+                } else if (keyboardAppearedSinceLastFocused) {
+                    focusManager.clearFocus()
+                }
+            }
+        }
+        onFocusEvent {
+            if (isFocused != it.isFocused) {
+                isFocused = it.isFocused
+                if (isFocused) {
+                    keyboardAppearedSinceLastFocused = false
+                }
+            }
+        }
+    }

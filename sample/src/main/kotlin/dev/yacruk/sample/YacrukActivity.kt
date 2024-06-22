@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -32,6 +33,7 @@ import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButton
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
+import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
 import dev.yacruk.io.components.uikit.slider.YacrukSlider
 import dev.yacruk.io.components.uikit.text.YacrukText
@@ -130,6 +132,10 @@ class YacrukActivity : ComponentActivity() {
                         content = {
                             YacrukText(text = "10", textStyle = YacrukTheme.typography.headline)
                         }
+                    )
+
+                    YaaumBasicTextField(
+                        strokeWidth = 4.dp,
                     )
                 }
             }
