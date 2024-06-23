@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
@@ -136,6 +137,10 @@ class YacrukActivity : ComponentActivity() {
 
                     YaaumBasicTextField(
                         strokeWidth = 4.dp,
+                        isDisabled = foo,
+                        textStyle = YacrukTheme.typography.headline,
+                        iconOffset = 4.dp,
+                        icon = R.drawable.icon_check_24
                     )
                 }
             }
