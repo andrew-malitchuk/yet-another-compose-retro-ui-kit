@@ -5,7 +5,10 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.interaction.DragInteraction
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,7 +37,9 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TextFieldDefaults.TextFieldDecorationBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -52,6 +57,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextRange
@@ -66,6 +72,8 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import dev.yacruk.io.R
+import dev.yacruk.io.components.uikit.button.ordinary.YacrukButtonClickState
+import dev.yacruk.io.components.uikit.button.ordinary.YacrukButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButtonHoverState
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.clearFocusOnKeyboardDismiss
@@ -165,6 +173,7 @@ fun YaaumBasicTextField(
         backgroundColor = borderColorAlt
     )
 
+
     Row(
         modifier =
         Modifier
@@ -197,8 +206,7 @@ fun YaaumBasicTextField(
         }
         CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {
             BasicTextField(
-//                cursorBrush = SolidColor(Color.Transparent),
-                cursorBrush = SolidColor(Color.Black),
+                cursorBrush = SolidColor(Color.Transparent),
                 modifier =
                 modifier
                     .focusRequester(focusRequester)
@@ -206,8 +214,7 @@ fun YaaumBasicTextField(
                     .onFocusChanged { state ->
                         isOnFocus = state.isFocused
                     }
-                    .clearFocusOnKeyboardDismiss(isOnFocus)
-                    .background(Color.Cyan),
+                    .clearFocusOnKeyboardDismiss(isOnFocus),
                 value = textState ?: "",
                 onValueChange = {
                     onTextChanged?.invoke(it)
@@ -222,42 +229,26 @@ fun YaaumBasicTextField(
                 enabled = !isDisabled,
                 maxLines = maxLines,
                 minLines = minLines,
-                visualTransformation = {
-                        text ->
+                visualTransformation = { text ->
                     val transformedText = if (isOnFocus) {
                         text.text + "_"
                     } else {
-                        text.text+" "
-                    }
-
-                    // The offset here simply maps the new characters positions.
-                    val offsetMapping = object : OffsetMapping {
-                        override fun originalToTransformed(offset: Int): Int {
-                            // The original offset maps directly unless it's at the end, where the underscore is added.
-                            if(offset==0)return 0
-                            return if (offset <= text.length) offset else text.length + 2
-                        }
-
-                        override fun transformedToOriginal(offset: Int): Int {
-                            // The transformed offset maps directly unless it's at the end, where the underscore is.
-                            if(offset==0)return 0
-                            return if (offset <= text.length) offset else text.length+2
-                        }
+                        text.text + " "
                     }
 
                     val numberOffsetTranslator = object : OffsetMapping {
                         override fun originalToTransformed(offset: Int): Int {
-                            return offset+1
+                            return offset + 1
                         }
 
                         override fun transformedToOriginal(offset: Int): Int {
-                            return offset -1
+                            return offset - 1
                         }
                     }
 
-//                    TransformedText(AnnotatedString(transformedText), offsetMapping)
                     TransformedText(AnnotatedString(transformedText), numberOffsetTranslator)
                 },
+                interactionSource = interactionSource,
                 decorationBox = { innerTextField ->
                     Row(
                         modifier = Modifier
@@ -282,14 +273,13 @@ fun YaaumBasicTextField(
             )
         }
 
-//        if(textState?.isEmpty()==false) {
-            Icon(
-                painterResource(id = R.drawable.icon_check_24),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(textStyle.fontSize.value.dp)
-                    .padding(all = 0.dp)
-            )
+        Icon(
+            painterResource(id = R.drawable.icon_check_24),
+            contentDescription = "",
+            modifier = Modifier
+                .size(textStyle.fontSize.value.dp)
+                .padding(all = 0.dp)
+        )
 //        }
     }
 }
