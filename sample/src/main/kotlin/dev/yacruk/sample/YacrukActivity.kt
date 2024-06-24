@@ -142,6 +142,8 @@ class YacrukActivity : ComponentActivity() {
                         iconOffset = 4.dp,
                         icon = R.drawable.icon_check_24
                     )
+
+
                 }
             }
         }
