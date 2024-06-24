@@ -140,7 +140,8 @@ class YacrukActivity : ComponentActivity() {
                         isDisabled = foo,
                         textStyle = YacrukTheme.typography.headline,
                         iconOffset = 4.dp,
-                        icon = R.drawable.icon_check_24
+                        leadingIcon =  R.drawable.icon_check_24,
+                        tailingIcon  = R.drawable.icon_times_circle_24
                     )
 
 

@@ -105,7 +105,8 @@ fun YaaumBasicTextField(
     strokeWidth: Dp,
     primaryState: YaaumBasicTextFieldState = YaaumBasicTextFieldState.Enabled,
     isDisabled: Boolean = false,
-    icon: Int?,
+    leadingIcon: Int?,
+    tailingIcon: Int?,
     iconOffset: Dp = 0.dp,
 ) {
     val focusRequester = remember { FocusRequester() }
@@ -194,7 +195,7 @@ fun YaaumBasicTextField(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
-        icon?.let {
+        leadingIcon?.let {
             Spacer(modifier = Modifier.width(iconOffset))
             Icon(
                 painterResource(id = it),
@@ -273,14 +274,21 @@ fun YaaumBasicTextField(
             )
         }
 
-        Icon(
-            painterResource(id = R.drawable.icon_check_24),
-            contentDescription = "",
-            modifier = Modifier
-                .size(textStyle.fontSize.value.dp)
-                .padding(all = 0.dp)
-        )
-//        }
+        tailingIcon?.let {
+            if(textState?.isEmpty()==false) {
+                Icon(
+                    painterResource(id = it),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(textStyle.fontSize.value.dp)
+                        .noRippleClickable {
+                            textState = ""
+                        }
+                        .padding(all = 0.dp)
+                )
+                Spacer(modifier = Modifier.width(iconOffset))
+            }
+        }
     }
 }
 
