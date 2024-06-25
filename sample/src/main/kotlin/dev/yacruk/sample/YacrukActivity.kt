@@ -11,10 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -32,6 +34,7 @@ import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButton
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
+import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
 import dev.yacruk.io.components.uikit.slider.YacrukSlider
 import dev.yacruk.io.components.uikit.text.YacrukText
@@ -131,6 +134,17 @@ class YacrukActivity : ComponentActivity() {
                             YacrukText(text = "10", textStyle = YacrukTheme.typography.headline)
                         }
                     )
+
+                    YaaumBasicTextField(
+                        strokeWidth = 4.dp,
+                        isDisabled = foo,
+                        textStyle = YacrukTheme.typography.headline,
+                        iconOffset = 4.dp,
+                        leadingIcon =  R.drawable.icon_check_24,
+                        tailingIcon  = R.drawable.icon_times_circle_24
+                    )
+
+
                 }
             }
         }

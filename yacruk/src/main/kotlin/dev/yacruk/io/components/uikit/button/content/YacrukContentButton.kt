@@ -7,10 +7,8 @@ import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -23,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.core.ext.yacrukIconBorder
@@ -61,22 +58,22 @@ fun YacrukContentButton(
 
     val borderColorState by animateColorAsState(
         targetValue =
-        when (clickState) {
-            YacrukContentButtonClickState.Clicked ->
-                if (!isDisabled) {
-                    borderColorClicked
-                } else {
-                    borderColorAlt
-                }
+            when (clickState) {
+                YacrukContentButtonClickState.Clicked ->
+                    if (!isDisabled) {
+                        borderColorClicked
+                    } else {
+                        borderColorAlt
+                    }
 
-            YacrukContentButtonClickState.Disabled -> Color.Cyan
-            YacrukContentButtonClickState.Enabled ->
-                if (!isDisabled) {
-                    borderColor
-                } else {
-                    borderColorAlt
-                }
-        },
+                YacrukContentButtonClickState.Disabled -> Color.Cyan
+                YacrukContentButtonClickState.Enabled ->
+                    if (!isDisabled) {
+                        borderColor
+                    } else {
+                        borderColorAlt
+                    }
+            },
         label = "borderColorState",
     )
 
@@ -117,24 +114,24 @@ fun YacrukContentButton(
 
     Box(
         modifier =
-        modifier
-            .size(contentSize)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                enabled = true,
-                onClick = {
-                    if (!isDisabled) {
-                        onClick?.invoke()
-                    }
-                },
-            )
-            .yacrukIconBorder(
-                strokeWidth = strokeWidth,
-                borderColor = borderColorState,
-                backgroundColor = Color.Transparent,
-            )
-            .padding(contentOffset),
+            modifier
+                .size(contentSize)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                    enabled = true,
+                    onClick = {
+                        if (!isDisabled) {
+                            onClick?.invoke()
+                        }
+                    },
+                )
+                .yacrukIconBorder(
+                    strokeWidth = strokeWidth,
+                    borderColor = borderColorState,
+                    backgroundColor = Color.Transparent,
+                )
+                .padding(contentOffset),
         contentAlignment = Alignment.Center,
     ) {
         content()

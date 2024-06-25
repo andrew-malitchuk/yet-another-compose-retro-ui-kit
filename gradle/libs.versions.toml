@@ -14,6 +14,7 @@ yaghm = "0.0.1-a.2"
 detektGradlePlugin = "1.23.1"
 kotlinterGradle = "3.16.0"
 foundationAndroid = "1.6.8"
+foundationText = "1.0.0-alpha07"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +38,7 @@ detekt-gradle-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-g
 # https://github.com/jeremymailen/kotlinter-gradle/releases
 kotlinter-gradle = { group = "org.jmailen.gradle", name = "kotlinter-gradle", version.ref = "kotlinterGradle" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+androidx-foundation-text = { group = "androidx.compose.foundation", name = "foundation-text", version.ref = "foundationText" }
 
 
 [plugins]
