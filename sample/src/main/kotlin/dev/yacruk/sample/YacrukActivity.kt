@@ -34,6 +34,7 @@ import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButton
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
+import dev.yacruk.io.components.uikit.chip.YacrukChip
 import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
 import dev.yacruk.io.components.uikit.slider.YacrukSlider
@@ -144,6 +145,19 @@ class YacrukActivity : ComponentActivity() {
                         tailingIcon  = R.drawable.icon_times_circle_24
                     )
 
+                    YacrukChip(
+                        strokeWidth = 4.dp,
+                        isDisabled = foo,
+                        iconOffset = 4.dp,
+                        text = "foo",
+                        textStyle = YacrukTheme.typography.headline,
+                        leadingIcon = {
+                            Icon(
+                                painterResource(id = R.drawable.icon_check_24),
+                                contentDescription = ""
+                            )
+                        },
+                    )
 
                 }
             }
