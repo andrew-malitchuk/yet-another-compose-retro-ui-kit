@@ -34,6 +34,7 @@ import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButton
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
+import dev.yacruk.io.components.uikit.checkbox.YacrukCheckbox
 import dev.yacruk.io.components.uikit.chip.YacrukChip
 import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
@@ -141,8 +142,8 @@ class YacrukActivity : ComponentActivity() {
                         isDisabled = foo,
                         textStyle = YacrukTheme.typography.headline,
                         iconOffset = 4.dp,
-                        leadingIcon =  R.drawable.icon_check_24,
-                        tailingIcon  = R.drawable.icon_times_circle_24
+                        leadingIcon = R.drawable.icon_check_24,
+                        tailingIcon = R.drawable.icon_times_circle_24
                     )
 
                     YacrukChip(
@@ -158,7 +159,14 @@ class YacrukActivity : ComponentActivity() {
                             )
                         },
                     )
-
+                    YacrukCheckbox(
+                        strokeWidth = 4.dp,
+                        textStyle = YacrukTheme.typography.headline,
+                        iconSize = 24.dp,
+                        text = "foobar",
+                        textSpacing = 4.dp,
+                        isDisabled = foo,
+                    )
                 }
             }
         }
