@@ -26,11 +26,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.R
+import dev.yacruk.io.components.uikit.badge.YacrukBadge
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButton
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
@@ -170,7 +172,14 @@ class YacrukActivity : ComponentActivity() {
                         textSpacing = 4.dp,
                         isDisabled = foo,
                     )
-
+                    YacrukBadge(
+                        text = "1",
+                        textStyle = YacrukTheme.typography.headline,
+                        badgeColor = black_mesa,
+                        textColor = renkon_beige,
+                        padding = 4.dp,
+                        shape = RectangleShape
+                    )
                     YacrukSwitchButton(
                         borderWidth = 4.dp,
                         thumbSize = 24.dp,
