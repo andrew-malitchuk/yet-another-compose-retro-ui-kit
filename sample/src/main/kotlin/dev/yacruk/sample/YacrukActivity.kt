@@ -41,11 +41,13 @@ import dev.yacruk.io.components.uikit.chip.YacrukChip
 import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
 import dev.yacruk.io.components.uikit.slider.YacrukSlider
+import dev.yacruk.io.components.uikit.switch.YacrukSwitchButton
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.renkon_beige
+import dev.yacruk.io.core.theme.source.color.true_navy
 import dev.yacruk.sample.ui.theme.YACRUKTheme
 import kotlinx.coroutines.launch
 
@@ -177,6 +179,12 @@ class YacrukActivity : ComponentActivity() {
                         textColor = renkon_beige,
                         padding = 4.dp,
                         shape = RectangleShape
+                    )
+                    YacrukSwitchButton(
+                        borderWidth = 4.dp,
+                        thumbSize = 24.dp,
+                        checkedTrackColor = true_navy,
+                        uncheckedTrackColor = black_mesa
                     )
                 }
             }
