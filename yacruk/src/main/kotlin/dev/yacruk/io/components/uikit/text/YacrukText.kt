@@ -12,6 +12,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.core.ext.marquee
 import dev.yacruk.io.core.ext.noRippleClickable
 import dev.yacruk.io.core.theme.common.YacrukTheme
@@ -35,6 +36,24 @@ fun YacrukText(
     onClick: (() -> Unit)? = null,
     isMarqueeEnabled: Boolean = true,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "text" to text,
+                "color" to color,
+                "textStyle" to textStyle,
+                "fontSize" to fontSize,
+                "lineHeight" to lineHeight,
+                "textAlign" to textAlign,
+                "maxLines" to maxLines,
+                "minLines" to minLines,
+                "onTextLayout" to onTextLayout,
+                "onClick" to onClick,
+                "isMarqueeEnabled" to isMarqueeEnabled,
+            ),
+    )
+
     Text(
         text = text,
         modifier =

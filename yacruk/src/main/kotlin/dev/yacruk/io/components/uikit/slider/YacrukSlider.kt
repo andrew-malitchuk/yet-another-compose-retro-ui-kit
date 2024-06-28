@@ -17,6 +17,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.Dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.true_navy
 import kotlin.math.abs
@@ -33,6 +34,20 @@ fun YacrukSlider(
     strokeWidth: Dp,
     pointerSize: Dp,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "value" to value,
+                "onValueChanged" to onValueChanged,
+                "modifier" to modifier,
+                "enabled" to enabled,
+                "valueRange" to valueRange,
+                "stepSize" to stepSize,
+                "strokeWidth" to strokeWidth,
+                "pointerSize" to pointerSize,
+            ),
+    )
+
     val haptic = LocalHapticFeedback.current
 
     val borderColor = true_navy

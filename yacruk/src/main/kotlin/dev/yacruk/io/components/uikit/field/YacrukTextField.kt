@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.core.ext.clearFocusOnKeyboardDismiss
 import dev.yacruk.io.core.ext.foo
 import dev.yacruk.io.core.ext.noRippleClickable
@@ -69,6 +70,28 @@ fun YaaumBasicTextField(
     tailingIcon: Int?,
     iconOffset: Dp = 0.dp,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "text" to text,
+                "onTextChanged" to onTextChanged,
+                "keyboardOptions" to keyboardOptions,
+                "keyboardActions" to keyboardActions,
+                "singleLine" to singleLine,
+                "maxLines" to maxLines,
+                "minLines" to minLines,
+                "textStyle" to textStyle,
+                "onCleanTextClick" to onCleanTextClick,
+                "strokeWidth" to strokeWidth,
+                "primaryState" to primaryState,
+                "isDisabled" to isDisabled,
+                "leadingIcon" to leadingIcon,
+                "tailingIcon" to tailingIcon,
+                "iconOffset" to iconOffset,
+            ),
+    )
+
     val focusRequester = remember { FocusRequester() }
 
     var state by remember {

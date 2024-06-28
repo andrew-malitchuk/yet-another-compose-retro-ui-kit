@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.uikit.checkbox.YacrukCheckboxClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukIconBorder
@@ -53,6 +54,22 @@ fun YacrukCheckbox(
     iconSize: Dp,
     textSpacing: Dp = 0.dp,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "strokeWidth" to strokeWidth,
+                "primaryState" to primaryState,
+                "onClick" to onClick,
+                "interactionSource" to interactionSource,
+                "isDisabled" to isDisabled,
+                "text" to text,
+                "textStyle" to textStyle,
+                "iconSize" to iconSize,
+                "textSpacing" to textSpacing,
+            ),
+    )
+
     val haptic = LocalHapticFeedback.current
 
     var clickState: YacrukCheckboxClickState by remember {
@@ -124,7 +141,8 @@ fun YacrukCheckbox(
 
     Row(
         modifier =
-            Modifier.wrapContentSize()
+            Modifier
+                .wrapContentSize()
                 .clickable(
                     interactionSource = interactionSource,
                     indication = null,

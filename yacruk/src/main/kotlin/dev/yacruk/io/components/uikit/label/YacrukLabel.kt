@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.theme.common.YacrukTheme
 
@@ -23,6 +24,18 @@ fun YacrukLabel(
     color: Color = Color.Unspecified,
     content: @Composable () -> Unit,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "title" to title,
+                "padding" to padding,
+                "textStyle" to textStyle,
+                "color" to color,
+                "content" to content,
+            ),
+    )
+
     Column(
         modifier =
             modifier
