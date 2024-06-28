@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import com.theapache64.rebugger.Rebugger
 
 @Composable
 fun YacrukProgressBar(
@@ -25,6 +26,18 @@ fun YacrukProgressBar(
     clipShape: Shape = RectangleShape,
     height: Dp,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "progress" to progress,
+                "progressColor" to progressColor,
+                "backgroundColor" to backgroundColor,
+                "clipShape" to clipShape,
+                "height" to height,
+            ),
+    )
+
     Box(
         modifier =
             modifier

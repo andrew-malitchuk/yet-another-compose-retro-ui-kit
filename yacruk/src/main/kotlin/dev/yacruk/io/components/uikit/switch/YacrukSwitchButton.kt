@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.core.theme.common.YacrukTheme
 
 @Composable
@@ -40,6 +41,24 @@ fun YacrukSwitchButton(
     onStateChange: ((Boolean) -> Unit)? = null,
     foo: Boolean? = null,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "width" to width,
+                "height" to height,
+                "checkedTrackColor" to checkedTrackColor,
+                "uncheckedTrackColor" to uncheckedTrackColor,
+                "gapBetweenThumbAndTrackEdge" to gapBetweenThumbAndTrackEdge,
+                "borderWidth" to borderWidth,
+                "iconInnerPadding" to iconInnerPadding,
+                "thumbSize" to thumbSize,
+                "initValue" to initValue,
+                "onStateChange" to onStateChange,
+                "foo" to foo,
+            ),
+    )
+
     val interactionSource =
         remember {
             MutableInteractionSource()

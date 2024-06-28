@@ -25,6 +25,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
@@ -46,6 +47,21 @@ fun YacrukIconButton(
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "strokeWidth" to strokeWidth,
+                "iconSize" to iconSize,
+                "primaryState" to primaryState,
+                "onClick" to onClick,
+                "interactionSource" to interactionSource,
+                "icon" to icon,
+                "iconOffset" to iconOffset,
+                "isDisabled" to isDisabled,
+            ),
+    )
+
     val haptic = LocalHapticFeedback.current
 
     var clickState: YacrukIconButtonClickState by remember {

@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.Dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
@@ -43,6 +44,21 @@ fun YacrukContentButton(
     contentOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "strokeWidth" to strokeWidth,
+                "contentSize" to contentSize,
+                "primaryState" to primaryState,
+                "onClick" to onClick,
+                "interactionSource" to interactionSource,
+                "content" to content,
+                "contentOffset" to contentOffset,
+                "isDisabled" to isDisabled,
+            ),
+    )
+
     val haptic = LocalHapticFeedback.current
 
     var clickState: YacrukContentButtonClickState by remember {

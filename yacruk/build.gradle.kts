@@ -80,4 +80,6 @@ dependencies {
     implementation(libs.androidx.foundation.android)
 
     dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.20")
+
+    implementation("io.github.theapache64:rebugger:1.0.0-rc03")
 }

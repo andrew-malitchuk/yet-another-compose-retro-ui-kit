@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.uikit.chip.YacrukChipClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukBorder
@@ -59,6 +60,22 @@ fun YacrukChip(
     isDisabled: Boolean = false,
     leadingIcon: (@Composable () -> Unit)? = null,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "strokeWidth" to strokeWidth,
+                "primaryState" to primaryState,
+                "text" to text,
+                "textStyle" to textStyle,
+                "onClick" to onClick,
+                "interactionSource" to interactionSource,
+                "iconOffset" to iconOffset,
+                "isDisabled" to isDisabled,
+                "leadingIcon" to leadingIcon,
+            ),
+    )
+
     val haptic = LocalHapticFeedback.current
 
     var clickState: YacrukChipClickState by remember {

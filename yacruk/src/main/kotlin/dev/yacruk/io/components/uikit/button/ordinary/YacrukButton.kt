@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukBorder
@@ -58,6 +59,21 @@ fun YacrukButton(
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "strokeWidth" to strokeWidth,
+                "primaryState" to primaryState,
+                "text" to text,
+                "onClick" to onClick,
+                "interactionSource" to interactionSource,
+                "icon" to icon,
+                "iconOffset" to iconOffset,
+                "isDisabled" to isDisabled,
+            ),
+    )
+
     val haptic = LocalHapticFeedback.current
 
     var clickState: YacrukButtonClickState by remember {
