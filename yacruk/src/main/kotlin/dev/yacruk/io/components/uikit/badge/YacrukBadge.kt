@@ -24,25 +24,26 @@ fun YacrukBadge(
     badgeColor: Color,
     textColor: Color,
     shape: Shape,
-    padding: Dp = 2.dp
+    padding: Dp = 2.dp,
 ) {
     Box(
-        modifier = modifier
-            .clip(shape)
-            .background(badgeColor)
-            .wrapContentSize()
-            .padding(padding),
-        contentAlignment = Alignment.Center
+        modifier =
+            modifier
+                .clip(shape)
+                .background(badgeColor)
+                .wrapContentSize()
+                .padding(padding),
+        contentAlignment = Alignment.Center,
     ) {
         YacrukText(
             modifier =
-            Modifier
-                .height(
-                    textStyle.lineHeight.value.dp
-                ),
+                Modifier
+                    .height(
+                        textStyle.lineHeight.value.dp,
+                    ),
             text = text,
             textStyle = textStyle,
-            color = textColor
+            color = textColor,
         )
     }
 }
