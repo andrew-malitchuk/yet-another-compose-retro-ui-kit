@@ -40,9 +40,10 @@ fun YacrukSwitchButton(
     onStateChange: ((Boolean) -> Unit)? = null,
     foo: Boolean? = null,
 ) {
-    val interactionSource = remember {
-        MutableInteractionSource()
-    }
+    val interactionSource =
+        remember {
+            MutableInteractionSource()
+        }
     var onSideChangeState by remember {
         mutableStateOf(initValue)
     }
@@ -53,48 +54,49 @@ fun YacrukSwitchButton(
 
     val alignment by animateAlignmentAsState(if (onSideChangeState) 1f else -1f)
     Box(
-        modifier = modifier
-            .size(width = width, height = height)
-            .border(
-                width = borderWidth,
-                color = if (onSideChangeState) checkedTrackColor else uncheckedTrackColor,
-                shape = RectangleShape,
-            )
-            .clickable(
-                indication = null,
-                interactionSource = interactionSource,
-            ) {
-                onSideChangeState = onSideChangeState.not()
-                onStateChange?.invoke(onSideChangeState)
-            },
+        modifier =
+            modifier
+                .size(width = width, height = height)
+                .border(
+                    width = borderWidth,
+                    color = if (onSideChangeState) checkedTrackColor else uncheckedTrackColor,
+                    shape = RectangleShape,
+                )
+                .clickable(
+                    indication = null,
+                    interactionSource = interactionSource,
+                ) {
+                    onSideChangeState = onSideChangeState.not()
+                    onStateChange?.invoke(onSideChangeState)
+                },
         contentAlignment = Alignment.Center,
     ) {
         Box(
-            modifier = Modifier
-                .padding(
-                    start = gapBetweenThumbAndTrackEdge,
-                    end = gapBetweenThumbAndTrackEdge,
-                )
-                .fillMaxSize(),
+            modifier =
+                Modifier
+                    .padding(
+                        start = gapBetweenThumbAndTrackEdge,
+                        end = gapBetweenThumbAndTrackEdge,
+                    )
+                    .fillMaxSize(),
             contentAlignment = alignment,
         ) {
             Box(
-                modifier = Modifier
-                    .size(size = thumbSize)
-                    .background(
-                        color = if (onSideChangeState) checkedTrackColor else uncheckedTrackColor,
-                        shape = RectangleShape,
-                    )
-                    .padding(all = iconInnerPadding),
+                modifier =
+                    Modifier
+                        .size(size = thumbSize)
+                        .background(
+                            color = if (onSideChangeState) checkedTrackColor else uncheckedTrackColor,
+                            shape = RectangleShape,
+                        )
+                        .padding(all = iconInnerPadding),
             )
         }
     }
 }
 
 @Composable
-private fun animateAlignmentAsState(
-    targetBiasValue: Float,
-): State<BiasAlignment> {
+private fun animateAlignmentAsState(targetBiasValue: Float): State<BiasAlignment> {
     val bias by animateFloatAsState(targetBiasValue, label = "")
     return remember { derivedStateOf { BiasAlignment(horizontalBias = bias, verticalBias = 0f) } }
 }

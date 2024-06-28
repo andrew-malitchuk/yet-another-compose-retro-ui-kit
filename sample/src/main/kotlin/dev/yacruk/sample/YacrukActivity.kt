@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,6 +41,7 @@ import dev.yacruk.io.components.uikit.checkbox.YacrukCheckbox
 import dev.yacruk.io.components.uikit.chip.YacrukChip
 import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
+import dev.yacruk.io.components.uikit.progress.CustomLinearProgressIndicator
 import dev.yacruk.io.components.uikit.slider.YacrukSlider
 import dev.yacruk.io.components.uikit.switch.YacrukSwitchButton
 import dev.yacruk.io.components.uikit.text.YacrukText
@@ -52,7 +54,7 @@ import dev.yacruk.sample.ui.theme.YACRUKTheme
 import kotlinx.coroutines.launch
 
 class YacrukActivity : ComponentActivity() {
-    @OptIn(ExperimentalComposeUiApi::class)
+    @OptIn(ExperimentalComposeUiApi::class, ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -185,6 +187,13 @@ class YacrukActivity : ComponentActivity() {
                         thumbSize = 24.dp,
                         checkedTrackColor = true_navy,
                         uncheckedTrackColor = black_mesa
+                    )
+                    CustomLinearProgressIndicator(
+                        modifier = Modifier.fillMaxWidth(),
+                        progress = 0.5f,
+                        height= 8.dp,
+                        backgroundColor = black_mesa,
+                        progressColor = true_navy
                     )
                 }
             }
