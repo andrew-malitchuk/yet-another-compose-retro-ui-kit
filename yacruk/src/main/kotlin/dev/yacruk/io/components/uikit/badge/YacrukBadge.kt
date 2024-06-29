@@ -10,12 +10,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.text.YacrukText
+import dev.yacruk.io.core.theme.common.YacrukTheme
+import dev.yacruk.io.core.theme.source.YacrukTheme
+import dev.yacruk.io.core.theme.source.color.bittersweet
+import dev.yacruk.io.core.theme.source.color.renkon_beige
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun YacrukBadge(
@@ -58,6 +65,22 @@ fun YacrukBadge(
             text = text,
             textStyle = textStyle,
             color = textColor,
+        )
+    }
+}
+
+@YacrukPreview
+@Composable
+fun PreviewYacrukBadge() {
+    val faker = Faker()
+    dev.yacruk.io.core.theme.source.YacrukTheme {
+        YacrukBadge(
+            text = faker.idNumber.invalid(),
+            textStyle = YacrukTheme.typography.headline,
+            badgeColor = bittersweet,
+            textColor = renkon_beige,
+            shape = RectangleShape,
+            padding = 8.dp,
         )
     }
 }

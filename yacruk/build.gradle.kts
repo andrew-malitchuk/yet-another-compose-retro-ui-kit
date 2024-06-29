@@ -82,4 +82,5 @@ dependencies {
     dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.20")
 
     implementation("io.github.theapache64:rebugger:1.0.0-rc03")
+    implementation("io.github.serpro69:kotlin-faker:1.14.0")
 }

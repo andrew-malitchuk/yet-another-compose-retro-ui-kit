@@ -25,10 +25,14 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.R
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
+import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
@@ -174,5 +178,18 @@ sealed class YacrukIconButtonClickState {
             this is Enabled -> Clicked
             else -> Enabled
         }
+    }
+}
+
+@YacrukPreview
+@Composable
+private fun PreviewYacrukIconButton() {
+    YacrukTheme {
+        YacrukIconButton(
+            strokeWidth = 4.dp,
+            icon = R.drawable.icon_check_24,
+            iconSize = 48.dp,
+            iconOffset = 2.dp,
+        )
     }
 }
