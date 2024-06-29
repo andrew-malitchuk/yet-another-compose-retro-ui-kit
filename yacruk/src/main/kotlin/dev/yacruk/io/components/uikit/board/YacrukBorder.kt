@@ -1,6 +1,7 @@
 package dev.yacruk.io.components.uikit.board
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -10,9 +11,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.core.ext.bar
+import dev.yacruk.io.core.theme.common.YacrukTheme
+import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.renkon_beige
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun YacrukBorder(
@@ -23,6 +29,18 @@ fun YacrukBorder(
     textStyle: TextStyle,
     content: @Composable () -> Unit,
 ) {
+    Rebugger(
+        trackMap =
+            mapOf(
+                "modifier" to modifier,
+                "strokeWidth" to strokeWidth,
+                "text" to text,
+                "padding" to padding,
+                "textStyle" to textStyle,
+                "content" to content,
+            ),
+    )
+
     val borderColor = black_mesa
     val backgroundColor = renkon_beige
 
@@ -50,5 +68,26 @@ fun YacrukBorder(
                 ),
     ) {
         content()
+    }
+}
+
+@YacrukPreview
+@Composable
+fun PreviewYacrukBorder() {
+    val faker = Faker()
+    YacrukTheme {
+        YacrukBorder(
+            strokeWidth = 4.dp,
+            text = faker.cowboyBebop.character(),
+            padding = 8.dp,
+            textStyle = YacrukTheme.typography.title,
+        ) {
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f),
+            )
+        }
     }
 }

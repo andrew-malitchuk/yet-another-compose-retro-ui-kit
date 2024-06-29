@@ -32,14 +32,17 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.checkbox.YacrukCheckboxClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukIconBorder
+import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun YacrukCheckbox(
@@ -201,5 +204,20 @@ sealed class YacrukCheckboxClickState {
             this is Enabled -> Clicked
             else -> Enabled
         }
+    }
+}
+
+@YacrukPreview
+@Composable
+private fun PreviewYacrukCheckbox() {
+    val faker = Faker()
+    YacrukTheme {
+        YacrukCheckbox(
+            strokeWidth = 4.dp,
+            textStyle = dev.yacruk.io.core.theme.common.YacrukTheme.typography.headline,
+            iconSize = 24.dp,
+            text = faker.cowboyBebop.character(),
+            textSpacing = 4.dp,
+        )
     }
 }

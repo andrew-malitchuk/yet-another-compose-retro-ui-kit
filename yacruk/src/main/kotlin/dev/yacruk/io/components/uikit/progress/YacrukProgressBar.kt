@@ -15,7 +15,13 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
+import dev.yacruk.io.core.theme.common.YacrukTheme
+import dev.yacruk.io.core.theme.source.YacrukTheme
+import dev.yacruk.io.core.theme.source.color.black_mesa
+import dev.yacruk.io.core.theme.source.color.true_navy
 
 @Composable
 fun YacrukProgressBar(
@@ -61,6 +67,20 @@ fun YacrukProgressBar(
                     .background(progressColor)
                     .fillMaxHeight()
                     .fillMaxWidth(progress),
+        )
+    }
+}
+
+@YacrukPreview
+@Composable
+private fun PreviewYacrukProgressBar() {
+    YacrukTheme {
+        YacrukProgressBar(
+            modifier = Modifier.fillMaxWidth(),
+            progress = 0.5f,
+            height = 8.dp,
+            backgroundColor = black_mesa,
+            progressColor = true_navy,
         )
     }
 }

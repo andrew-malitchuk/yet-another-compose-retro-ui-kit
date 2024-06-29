@@ -10,14 +10,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.core.ext.marquee
 import dev.yacruk.io.core.ext.noRippleClickable
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.fontSize
+import io.github.serpro69.kfaker.Faker
 
 // TODO: preview
 @OptIn(ExperimentalFoundationApi::class)
@@ -102,13 +103,13 @@ fun YacrukText(
     )
 }
 
-// TODO: text
-@Preview(showBackground = true)
+@YacrukPreview
 @Composable
-fun PreviewYacrukText() {
+private fun PreviewYacrukText() {
+    val faker = Faker()
     YacrukTheme {
         YacrukText(
-            text = "Lorem",
+            text = faker.cowboyBebop.quote(),
             textStyle = YacrukTheme.typography.headline,
         )
     }

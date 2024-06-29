@@ -4,6 +4,8 @@ import android.content.res.Resources
 import android.util.TypedValue
 import android.view.MotionEvent
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -17,7 +19,10 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
+import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.true_navy
 import kotlin.math.abs
@@ -184,4 +189,25 @@ object YacrukBarColorsDefaults {
         colorPrimary = colorPrimary,
         colorTrack = colorTrack,
     )
+}
+
+@YacrukPreview
+@Composable
+@ExperimentalComposeUiApi
+private fun PreviewYacrukSlider() {
+    YacrukTheme {
+        YacrukSlider(
+            value = 1f,
+            onValueChanged = {
+            },
+            modifier =
+                Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+            valueRange = 0f..30f,
+            stepSize = 2f,
+            strokeWidth = 4.dp,
+            pointerSize = 12.dp,
+        )
+    }
 }

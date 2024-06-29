@@ -22,8 +22,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButtonClickState.Clicked.toggleClick
+import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
@@ -31,6 +34,7 @@ import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun YacrukContentButton(
@@ -166,5 +170,25 @@ sealed class YacrukContentButtonClickState {
             this is Enabled -> Clicked
             else -> Enabled
         }
+    }
+}
+
+@YacrukPreview
+@Composable
+fun PreviewYacrukContentButton() {
+    val faker = Faker()
+    dev.yacruk.io.core.theme.source.YacrukTheme {
+        YacrukContentButton(
+            strokeWidth = 4.dp,
+            contentSize = 48.dp,
+            primaryState = YacrukContentButtonClickState.Enabled,
+            contentOffset = 8.dp,
+            content = {
+                YacrukText(
+                    text = faker.code.asin(),
+                    textStyle = YacrukTheme.typography.headline,
+                )
+            },
+        )
     }
 }

@@ -24,7 +24,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.core.theme.common.YacrukTheme
+import dev.yacruk.io.core.theme.source.YacrukTheme
+import dev.yacruk.io.core.theme.source.color.black_mesa
+import dev.yacruk.io.core.theme.source.color.true_navy
 
 @Composable
 fun YacrukSwitchButton(
@@ -118,4 +122,17 @@ fun YacrukSwitchButton(
 private fun animateAlignmentAsState(targetBiasValue: Float): State<BiasAlignment> {
     val bias by animateFloatAsState(targetBiasValue, label = "")
     return remember { derivedStateOf { BiasAlignment(horizontalBias = bias, verticalBias = 0f) } }
+}
+
+@YacrukPreview
+@Composable
+private fun PreviewYacrukSwitchButton() {
+    YacrukTheme {
+        YacrukSwitchButton(
+            borderWidth = 4.dp,
+            thumbSize = 24.dp,
+            checkedTrackColor = true_navy,
+            uncheckedTrackColor = black_mesa,
+        )
+    }
 }

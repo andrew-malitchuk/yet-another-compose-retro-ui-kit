@@ -41,9 +41,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.R
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.core.ext.clearFocusOnKeyboardDismiss
 import dev.yacruk.io.core.ext.foo
 import dev.yacruk.io.core.ext.noRippleClickable
+import dev.yacruk.io.core.theme.common.YacrukTheme
+import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.jambalaya
 import dev.yacruk.io.core.theme.source.color.renkon_beige
@@ -285,4 +289,18 @@ sealed class YaaumBasicTextFieldState {
     data object Focused : YaaumBasicTextFieldState()
 
     data object Disabled : YaaumBasicTextFieldState()
+}
+
+@YacrukPreview
+@Composable
+private fun PreviewYaaumBasicTextField() {
+    YacrukTheme {
+        YaaumBasicTextField(
+            strokeWidth = 4.dp,
+            textStyle = YacrukTheme.typography.headline,
+            iconOffset = 4.dp,
+            leadingIcon = R.drawable.icon_check_24,
+            tailingIcon = R.drawable.icon_times_circle_24,
+        )
+    }
 }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,12 +31,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
+import dev.yacruk.io.R
+import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukBorder
@@ -46,6 +49,7 @@ import dev.yacruk.io.core.theme.source.color.jambalaya
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
+import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun YacrukButton(
@@ -269,17 +273,20 @@ sealed class YacrukButtonHoverState {
     data object Default : YacrukButtonHoverState()
 }
 
-@Preview(showBackground = true)
+@YacrukPreview
 @Composable
-fun PreviewYacrukButton() {
+private fun PreviewYacrukButton() {
+    val faker = Faker()
     YacrukTheme {
-        Box(modifier = Modifier.padding(YacrukTheme.spacing.medium)) {
-            YacrukButton(
-                strokeWidth = 4.dp,
-                primaryState = YacrukButtonClickState.Clicked,
-                isDisabled = false,
-                text = "foobar",
-            )
-        }
+        YacrukButton(
+            strokeWidth = 4.dp,
+            icon = {
+                Icon(
+                    painterResource(id = R.drawable.icon_check_24),
+                    contentDescription = "",
+                )
+            },
+            text = faker.cowboyBebop.quote(),
+        )
     }
 }
