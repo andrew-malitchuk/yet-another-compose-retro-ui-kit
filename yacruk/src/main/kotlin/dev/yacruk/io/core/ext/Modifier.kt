@@ -9,6 +9,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.isImeVisible
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +28,9 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 
 fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
@@ -193,6 +197,78 @@ fun Modifier.foo(
             strokeWidth = strokeWidth.toPx(),
         )
     }
+
+@Composable
+fun Modifier.bar(
+    textStyle: TextStyle,
+    strokeWidth: Dp,
+    backgroundColor: Color,
+    borderColor: Color,
+    borderColorAlt: Color,
+    text: String,
+): Modifier {
+    val textMeasurer = rememberTextMeasurer()
+    val textLayoutResult =
+        remember(text) {
+            textMeasurer.measure(text, textStyle)
+        }
+    val textSize = textStyle.fontSize.value
+
+    return this.drawBehind {
+        drawRect(
+            color = backgroundColor,
+            topLeft =
+                Offset(
+                    strokeWidth.toPx() / 2,
+                    strokeWidth.toPx() / 2 + textSize + strokeWidth.toPx() / 2,
+                ),
+            size =
+                Size(
+                    width = (size.width - strokeWidth.toPx()),
+                    height = (size.height - strokeWidth.toPx() - textSize - strokeWidth.toPx() / 2),
+                ),
+        )
+
+        drawRect(
+            color = borderColor,
+            style = Stroke(width = strokeWidth.toPx()),
+            topLeft =
+                Offset(
+                    0f,
+                    textSize / 2 + strokeWidth.toPx() * 2,
+                ),
+        )
+
+        drawRect(
+            color = backgroundColor,
+            topLeft =
+                Offset(
+                    x = strokeWidth.toPx() * 4 - strokeWidth.toPx(),
+                    y = strokeWidth.toPx(),
+                ),
+            size =
+                Size(
+                    width = textLayoutResult.size.width.toFloat() + strokeWidth.toPx() * 2,
+                    height = textLayoutResult.size.height.toFloat(),
+                ),
+        )
+
+        drawText(
+            textLayoutResult = textLayoutResult,
+            topLeft =
+                Offset(
+                    x = strokeWidth.toPx() * 4,
+                    y = 0f,
+                ),
+            color = borderColor,
+        )
+
+//        drawRect(
+//            color = borderColor,
+//            style = Stroke(width = strokeWidth.toPx()),
+//        )
+    }
+}
 
 fun Modifier.yacrukIconBorder(
     strokeWidth: Dp,

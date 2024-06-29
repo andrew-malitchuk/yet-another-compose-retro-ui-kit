@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.badge.YacrukBadge
+import dev.yacruk.io.components.uikit.board.YacrukBorder
 import dev.yacruk.io.components.uikit.button.content.YacrukContentButton
 import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
@@ -41,7 +42,7 @@ import dev.yacruk.io.components.uikit.checkbox.YacrukCheckbox
 import dev.yacruk.io.components.uikit.chip.YacrukChip
 import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
-import dev.yacruk.io.components.uikit.progress.CustomLinearProgressIndicator
+import dev.yacruk.io.components.uikit.progress.YacrukProgressBar
 import dev.yacruk.io.components.uikit.slider.YacrukSlider
 import dev.yacruk.io.components.uikit.switch.YacrukSwitchButton
 import dev.yacruk.io.components.uikit.text.YacrukText
@@ -174,27 +175,33 @@ class YacrukActivity : ComponentActivity() {
                         textSpacing = 4.dp,
                         isDisabled = foo,
                     )
-                    YacrukBadge(
-                        text = "1",
-                        textStyle = YacrukTheme.typography.headline,
-                        badgeColor = black_mesa,
-                        textColor = renkon_beige,
-                        padding = 4.dp,
-                        shape = RectangleShape
-                    )
-                    YacrukSwitchButton(
-                        borderWidth = 4.dp,
-                        thumbSize = 24.dp,
-                        checkedTrackColor = true_navy,
-                        uncheckedTrackColor = black_mesa
-                    )
-                    CustomLinearProgressIndicator(
-                        modifier = Modifier.fillMaxWidth(),
-                        progress = 0.5f,
-                        height= 8.dp,
-                        backgroundColor = black_mesa,
-                        progressColor = true_navy
-                    )
+                    YacrukBorder(textStyle = YacrukTheme.typography.body, strokeWidth = 4.dp, text = "lorem ipsum", padding = 8.dp) {
+                        Column {
+                            YacrukBadge(
+                                text = "1",
+                                textStyle = YacrukTheme.typography.headline,
+                                badgeColor = black_mesa,
+                                textColor = renkon_beige,
+                                padding = 4.dp,
+                                shape = RectangleShape
+                            )
+                            YacrukSwitchButton(
+                                borderWidth = 4.dp,
+                                thumbSize = 24.dp,
+                                checkedTrackColor = true_navy,
+                                uncheckedTrackColor = black_mesa
+                            )
+                            YacrukProgressBar(
+                                modifier = Modifier.fillMaxWidth(),
+                                progress = 0.5f,
+                                height = 8.dp,
+                                backgroundColor = black_mesa,
+                                progressColor = true_navy
+                            )
+                        }
+
+                    }
+
                 }
             }
         }
