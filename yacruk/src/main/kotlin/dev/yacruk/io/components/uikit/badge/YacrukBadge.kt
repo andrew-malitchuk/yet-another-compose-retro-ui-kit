@@ -73,7 +73,7 @@ fun YacrukBadge(
 @Composable
 fun PreviewYacrukBadge() {
     val faker = Faker()
-    dev.yacruk.io.core.theme.source.YacrukTheme {
+    YacrukTheme {
         YacrukBadge(
             text = faker.idNumber.invalid(),
             textStyle = YacrukTheme.typography.headline,

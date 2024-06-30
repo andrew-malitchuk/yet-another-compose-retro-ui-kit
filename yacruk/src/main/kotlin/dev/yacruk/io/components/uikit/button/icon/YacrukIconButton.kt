@@ -50,6 +50,9 @@ fun YacrukIconButton(
     icon: Int,
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
+    borderColor: Color,
+    borderColorAlt: Color,
+    borderColorClicked: Color
 ) {
     Rebugger(
         trackMap =
@@ -71,13 +74,6 @@ fun YacrukIconButton(
     var clickState: YacrukIconButtonClickState by remember {
         mutableStateOf(primaryState)
     }
-
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = rustling_leaves
-    val borderColorClicked = true_navy
 
     val borderColorState by animateColorAsState(
         targetValue =
@@ -190,6 +186,9 @@ private fun PreviewYacrukIconButton() {
             icon = R.drawable.icon_check_24,
             iconSize = 48.dp,
             iconOffset = 2.dp,
+            borderColor = black_mesa,
+            borderColorAlt = rustling_leaves,
+            borderColorClicked = true_navy,
         )
     }
 }

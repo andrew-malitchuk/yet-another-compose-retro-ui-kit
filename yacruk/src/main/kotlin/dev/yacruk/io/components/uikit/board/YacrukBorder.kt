@@ -25,47 +25,47 @@ fun YacrukBorder(
     modifier: Modifier = Modifier,
     strokeWidth: Dp,
     text: String,
+    borderColor: Color,
+    backgroundColor: Color,
     padding: Dp,
     textStyle: TextStyle,
     content: @Composable () -> Unit,
 ) {
     Rebugger(
         trackMap =
-            mapOf(
-                "modifier" to modifier,
-                "strokeWidth" to strokeWidth,
-                "text" to text,
-                "padding" to padding,
-                "textStyle" to textStyle,
-                "content" to content,
-            ),
+        mapOf(
+            "modifier" to modifier,
+            "strokeWidth" to strokeWidth,
+            "text" to text,
+            "padding" to padding,
+            "textStyle" to textStyle,
+            "content" to content,
+        ),
     )
 
-    val borderColor = black_mesa
-    val backgroundColor = renkon_beige
 
     val initialPadding = strokeWidth * 2 + textStyle.fontSize.value.dp / 2
 
     Box(
         modifier =
-            modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .bar(
-                    textStyle = textStyle,
-                    strokeWidth = strokeWidth,
-                    borderColor = borderColor,
-                    backgroundColor = backgroundColor,
-                    borderColorAlt = Color.Transparent,
-                    text = text,
-                )
-                .padding(
-                    top = initialPadding + padding,
-                    bottom = padding,
-                    start = padding,
-                    end =
-                    padding,
-                ),
+        modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .bar(
+                textStyle = textStyle,
+                strokeWidth = strokeWidth,
+                borderColor = borderColor,
+                backgroundColor = backgroundColor,
+                borderColorAlt = Color.Transparent,
+                text = text,
+            )
+            .padding(
+                top = initialPadding + padding,
+                bottom = padding,
+                start = padding,
+                end =
+                padding,
+            ),
     ) {
         content()
     }
@@ -81,12 +81,14 @@ fun PreviewYacrukBorder() {
             text = faker.cowboyBebop.character(),
             padding = 8.dp,
             textStyle = YacrukTheme.typography.title,
+            backgroundColor = black_mesa,
+            borderColor = renkon_beige
         ) {
             Box(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f),
+                Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
             )
         }
     }
