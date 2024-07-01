@@ -49,7 +49,10 @@ import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
+import dev.yacruk.io.core.theme.source.color.jambalaya
 import dev.yacruk.io.core.theme.source.color.renkon_beige
+import dev.yacruk.io.core.theme.source.color.rustling_leaves
+import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
 import dev.yacruk.sample.ui.theme.YACRUKTheme
 import kotlinx.coroutines.launch
@@ -91,6 +94,11 @@ class YacrukActivity : ComponentActivity() {
                             },
                             text = "foobarfoobarfoobarfoobarfoobarfoobar",
                             isDisabled = foo,
+                            backgroundColor = renkon_beige,
+                            borderColor = black_mesa,
+                            borderColorAlt = rustling_leaves,
+                            hoverColor = stone_craft,
+                            disableColor = jambalaya,
                             onClick = {
                                 coroutineContext.launch {
                                     Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
@@ -124,6 +132,9 @@ class YacrukActivity : ComponentActivity() {
                         isDisabled = foo,
                         iconSize = 48.dp,
                         iconOffset = 2.dp,
+                        borderColor = black_mesa,
+                        borderColorAlt = rustling_leaves,
+                        borderColorClicked = true_navy,
                         onClick = {
                             coroutineContext.launch {
                                 Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
@@ -135,6 +146,9 @@ class YacrukActivity : ComponentActivity() {
                         isDisabled = foo,
                         contentSize = 48.dp,
                         contentOffset = 2.dp,
+                        borderColor = black_mesa,
+                        borderColorAlt = rustling_leaves,
+                        borderColorClicked = true_navy,
                         onClick = {
                             coroutineContext.launch {
                                 Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
@@ -151,7 +165,11 @@ class YacrukActivity : ComponentActivity() {
                         textStyle = YacrukTheme.typography.headline,
                         iconOffset = 4.dp,
                         leadingIcon = R.drawable.icon_check_24,
-                        tailingIcon = R.drawable.icon_times_circle_24
+                        tailingIcon = R.drawable.icon_times_circle_24,
+                        backgroundColor = renkon_beige,
+                        borderColor = black_mesa,
+                        borderColorAlt = rustling_leaves,
+                        disableColor = jambalaya,
                     )
 
                     YacrukChip(
@@ -160,6 +178,11 @@ class YacrukActivity : ComponentActivity() {
                         iconOffset = 4.dp,
                         text = "foo",
                         textStyle = YacrukTheme.typography.headline,
+                        backgroundColor = renkon_beige,
+                        borderColor = black_mesa,
+                        borderColorAlt = rustling_leaves,
+                        hoverColor = stone_craft,
+                        disableColor = jambalaya,
                         leadingIcon = {
                             Icon(
                                 painterResource(id = R.drawable.icon_check_24),
@@ -174,8 +197,18 @@ class YacrukActivity : ComponentActivity() {
                         text = "foobar",
                         textSpacing = 4.dp,
                         isDisabled = foo,
+                        borderColor = black_mesa,
+                        borderColorAlt = rustling_leaves,
+                        borderColorClicked = true_navy,
                     )
-                    YacrukBorder(textStyle = YacrukTheme.typography.body, strokeWidth = 4.dp, text = "lorem ipsum", padding = 8.dp) {
+                    YacrukBorder(
+                        textStyle = YacrukTheme.typography.body,
+                        strokeWidth = 4.dp,
+                        text = "lorem ipsum",
+                        padding = 8.dp,
+                        backgroundColor = black_mesa,
+                        borderColor = renkon_beige,
+                    ) {
                         Column {
                             YacrukBadge(
                                 text = "1",
