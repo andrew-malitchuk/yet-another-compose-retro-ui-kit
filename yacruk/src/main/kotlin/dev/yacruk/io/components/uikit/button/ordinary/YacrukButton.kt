@@ -62,6 +62,11 @@ fun YacrukButton(
     icon: (@Composable () -> Unit)? = null,
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
+    backgroundColor: Color,
+    borderColor: Color,
+    borderColorAlt: Color,
+    hoverColor: Color,
+    disableColor: Color,
 ) {
     Rebugger(
         trackMap =
@@ -97,12 +102,6 @@ fun YacrukButton(
             hoverStateState = YacrukButtonHoverState.Default
         }
     }
-
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = jambalaya
 
     val offset by animateDpAsState(
         targetValue =
@@ -287,6 +286,11 @@ private fun PreviewYacrukButton() {
                 )
             },
             text = faker.cowboyBebop.quote(),
+            backgroundColor = renkon_beige,
+            borderColor = black_mesa,
+            borderColorAlt = rustling_leaves,
+            hoverColor = stone_craft,
+            disableColor = jambalaya,
         )
     }
 }

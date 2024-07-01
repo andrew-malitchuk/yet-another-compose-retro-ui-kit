@@ -52,7 +52,6 @@ import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.jambalaya
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
-import dev.yacruk.io.core.theme.source.color.stone_craft
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -73,6 +72,10 @@ fun YaaumBasicTextField(
     leadingIcon: Int?,
     tailingIcon: Int?,
     iconOffset: Dp = 0.dp,
+    backgroundColor: Color,
+    borderColor: Color,
+    borderColorAlt: Color,
+    disableColor: Color,
 ) {
     Rebugger(
         trackMap =
@@ -101,12 +104,6 @@ fun YaaumBasicTextField(
     var state by remember {
         mutableStateOf(primaryState)
     }
-
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = jambalaya
 
     when {
         isDisabled -> {
@@ -301,6 +298,10 @@ private fun PreviewYaaumBasicTextField() {
             iconOffset = 4.dp,
             leadingIcon = R.drawable.icon_check_24,
             tailingIcon = R.drawable.icon_times_circle_24,
+            backgroundColor = renkon_beige,
+            borderColor = black_mesa,
+            borderColorAlt = rustling_leaves,
+            disableColor = jambalaya,
         )
     }
 }

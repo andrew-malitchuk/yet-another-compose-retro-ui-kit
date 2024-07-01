@@ -27,8 +27,8 @@ import dev.yacruk.io.core.theme.source.color.true_navy
 fun YacrukProgressBar(
     modifier: Modifier = Modifier,
     progress: Float,
-    progressColor: Color = Color.Cyan,
-    backgroundColor: Color = Color.Red,
+    progressColor: Color,
+    backgroundColor: Color,
     clipShape: Shape = RectangleShape,
     height: Dp,
 ) {

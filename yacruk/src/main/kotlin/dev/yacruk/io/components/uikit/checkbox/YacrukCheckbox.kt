@@ -38,9 +38,7 @@ import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
-import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
-import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
 import io.github.serpro69.kfaker.Faker
 
@@ -56,6 +54,9 @@ fun YacrukCheckbox(
     textStyle: TextStyle,
     iconSize: Dp,
     textSpacing: Dp = 0.dp,
+    borderColor: Color,
+    borderColorAlt: Color,
+    borderColorClicked: Color,
 ) {
     Rebugger(
         trackMap =
@@ -78,13 +79,6 @@ fun YacrukCheckbox(
     var clickState: YacrukCheckboxClickState by remember {
         mutableStateOf(primaryState)
     }
-
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = rustling_leaves
-    val borderColorClicked = true_navy
 
     val borderColorState by animateColorAsState(
         targetValue =
@@ -218,6 +212,9 @@ private fun PreviewYacrukCheckbox() {
             iconSize = 24.dp,
             text = faker.cowboyBebop.character(),
             textSpacing = 4.dp,
+            borderColor = black_mesa,
+            borderColorAlt = rustling_leaves,
+            borderColorClicked = true_navy,
         )
     }
 }

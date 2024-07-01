@@ -64,6 +64,11 @@ fun YacrukChip(
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
     leadingIcon: (@Composable () -> Unit)? = null,
+    backgroundColor: Color,
+    borderColor: Color,
+    borderColorAlt: Color,
+    hoverColor: Color,
+    disableColor: Color,
 ) {
     Rebugger(
         trackMap =
@@ -100,12 +105,6 @@ fun YacrukChip(
             hoverStateState = YacrukChipHoverState.Default
         }
     }
-
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = jambalaya
 
     val offset by animateDpAsState(
         targetValue =
@@ -293,6 +292,11 @@ private fun PreviewYacrukChip() {
                     contentDescription = "",
                 )
             },
+            backgroundColor = renkon_beige,
+            borderColor = black_mesa,
+            borderColorAlt = rustling_leaves,
+            hoverColor = stone_craft,
+            disableColor = jambalaya,
         )
     }
 }

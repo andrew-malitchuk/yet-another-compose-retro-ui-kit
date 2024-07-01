@@ -30,9 +30,7 @@ import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
-import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
-import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
 import io.github.serpro69.kfaker.Faker
 
@@ -49,21 +47,21 @@ fun YacrukContentButton(
     isDisabled: Boolean = false,
     borderColor: Color,
     borderColorAlt: Color,
-    borderColorClicked: Color
+    borderColorClicked: Color,
 ) {
     Rebugger(
         trackMap =
-        mapOf(
-            "modifier" to modifier,
-            "strokeWidth" to strokeWidth,
-            "contentSize" to contentSize,
-            "primaryState" to primaryState,
-            "onClick" to onClick,
-            "interactionSource" to interactionSource,
-            "content" to content,
-            "contentOffset" to contentOffset,
-            "isDisabled" to isDisabled,
-        ),
+            mapOf(
+                "modifier" to modifier,
+                "strokeWidth" to strokeWidth,
+                "contentSize" to contentSize,
+                "primaryState" to primaryState,
+                "onClick" to onClick,
+                "interactionSource" to interactionSource,
+                "content" to content,
+                "contentOffset" to contentOffset,
+                "isDisabled" to isDisabled,
+            ),
     )
 
     val haptic = LocalHapticFeedback.current
@@ -74,22 +72,22 @@ fun YacrukContentButton(
 
     val borderColorState by animateColorAsState(
         targetValue =
-        when (clickState) {
-            YacrukContentButtonClickState.Clicked ->
-                if (!isDisabled) {
-                    borderColorClicked
-                } else {
-                    borderColorAlt
-                }
+            when (clickState) {
+                YacrukContentButtonClickState.Clicked ->
+                    if (!isDisabled) {
+                        borderColorClicked
+                    } else {
+                        borderColorAlt
+                    }
 
-            YacrukContentButtonClickState.Disabled -> Color.Cyan
-            YacrukContentButtonClickState.Enabled ->
-                if (!isDisabled) {
-                    borderColor
-                } else {
-                    borderColorAlt
-                }
-        },
+                YacrukContentButtonClickState.Disabled -> Color.Cyan
+                YacrukContentButtonClickState.Enabled ->
+                    if (!isDisabled) {
+                        borderColor
+                    } else {
+                        borderColorAlt
+                    }
+            },
         label = "borderColorState",
     )
 
@@ -130,24 +128,24 @@ fun YacrukContentButton(
 
     Box(
         modifier =
-        modifier
-            .size(contentSize)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                enabled = true,
-                onClick = {
-                    if (!isDisabled) {
-                        onClick?.invoke()
-                    }
-                },
-            )
-            .yacrukIconBorder(
-                strokeWidth = strokeWidth,
-                borderColor = borderColorState,
-                backgroundColor = Color.Transparent,
-            )
-            .padding(contentOffset),
+            modifier
+                .size(contentSize)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                    enabled = true,
+                    onClick = {
+                        if (!isDisabled) {
+                            onClick?.invoke()
+                        }
+                    },
+                )
+                .yacrukIconBorder(
+                    strokeWidth = strokeWidth,
+                    borderColor = borderColorState,
+                    backgroundColor = Color.Transparent,
+                )
+                .padding(contentOffset),
         contentAlignment = Alignment.Center,
     ) {
         content()

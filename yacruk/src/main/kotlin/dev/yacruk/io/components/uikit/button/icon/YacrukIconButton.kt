@@ -34,9 +34,7 @@ import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
-import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
-import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
 
 @Composable
@@ -52,7 +50,7 @@ fun YacrukIconButton(
     isDisabled: Boolean = false,
     borderColor: Color,
     borderColorAlt: Color,
-    borderColorClicked: Color
+    borderColorClicked: Color,
 ) {
     Rebugger(
         trackMap =

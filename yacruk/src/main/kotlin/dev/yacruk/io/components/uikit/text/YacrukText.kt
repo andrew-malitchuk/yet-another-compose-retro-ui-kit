@@ -1,7 +1,6 @@
 package dev.yacruk.io.components.uikit.text
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,8 +19,6 @@ import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.fontSize
 import io.github.serpro69.kfaker.Faker
 
-// TODO: preview
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun YacrukText(
     modifier: Modifier = Modifier,
@@ -72,7 +69,6 @@ fun YacrukText(
     )
 }
 
-// TODO: preview
 @Composable
 fun YacrukText(
     modifier: Modifier = Modifier,
