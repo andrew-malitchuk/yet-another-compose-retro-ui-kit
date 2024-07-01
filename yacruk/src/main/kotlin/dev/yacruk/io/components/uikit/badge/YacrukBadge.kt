@@ -29,10 +29,9 @@ fun YacrukBadge(
     modifier: Modifier = Modifier,
     text: String,
     textStyle: TextStyle,
-    badgeColor: Color,
-    textColor: Color,
     shape: Shape,
     padding: Dp = 2.dp,
+    colors: YacrukBadgeColors = YacrukBadgeDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
@@ -40,18 +39,16 @@ fun YacrukBadge(
                 "modifier" to modifier,
                 "text" to text,
                 "textStyle" to textStyle,
-                "badgeColor" to badgeColor,
-                "textColor" to textColor,
                 "shape" to shape,
                 "padding" to padding,
+                "colors" to colors,
             ),
     )
-
     Box(
         modifier =
             modifier
                 .clip(shape)
-                .background(badgeColor)
+                .background(colors.badgeColor)
                 .wrapContentSize()
                 .padding(padding),
         contentAlignment = Alignment.Center,
@@ -64,9 +61,25 @@ fun YacrukBadge(
                     ),
             text = text,
             textStyle = textStyle,
-            color = textColor,
+            color = colors.textColor,
         )
     }
+}
+
+class YacrukBadgeColors internal constructor(
+    val badgeColor: Color,
+    val textColor: Color,
+)
+
+object YacrukBadgeDefaults {
+    @Composable
+    fun colors(
+        badgeColor: Color = bittersweet,
+        textColor: Color = renkon_beige,
+    ) = YacrukBadgeColors(
+        badgeColor = badgeColor,
+        textColor = textColor,
+    )
 }
 
 @YacrukPreview
@@ -77,8 +90,6 @@ fun PreviewYacrukBadge() {
         YacrukBadge(
             text = faker.idNumber.invalid(),
             textStyle = YacrukTheme.typography.headline,
-            badgeColor = bittersweet,
-            textColor = renkon_beige,
             shape = RectangleShape,
             padding = 8.dp,
         )

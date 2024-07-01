@@ -54,25 +54,21 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun YacrukButton(
     modifier: Modifier = Modifier,
-    strokeWidth: Dp,
-    primaryState: YacrukButtonClickState = YacrukButtonClickState.Enabled,
+    borderWidth: Dp,
     text: String,
-    onClick: (() -> Unit)? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    primaryState: YacrukButtonClickState = YacrukButtonClickState.Enabled,
     icon: (@Composable () -> Unit)? = null,
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
-    backgroundColor: Color,
-    borderColor: Color,
-    borderColorAlt: Color,
-    hoverColor: Color,
-    disableColor: Color,
+    colors: YacrukButtonColors = YacrukButtonDefaults.colors(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: (() -> Unit)? = null,
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
-                "strokeWidth" to strokeWidth,
+                "borderWidth" to borderWidth,
                 "primaryState" to primaryState,
                 "text" to text,
                 "onClick" to onClick,
@@ -106,9 +102,9 @@ fun YacrukButton(
     val offset by animateDpAsState(
         targetValue =
             when (clickState) {
-                YacrukButtonClickState.Clicked -> (strokeWidth * 2) + strokeWidth
-                YacrukButtonClickState.Enabled -> (strokeWidth * 2)
-                else -> (strokeWidth * 2)
+                YacrukButtonClickState.Clicked -> (borderWidth * 2) + borderWidth
+                YacrukButtonClickState.Enabled -> (borderWidth * 2)
+                else -> (borderWidth * 2)
             },
         label = "offset",
     )
@@ -116,8 +112,8 @@ fun YacrukButton(
     val borderColorAltState by animateColorAsState(
         targetValue =
             when (clickState) {
-                YacrukButtonClickState.Clicked -> borderColorAlt
-                YacrukButtonClickState.Disabled -> disableColor
+                YacrukButtonClickState.Clicked -> colors.borderColorAlt
+                YacrukButtonClickState.Disabled -> colors.disableColor
                 else -> Color.Transparent
             },
         label = "borderColorAltState",
@@ -126,9 +122,9 @@ fun YacrukButton(
     val backgroundColorState by animateColorAsState(
         targetValue =
             when (hoverStateState) {
-                YacrukButtonHoverState.Hovered -> hoverColor
-                YacrukButtonHoverState.Disabled -> disableColor
-                else -> backgroundColor
+                YacrukButtonHoverState.Hovered -> colors.hoverColor
+                YacrukButtonHoverState.Disabled -> colors.disableColor
+                else -> colors.backgroundColor
             },
         label = "backgroundColorAltState",
     )
@@ -199,8 +195,8 @@ fun YacrukButton(
                     },
                 )
                 .yacrukBorder(
-                    strokeWidth = strokeWidth,
-                    borderColor = borderColor,
+                    borderWidth = borderWidth,
+                    borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,
                     borderColorAlt = borderColorAltState,
                 ),
@@ -211,8 +207,8 @@ fun YacrukButton(
                     .fillMaxWidth()
                     .padding(
                         start = offset,
-                        bottom = strokeWidth * 2,
-                        top = strokeWidth * 2,
+                        bottom = borderWidth * 2,
+                        top = borderWidth * 2,
                     ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -272,13 +268,38 @@ sealed class YacrukButtonHoverState {
     data object Default : YacrukButtonHoverState()
 }
 
+class YacrukButtonColors internal constructor(
+    val backgroundColor: Color,
+    val borderColor: Color,
+    val borderColorAlt: Color,
+    val hoverColor: Color,
+    val disableColor: Color,
+)
+
+object YacrukButtonDefaults {
+    @Composable
+    fun colors(
+        backgroundColor: Color = renkon_beige,
+        borderColor: Color = black_mesa,
+        borderColorAlt: Color = rustling_leaves,
+        hoverColor: Color = stone_craft,
+        disableColor: Color = jambalaya,
+    ) = YacrukButtonColors(
+        backgroundColor = backgroundColor,
+        borderColor = borderColor,
+        borderColorAlt = borderColorAlt,
+        hoverColor = hoverColor,
+        disableColor = disableColor,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYacrukButton() {
     val faker = Faker()
     YacrukTheme {
         YacrukButton(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             icon = {
                 Icon(
                     painterResource(id = R.drawable.icon_check_24),
@@ -286,11 +307,6 @@ private fun PreviewYacrukButton() {
                 )
             },
             text = faker.cowboyBebop.quote(),
-            backgroundColor = renkon_beige,
-            borderColor = black_mesa,
-            borderColorAlt = rustling_leaves,
-            hoverColor = stone_craft,
-            disableColor = jambalaya,
         )
     }
 }

@@ -66,16 +66,13 @@ fun YaaumBasicTextField(
     minLines: Int = 1,
     textStyle: TextStyle,
     onCleanTextClick: (() -> Unit)? = null,
-    strokeWidth: Dp,
+    borderWidth: Dp,
     primaryState: YaaumBasicTextFieldState = YaaumBasicTextFieldState.Enabled,
     isDisabled: Boolean = false,
     leadingIcon: Int?,
     tailingIcon: Int?,
     iconOffset: Dp = 0.dp,
-    backgroundColor: Color,
-    borderColor: Color,
-    borderColorAlt: Color,
-    disableColor: Color,
+    colors: YaaumBasicTextFieldColors = YaaumBasicTextFieldColorsDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
@@ -90,12 +87,13 @@ fun YaaumBasicTextField(
                 "minLines" to minLines,
                 "textStyle" to textStyle,
                 "onCleanTextClick" to onCleanTextClick,
-                "strokeWidth" to strokeWidth,
+                "borderWidth" to borderWidth,
                 "primaryState" to primaryState,
                 "isDisabled" to isDisabled,
                 "leadingIcon" to leadingIcon,
                 "tailingIcon" to tailingIcon,
                 "iconOffset" to iconOffset,
+                "colors" to colors,
             ),
     )
 
@@ -136,8 +134,8 @@ fun YaaumBasicTextField(
     val borderColorAltState by animateColorAsState(
         targetValue =
             when (state) {
-                YaaumBasicTextFieldState.Focused -> borderColorAlt
-                YaaumBasicTextFieldState.Disabled -> disableColor
+                YaaumBasicTextFieldState.Focused -> colors.borderColorAlt
+                YaaumBasicTextFieldState.Disabled -> colors.disableColor
                 else -> Color.Transparent
             },
         label = "borderColorAltState",
@@ -146,8 +144,8 @@ fun YaaumBasicTextField(
     val backgroundColorState by animateColorAsState(
         targetValue =
             when (state) {
-                YaaumBasicTextFieldState.Disabled -> disableColor
-                else -> backgroundColor
+                YaaumBasicTextFieldState.Disabled -> colors.disableColor
+                else -> colors.backgroundColor
             },
         label = "backgroundColorAltState",
     )
@@ -156,7 +154,7 @@ fun YaaumBasicTextField(
     val customTextSelectionColors =
         TextSelectionColors(
             handleColor = Color.Transparent,
-            backgroundColor = borderColorAlt,
+            backgroundColor = colors.borderColorAlt,
         )
 
     Row(
@@ -165,16 +163,16 @@ fun YaaumBasicTextField(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .foo(
-                    strokeWidth = strokeWidth,
-                    borderColor = borderColor,
+                    borderWidth = borderWidth,
+                    borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,
                     borderColorAlt = borderColorAltState,
                 )
                 .padding(
-                    start = strokeWidth,
-                    end = strokeWidth,
-                    bottom = strokeWidth,
-                    top = strokeWidth,
+                    start = borderWidth,
+                    end = borderWidth,
+                    bottom = borderWidth,
+                    top = borderWidth,
                 ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
@@ -252,8 +250,8 @@ fun YaaumBasicTextField(
                             interactionSource = interactionSource,
                             contentPadding =
                                 PaddingValues(
-                                    horizontal = strokeWidth * 2,
-                                    vertical = strokeWidth,
+                                    horizontal = borderWidth * 2,
+                                    vertical = borderWidth,
                                 ),
                         )
                     }
@@ -271,6 +269,7 @@ fun YaaumBasicTextField(
                             .size(textStyle.fontSize.value.dp)
                             .noRippleClickable {
                                 textState = ""
+                                onCleanTextClick?.invoke()
                             }
                             .padding(all = 0.dp),
                 )
@@ -288,20 +287,38 @@ sealed class YaaumBasicTextFieldState {
     data object Disabled : YaaumBasicTextFieldState()
 }
 
+class YaaumBasicTextFieldColors internal constructor(
+    val backgroundColor: Color,
+    val borderColor: Color,
+    val borderColorAlt: Color,
+    val disableColor: Color,
+)
+
+object YaaumBasicTextFieldColorsDefaults {
+    @Composable
+    fun colors(
+        backgroundColor: Color = renkon_beige,
+        borderColor: Color = black_mesa,
+        borderColorAlt: Color = rustling_leaves,
+        disableColor: Color = jambalaya,
+    ) = YaaumBasicTextFieldColors(
+        backgroundColor = backgroundColor,
+        borderColor = borderColor,
+        borderColorAlt = borderColorAlt,
+        disableColor = disableColor,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYaaumBasicTextField() {
     YacrukTheme {
         YaaumBasicTextField(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             textStyle = YacrukTheme.typography.headline,
             iconOffset = 4.dp,
             leadingIcon = R.drawable.icon_check_24,
             tailingIcon = R.drawable.icon_times_circle_24,
-            backgroundColor = renkon_beige,
-            borderColor = black_mesa,
-            borderColorAlt = rustling_leaves,
-            disableColor = jambalaya,
         )
     }
 }

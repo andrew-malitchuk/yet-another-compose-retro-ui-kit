@@ -23,27 +23,27 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun YacrukBorder(
     modifier: Modifier = Modifier,
-    strokeWidth: Dp,
+    borderWidth: Dp,
     text: String,
-    borderColor: Color,
-    backgroundColor: Color,
     padding: Dp,
     textStyle: TextStyle,
+    colors: YacrukBorderColors = YacrukBorderDefaults.colors(),
     content: @Composable () -> Unit,
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
-                "strokeWidth" to strokeWidth,
+                "borderWidth" to borderWidth,
                 "text" to text,
                 "padding" to padding,
                 "textStyle" to textStyle,
                 "content" to content,
+                "colors" to colors,
             ),
     )
 
-    val initialPadding = strokeWidth * 2 + textStyle.fontSize.value.dp / 2
+    val initialPadding = borderWidth * 2 + textStyle.fontSize.value.dp / 2
 
     Box(
         modifier =
@@ -52,9 +52,9 @@ fun YacrukBorder(
                 .wrapContentHeight()
                 .bar(
                     textStyle = textStyle,
-                    strokeWidth = strokeWidth,
-                    borderColor = borderColor,
-                    backgroundColor = backgroundColor,
+                    borderWidth = borderWidth,
+                    borderColor = colors.borderColor,
+                    backgroundColor = colors.backgroundColor,
                     borderColorAlt = Color.Transparent,
                     text = text,
                 )
@@ -70,18 +70,32 @@ fun YacrukBorder(
     }
 }
 
+class YacrukBorderColors internal constructor(
+    val borderColor: Color,
+    val backgroundColor: Color,
+)
+
+object YacrukBorderDefaults {
+    @Composable
+    fun colors(
+        borderColor: Color = black_mesa,
+        backgroundColor: Color = renkon_beige,
+    ) = YacrukBorderColors(
+        borderColor = borderColor,
+        backgroundColor = backgroundColor,
+    )
+}
+
 @YacrukPreview
 @Composable
 fun PreviewYacrukBorder() {
     val faker = Faker()
     YacrukTheme {
         YacrukBorder(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             text = faker.cowboyBebop.character(),
             padding = 8.dp,
             textStyle = YacrukTheme.typography.title,
-            backgroundColor = black_mesa,
-            borderColor = renkon_beige,
         ) {
             Box(
                 modifier =

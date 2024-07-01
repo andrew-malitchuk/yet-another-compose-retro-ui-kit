@@ -27,20 +27,18 @@ import dev.yacruk.io.core.theme.source.color.true_navy
 fun YacrukProgressBar(
     modifier: Modifier = Modifier,
     progress: Float,
-    progressColor: Color,
-    backgroundColor: Color,
-    clipShape: Shape = RectangleShape,
     height: Dp,
+    clipShape: Shape = RectangleShape,
+    colors: YacrukProgressBarColors = YacrukProgressBarColorsDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
                 "progress" to progress,
-                "progressColor" to progressColor,
-                "backgroundColor" to backgroundColor,
-                "clipShape" to clipShape,
                 "height" to height,
+                "clipShape" to clipShape,
+                "colors" to colors,
             ),
     )
 
@@ -53,7 +51,7 @@ fun YacrukProgressBar(
                     val (width) = size
                     val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
                     drawLine(
-                        color = backgroundColor,
+                        color = colors.backgroundColor,
                         start = Offset(0f, center.y),
                         end = Offset(width, center.y),
                         strokeWidth = (height / 2).toPx(),
@@ -64,11 +62,27 @@ fun YacrukProgressBar(
         Box(
             modifier =
                 Modifier
-                    .background(progressColor)
+                    .background(colors.progressColor)
                     .fillMaxHeight()
                     .fillMaxWidth(progress),
         )
     }
+}
+
+class YacrukProgressBarColors internal constructor(
+    val backgroundColor: Color,
+    val progressColor: Color,
+)
+
+object YacrukProgressBarColorsDefaults {
+    @Composable
+    fun colors(
+        backgroundColor: Color = black_mesa,
+        progressColor: Color = true_navy,
+    ) = YacrukProgressBarColors(
+        backgroundColor = backgroundColor,
+        progressColor = progressColor,
+    )
 }
 
 @YacrukPreview
@@ -79,8 +93,6 @@ private fun PreviewYacrukProgressBar() {
             modifier = Modifier.fillMaxWidth(),
             progress = 0.5f,
             height = 8.dp,
-            backgroundColor = black_mesa,
-            progressColor = true_navy,
         )
     }
 }

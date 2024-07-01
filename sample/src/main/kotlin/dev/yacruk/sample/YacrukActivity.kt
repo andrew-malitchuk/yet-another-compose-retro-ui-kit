@@ -12,13 +12,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -30,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.yacruk.io.R
 import dev.yacruk.io.components.uikit.badge.YacrukBadge
@@ -54,7 +49,6 @@ import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
-import dev.yacruk.sample.ui.theme.YACRUKTheme
 import kotlinx.coroutines.launch
 
 class YacrukActivity : ComponentActivity() {
@@ -85,7 +79,7 @@ class YacrukActivity : ComponentActivity() {
                         textStyle = YacrukTheme.typography.body,
                     ) {
                         YacrukButton(
-                            strokeWidth = 4.dp,
+                            borderWidth = 4.dp,
                             icon = {
                                 Icon(
                                     painterResource(id = R.drawable.icon_check_24),
@@ -94,11 +88,6 @@ class YacrukActivity : ComponentActivity() {
                             },
                             text = "foobarfoobarfoobarfoobarfoobarfoobar",
                             isDisabled = foo,
-                            backgroundColor = renkon_beige,
-                            borderColor = black_mesa,
-                            borderColorAlt = rustling_leaves,
-                            hoverColor = stone_craft,
-                            disableColor = jambalaya,
                             onClick = {
                                 coroutineContext.launch {
                                     Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
@@ -122,19 +111,16 @@ class YacrukActivity : ComponentActivity() {
                             .fillMaxWidth(),
                         valueRange = 0f..30f,
                         stepSize = 2f,
-                        strokeWidth = 4.dp,
+                        borderWidth = 4.dp,
                         pointerSize = 12.dp,
                     )
 
                     YacrukIconButton(
-                        strokeWidth = 4.dp,
+                        borderWidth = 4.dp,
                         icon = R.drawable.icon_check_24,
                         isDisabled = foo,
                         iconSize = 48.dp,
                         iconOffset = 2.dp,
-                        borderColor = black_mesa,
-                        borderColorAlt = rustling_leaves,
-                        borderColorClicked = true_navy,
                         onClick = {
                             coroutineContext.launch {
                                 Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
@@ -142,13 +128,10 @@ class YacrukActivity : ComponentActivity() {
                         }
                     )
                     YacrukContentButton(
-                        strokeWidth = 4.dp,
+                        borderWidth = 4.dp,
                         isDisabled = foo,
                         contentSize = 48.dp,
                         contentOffset = 2.dp,
-                        borderColor = black_mesa,
-                        borderColorAlt = rustling_leaves,
-                        borderColorClicked = true_navy,
                         onClick = {
                             coroutineContext.launch {
                                 Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
@@ -160,7 +143,7 @@ class YacrukActivity : ComponentActivity() {
                     )
 
                     YaaumBasicTextField(
-                        strokeWidth = 4.dp,
+                        borderWidth = 4.dp,
                         isDisabled = foo,
                         textStyle = YacrukTheme.typography.headline,
                         iconOffset = 4.dp,
@@ -173,7 +156,7 @@ class YacrukActivity : ComponentActivity() {
                     )
 
                     YacrukChip(
-                        strokeWidth = 4.dp,
+                        borderWidth = 4.dp,
                         isDisabled = foo,
                         iconOffset = 4.dp,
                         text = "foo",
@@ -191,38 +174,29 @@ class YacrukActivity : ComponentActivity() {
                         },
                     )
                     YacrukCheckbox(
-                        strokeWidth = 4.dp,
+                        borderWidth = 4.dp,
                         textStyle = YacrukTheme.typography.headline,
                         iconSize = 24.dp,
                         text = "foobar",
                         textSpacing = 4.dp,
                         isDisabled = foo,
-                        borderColor = black_mesa,
-                        borderColorAlt = rustling_leaves,
-                        borderColorClicked = true_navy,
                     )
                     YacrukBorder(
                         textStyle = YacrukTheme.typography.body,
-                        strokeWidth = 4.dp,
+                        borderWidth = 4.dp,
                         text = "lorem ipsum",
                         padding = 8.dp,
-                        backgroundColor = black_mesa,
-                        borderColor = renkon_beige,
                     ) {
                         Column {
                             YacrukBadge(
                                 text = "1",
                                 textStyle = YacrukTheme.typography.headline,
-                                badgeColor = black_mesa,
-                                textColor = renkon_beige,
                                 padding = 4.dp,
                                 shape = RectangleShape
                             )
                             YacrukSwitchButton(
                                 borderWidth = 4.dp,
                                 thumbSize = 24.dp,
-                                checkedTrackColor = true_navy,
-                                uncheckedTrackColor = black_mesa
                             )
                             YacrukProgressBar(
                                 modifier = Modifier.fillMaxWidth(),
@@ -239,21 +213,5 @@ class YacrukActivity : ComponentActivity() {
             }
         }
 
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    YACRUKTheme {
-        Greeting("Android")
     }
 }

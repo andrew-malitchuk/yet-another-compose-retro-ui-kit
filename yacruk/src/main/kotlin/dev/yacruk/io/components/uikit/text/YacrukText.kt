@@ -23,32 +23,32 @@ import io.github.serpro69.kfaker.Faker
 fun YacrukText(
     modifier: Modifier = Modifier,
     text: String,
-    color: Color = Color.Unspecified,
     textStyle: TextStyle,
+    color: Color = Color.Unspecified,
     fontSize: TextUnit? = null,
     lineHeight: TextUnit? = null,
     textAlign: TextAlign? = null,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
+    isMarqueeEnabled: Boolean = true,
     onTextLayout: ((TextLayoutResult) -> Unit)? = null,
     onClick: (() -> Unit)? = null,
-    isMarqueeEnabled: Boolean = true,
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
                 "text" to text,
-                "color" to color,
                 "textStyle" to textStyle,
+                "color" to color,
                 "fontSize" to fontSize,
                 "lineHeight" to lineHeight,
                 "textAlign" to textAlign,
                 "maxLines" to maxLines,
                 "minLines" to minLines,
+                "isMarqueeEnabled" to isMarqueeEnabled,
                 "onTextLayout" to onTextLayout,
                 "onClick" to onClick,
-                "isMarqueeEnabled" to isMarqueeEnabled,
             ),
     )
 

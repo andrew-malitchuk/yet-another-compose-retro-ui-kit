@@ -35,15 +35,13 @@ fun YacrukSwitchButton(
     modifier: Modifier = Modifier,
     width: Dp = 72.dp,
     height: Dp = 40.dp,
-    checkedTrackColor: Color = YacrukTheme.colors.primary,
-    uncheckedTrackColor: Color = YacrukTheme.colors.secondary,
     gapBetweenThumbAndTrackEdge: Dp = YacrukTheme.spacing.small,
     borderWidth: Dp = 2.dp,
     iconInnerPadding: Dp = YacrukTheme.spacing.extraSmall,
     thumbSize: Dp = 8.dp,
     initValue: Boolean = false,
     onStateChange: ((Boolean) -> Unit)? = null,
-    foo: Boolean? = null,
+    colors: YacrukSwitchButtonColors = YacrukSwitchButtonDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
@@ -51,15 +49,13 @@ fun YacrukSwitchButton(
                 "modifier" to modifier,
                 "width" to width,
                 "height" to height,
-                "checkedTrackColor" to checkedTrackColor,
-                "uncheckedTrackColor" to uncheckedTrackColor,
+                "colors" to colors,
                 "gapBetweenThumbAndTrackEdge" to gapBetweenThumbAndTrackEdge,
                 "borderWidth" to borderWidth,
                 "iconInnerPadding" to iconInnerPadding,
                 "thumbSize" to thumbSize,
                 "initValue" to initValue,
                 "onStateChange" to onStateChange,
-                "foo" to foo,
             ),
     )
 
@@ -71,10 +67,6 @@ fun YacrukSwitchButton(
         mutableStateOf(initValue)
     }
 
-    if (foo != null && foo != onSideChangeState) {
-        onSideChangeState = foo
-    }
-
     val alignment by animateAlignmentAsState(if (onSideChangeState) 1f else -1f)
     Box(
         modifier =
@@ -82,7 +74,7 @@ fun YacrukSwitchButton(
                 .size(width = width, height = height)
                 .border(
                     width = borderWidth,
-                    color = if (onSideChangeState) checkedTrackColor else uncheckedTrackColor,
+                    color = if (onSideChangeState) colors.checkedTrackColor else colors.uncheckedTrackColor,
                     shape = RectangleShape,
                 )
                 .clickable(
@@ -109,7 +101,7 @@ fun YacrukSwitchButton(
                     Modifier
                         .size(size = thumbSize)
                         .background(
-                            color = if (onSideChangeState) checkedTrackColor else uncheckedTrackColor,
+                            color = if (onSideChangeState) colors.checkedTrackColor else colors.uncheckedTrackColor,
                             shape = RectangleShape,
                         )
                         .padding(all = iconInnerPadding),
@@ -124,6 +116,22 @@ private fun animateAlignmentAsState(targetBiasValue: Float): State<BiasAlignment
     return remember { derivedStateOf { BiasAlignment(horizontalBias = bias, verticalBias = 0f) } }
 }
 
+class YacrukSwitchButtonColors internal constructor(
+    val checkedTrackColor: Color,
+    val uncheckedTrackColor: Color,
+)
+
+object YacrukSwitchButtonDefaults {
+    @Composable
+    fun colors(
+        checkedTrackColor: Color = true_navy,
+        uncheckedTrackColor: Color = black_mesa,
+    ) = YacrukSwitchButtonColors(
+        checkedTrackColor = checkedTrackColor,
+        uncheckedTrackColor = uncheckedTrackColor,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYacrukSwitchButton() {
@@ -131,8 +139,6 @@ private fun PreviewYacrukSwitchButton() {
         YacrukSwitchButton(
             borderWidth = 4.dp,
             thumbSize = 24.dp,
-            checkedTrackColor = true_navy,
-            uncheckedTrackColor = black_mesa,
         )
     }
 }

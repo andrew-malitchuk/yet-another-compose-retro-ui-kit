@@ -87,7 +87,7 @@ fun Modifier.disableClickAndRipple(): Modifier =
     }
 
 fun Modifier.yacrukBorder(
-    strokeWidth: Dp,
+    borderWidth: Dp,
     backgroundColor: Color,
     borderColor: Color,
     borderColorAlt: Color,
@@ -95,19 +95,19 @@ fun Modifier.yacrukBorder(
     this.drawBehind {
         drawRect(
             color = borderColor,
-            style = Stroke(width = strokeWidth.toPx()),
+            style = Stroke(width = borderWidth.toPx()),
         )
         drawRect(
             color = backgroundColor,
             topLeft =
                 Offset(
-                    strokeWidth.toPx() / 2,
-                    strokeWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
                 ),
             size =
                 Size(
-                    width = (size.width - strokeWidth.toPx()),
-                    height = (size.height - strokeWidth.toPx()),
+                    width = (size.width - borderWidth.toPx()),
+                    height = (size.height - borderWidth.toPx()),
                 ),
         )
         // horizontal
@@ -115,35 +115,35 @@ fun Modifier.yacrukBorder(
             color = borderColorAlt,
             start =
                 Offset(
-                    (strokeWidth / 2).toPx(),
-                    strokeWidth.toPx(),
+                    (borderWidth / 2).toPx(),
+                    borderWidth.toPx(),
                 ),
             end =
                 Offset(
-                    x = size.width - (strokeWidth / 2).toPx(),
-                    y = strokeWidth.toPx(),
+                    x = size.width - (borderWidth / 2).toPx(),
+                    y = borderWidth.toPx(),
                 ),
-            strokeWidth = strokeWidth.toPx(),
+            strokeWidth = borderWidth.toPx(),
         )
         // vertical
         drawLine(
             color = borderColorAlt,
             start =
                 Offset(
-                    strokeWidth.toPx(),
-                    strokeWidth.toPx() + strokeWidth.toPx() / 2,
+                    borderWidth.toPx(),
+                    borderWidth.toPx() + borderWidth.toPx() / 2,
                 ),
             end =
                 Offset(
-                    x = strokeWidth.toPx(),
-                    y = size.height - (strokeWidth / 2).toPx(),
+                    x = borderWidth.toPx(),
+                    y = size.height - (borderWidth / 2).toPx(),
                 ),
-            strokeWidth = strokeWidth.toPx(),
+            strokeWidth = borderWidth.toPx(),
         )
     }
 
 fun Modifier.foo(
-    strokeWidth: Dp,
+    borderWidth: Dp,
     backgroundColor: Color,
     borderColor: Color,
     borderColorAlt: Color,
@@ -151,19 +151,19 @@ fun Modifier.foo(
     this.drawBehind {
         drawRect(
             color = borderColor,
-            style = Stroke(width = strokeWidth.toPx()),
+            style = Stroke(width = borderWidth.toPx()),
         )
         drawRect(
             color = backgroundColor,
             topLeft =
                 Offset(
-                    strokeWidth.toPx() / 2,
-                    strokeWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
                 ),
             size =
                 Size(
-                    width = (size.width - strokeWidth.toPx()),
-                    height = (size.height - strokeWidth.toPx()),
+                    width = (size.width - borderWidth.toPx()),
+                    height = (size.height - borderWidth.toPx()),
                 ),
         )
         // horizontal
@@ -171,37 +171,37 @@ fun Modifier.foo(
             color = borderColorAlt,
             start =
                 Offset(
-                    (strokeWidth / 2).toPx(),
-                    strokeWidth.toPx(),
+                    (borderWidth / 2).toPx(),
+                    borderWidth.toPx(),
                 ),
             end =
                 Offset(
-                    x = size.width - (strokeWidth / 2).toPx(),
-                    y = strokeWidth.toPx(),
+                    x = size.width - (borderWidth / 2).toPx(),
+                    y = borderWidth.toPx(),
                 ),
-            strokeWidth = strokeWidth.toPx(),
+            strokeWidth = borderWidth.toPx(),
         )
         // vertical
         drawLine(
             color = borderColorAlt,
             start =
                 Offset(
-                    strokeWidth.toPx(),
-                    strokeWidth.toPx() + strokeWidth.toPx() / 2,
+                    borderWidth.toPx(),
+                    borderWidth.toPx() + borderWidth.toPx() / 2,
                 ),
             end =
                 Offset(
-                    x = strokeWidth.toPx(),
-                    y = size.height - (strokeWidth / 2).toPx(),
+                    x = borderWidth.toPx(),
+                    y = size.height - (borderWidth / 2).toPx(),
                 ),
-            strokeWidth = strokeWidth.toPx(),
+            strokeWidth = borderWidth.toPx(),
         )
     }
 
 @Composable
 fun Modifier.bar(
     textStyle: TextStyle,
-    strokeWidth: Dp,
+    borderWidth: Dp,
     backgroundColor: Color,
     borderColor: Color,
     borderColorAlt: Color,
@@ -219,23 +219,23 @@ fun Modifier.bar(
             color = backgroundColor,
             topLeft =
                 Offset(
-                    strokeWidth.toPx() / 2,
-                    strokeWidth.toPx() / 2 + textSize + strokeWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
+                    borderWidth.toPx() / 2 + textSize + borderWidth.toPx() / 2,
                 ),
             size =
                 Size(
-                    width = (size.width - strokeWidth.toPx()),
-                    height = (size.height - strokeWidth.toPx() - textSize - strokeWidth.toPx() / 2),
+                    width = (size.width - borderWidth.toPx()),
+                    height = (size.height - borderWidth.toPx() - textSize - borderWidth.toPx() / 2),
                 ),
         )
 
         drawRect(
             color = borderColor,
-            style = Stroke(width = strokeWidth.toPx()),
+            style = Stroke(width = borderWidth.toPx()),
             topLeft =
                 Offset(
                     0f,
-                    textSize / 2 + strokeWidth.toPx() * 2,
+                    textSize / 2 + borderWidth.toPx() * 2,
                 ),
         )
 
@@ -243,12 +243,12 @@ fun Modifier.bar(
             color = backgroundColor,
             topLeft =
                 Offset(
-                    x = strokeWidth.toPx() * 4 - strokeWidth.toPx(),
-                    y = strokeWidth.toPx(),
+                    x = borderWidth.toPx() * 4 - borderWidth.toPx(),
+                    y = borderWidth.toPx(),
                 ),
             size =
                 Size(
-                    width = textLayoutResult.size.width.toFloat() + strokeWidth.toPx() * 2,
+                    width = textLayoutResult.size.width.toFloat() + borderWidth.toPx() * 2,
                     height = textLayoutResult.size.height.toFloat(),
                 ),
         )
@@ -257,7 +257,7 @@ fun Modifier.bar(
             textLayoutResult = textLayoutResult,
             topLeft =
                 Offset(
-                    x = strokeWidth.toPx() * 4,
+                    x = borderWidth.toPx() * 4,
                     y = 0f,
                 ),
             color = borderColor,
@@ -265,32 +265,32 @@ fun Modifier.bar(
 
 //        drawRect(
 //            color = borderColor,
-//            style = Stroke(width = strokeWidth.toPx()),
+//            style = Stroke(width = borderWidth.toPx()),
 //        )
     }
 }
 
 fun Modifier.yacrukIconBorder(
-    strokeWidth: Dp,
+    borderWidth: Dp,
     backgroundColor: Color,
     borderColor: Color,
 ): Modifier =
     this.drawBehind {
         drawRect(
             color = borderColor,
-            style = Stroke(width = strokeWidth.toPx()),
+            style = Stroke(width = borderWidth.toPx()),
         )
         drawRect(
             color = backgroundColor,
             topLeft =
                 Offset(
-                    strokeWidth.toPx() / 2,
-                    strokeWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
                 ),
             size =
                 Size(
-                    width = (size.width - strokeWidth.toPx()),
-                    height = (size.height - strokeWidth.toPx()),
+                    width = (size.width - borderWidth.toPx()),
+                    height = (size.height - borderWidth.toPx()),
                 ),
         )
     }

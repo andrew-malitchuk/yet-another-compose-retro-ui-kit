@@ -55,34 +55,31 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun YacrukChip(
     modifier: Modifier = Modifier,
-    strokeWidth: Dp,
-    primaryState: YacrukChipClickState = YacrukChipClickState.Enabled,
     text: String,
     textStyle: TextStyle,
+    borderWidth: Dp,
+    primaryState: YacrukChipClickState = YacrukChipClickState.Enabled,
     onClick: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
     leadingIcon: (@Composable () -> Unit)? = null,
-    backgroundColor: Color,
-    borderColor: Color,
-    borderColorAlt: Color,
-    hoverColor: Color,
-    disableColor: Color,
+    colors: YacrukChipColors = YacrukChipColorsDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
-                "strokeWidth" to strokeWidth,
-                "primaryState" to primaryState,
                 "text" to text,
                 "textStyle" to textStyle,
+                "borderWidth" to borderWidth,
+                "primaryState" to primaryState,
                 "onClick" to onClick,
                 "interactionSource" to interactionSource,
                 "iconOffset" to iconOffset,
                 "isDisabled" to isDisabled,
                 "leadingIcon" to leadingIcon,
+                "colors" to colors,
             ),
     )
 
@@ -109,9 +106,9 @@ fun YacrukChip(
     val offset by animateDpAsState(
         targetValue =
             when (clickState) {
-                YacrukChipClickState.Clicked -> (strokeWidth * 2) + strokeWidth
-                YacrukChipClickState.Enabled -> (strokeWidth * 2)
-                else -> (strokeWidth * 2)
+                YacrukChipClickState.Clicked -> (borderWidth * 2) + borderWidth
+                YacrukChipClickState.Enabled -> (borderWidth * 2)
+                else -> (borderWidth * 2)
             },
         label = "offset",
     )
@@ -119,8 +116,8 @@ fun YacrukChip(
     val borderColorAltState by animateColorAsState(
         targetValue =
             when (clickState) {
-                YacrukChipClickState.Clicked -> borderColorAlt
-                YacrukChipClickState.Disabled -> disableColor
+                YacrukChipClickState.Clicked -> colors.borderColorAlt
+                YacrukChipClickState.Disabled -> colors.disableColor
                 else -> Color.Transparent
             },
         label = "borderColorAltState",
@@ -129,9 +126,9 @@ fun YacrukChip(
     val backgroundColorState by animateColorAsState(
         targetValue =
             when (hoverStateState) {
-                YacrukChipHoverState.Hovered -> hoverColor
-                YacrukChipHoverState.Disabled -> disableColor
-                else -> backgroundColor
+                YacrukChipHoverState.Hovered -> colors.hoverColor
+                YacrukChipHoverState.Disabled -> colors.disableColor
+                else -> colors.backgroundColor
             },
         label = "backgroundColorAltState",
     )
@@ -202,8 +199,8 @@ fun YacrukChip(
                     },
                 )
                 .yacrukBorder(
-                    strokeWidth = strokeWidth,
-                    borderColor = borderColor,
+                    borderWidth = borderWidth,
+                    borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,
                     borderColorAlt = borderColorAltState,
                 ),
@@ -214,8 +211,8 @@ fun YacrukChip(
                     .wrapContentWidth()
                     .padding(
                         start = offset,
-                        bottom = strokeWidth * 2,
-                        top = strokeWidth * 2,
+                        bottom = borderWidth * 2,
+                        top = borderWidth * 2,
                     ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -247,7 +244,7 @@ fun YacrukChip(
                             TextUnitType.Sp,
                         ),
                 )
-                Spacer(modifier = Modifier.width(strokeWidth * 2 * sizeState))
+                Spacer(modifier = Modifier.width(borderWidth * 2 * sizeState))
             }
         }
     }
@@ -276,13 +273,38 @@ sealed class YacrukChipHoverState {
     data object Default : YacrukChipHoverState()
 }
 
+class YacrukChipColors internal constructor(
+    val backgroundColor: Color,
+    val borderColor: Color,
+    val borderColorAlt: Color,
+    val hoverColor: Color,
+    val disableColor: Color,
+)
+
+object YacrukChipColorsDefaults {
+    @Composable
+    fun colors(
+        backgroundColor: Color = renkon_beige,
+        borderColor: Color = black_mesa,
+        borderColorAlt: Color = rustling_leaves,
+        hoverColor: Color = stone_craft,
+        disableColor: Color = jambalaya,
+    ) = YacrukChipColors(
+        backgroundColor = backgroundColor,
+        borderColor = borderColor,
+        borderColorAlt = borderColorAlt,
+        hoverColor = hoverColor,
+        disableColor = disableColor,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYacrukChip() {
     val faker = Faker()
     YacrukTheme {
         YacrukChip(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             iconOffset = 4.dp,
             text = faker.cowboyBebop.character(),
             textStyle = YacrukTheme.typography.headline,
@@ -292,11 +314,6 @@ private fun PreviewYacrukChip() {
                     contentDescription = "",
                 )
             },
-            backgroundColor = renkon_beige,
-            borderColor = black_mesa,
-            borderColorAlt = rustling_leaves,
-            hoverColor = stone_craft,
-            disableColor = jambalaya,
         )
     }
 }
