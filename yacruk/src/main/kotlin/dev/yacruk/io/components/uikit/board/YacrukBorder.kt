@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.internal.preview.YacrukPreview
-import dev.yacruk.io.core.ext.bar
+import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
@@ -50,12 +50,11 @@ fun YacrukBorder(
             modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .bar(
+                .yacrukBorder(
                     textStyle = textStyle,
                     borderWidth = borderWidth,
-                    borderColor = colors.borderColor,
                     backgroundColor = colors.backgroundColor,
-                    borderColorAlt = Color.Transparent,
+                    borderColor = colors.borderColor,
                     text = text,
                 )
                 .padding(

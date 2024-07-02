@@ -3,8 +3,6 @@ package dev.yacruk.io.core.ext
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
@@ -23,10 +21,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.PointerEvent
-import androidx.compose.ui.input.pointer.PointerInputChange
-import androidx.compose.ui.input.pointer.consumePositionChange
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
@@ -47,42 +41,59 @@ fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
         }
     }
 
-fun Modifier.onTouch(
-    onHover: (() -> Unit)? = null,
-    onMove: (() -> Unit)? = null,
-    onRelease: (() -> Unit)? = null,
+fun Modifier.yacrukBorderAlt(
+    borderWidth: Dp,
+    backgroundColor: Color,
+    borderColor: Color,
+    borderColorAlt: Color,
 ): Modifier =
-    composed {
-        this.pointerInput(Unit) {
-            awaitEachGesture {
-                awaitFirstDown()
-                // ACTION_DOWN here
-                onHover?.invoke()
-                do {
-                    // This PointerEvent contains details including
-                    // event, id, position and more
-                    val event: PointerEvent = awaitPointerEvent()
-                    // ACTION_MOVE loop
-                    onMove?.invoke()
-                    // Consuming event prevents other gestures or scroll to intercept
-                    event.changes.forEach { pointerInputChange: PointerInputChange ->
-                        pointerInputChange.consumePositionChange()
-                    }
-                } while (event.changes.any { it.pressed })
-
-                // ACTION_UP is here
-                onRelease?.invoke()
-            }
-        }
-    }
-
-fun Modifier.disableClickAndRipple(): Modifier =
-    composed {
-        this.clickable(
-            enabled = false,
-            indication = null,
-            interactionSource = remember { MutableInteractionSource() },
-            onClick = { },
+    this.drawBehind {
+        drawRect(
+            color = borderColor,
+            style = Stroke(width = borderWidth.toPx()),
+        )
+        drawRect(
+            color = backgroundColor,
+            topLeft =
+                Offset(
+                    borderWidth.toPx() / 2,
+                    borderWidth.toPx() / 2,
+                ),
+            size =
+                Size(
+                    width = (size.width - borderWidth.toPx()),
+                    height = (size.height - borderWidth.toPx()),
+                ),
+        )
+        // horizontal
+        drawLine(
+            color = borderColorAlt,
+            start =
+                Offset(
+                    (borderWidth / 2).toPx(),
+                    borderWidth.toPx(),
+                ),
+            end =
+                Offset(
+                    x = size.width - (borderWidth / 2).toPx(),
+                    y = borderWidth.toPx(),
+                ),
+            strokeWidth = borderWidth.toPx(),
+        )
+        // vertical
+        drawLine(
+            color = borderColorAlt,
+            start =
+                Offset(
+                    borderWidth.toPx(),
+                    borderWidth.toPx() + borderWidth.toPx() / 2,
+                ),
+            end =
+                Offset(
+                    x = borderWidth.toPx(),
+                    y = size.height - (borderWidth / 2).toPx(),
+                ),
+            strokeWidth = borderWidth.toPx(),
         )
     }
 
@@ -142,69 +153,12 @@ fun Modifier.yacrukBorder(
         )
     }
 
-fun Modifier.foo(
-    borderWidth: Dp,
-    backgroundColor: Color,
-    borderColor: Color,
-    borderColorAlt: Color,
-): Modifier =
-    this.drawBehind {
-        drawRect(
-            color = borderColor,
-            style = Stroke(width = borderWidth.toPx()),
-        )
-        drawRect(
-            color = backgroundColor,
-            topLeft =
-                Offset(
-                    borderWidth.toPx() / 2,
-                    borderWidth.toPx() / 2,
-                ),
-            size =
-                Size(
-                    width = (size.width - borderWidth.toPx()),
-                    height = (size.height - borderWidth.toPx()),
-                ),
-        )
-        // horizontal
-        drawLine(
-            color = borderColorAlt,
-            start =
-                Offset(
-                    (borderWidth / 2).toPx(),
-                    borderWidth.toPx(),
-                ),
-            end =
-                Offset(
-                    x = size.width - (borderWidth / 2).toPx(),
-                    y = borderWidth.toPx(),
-                ),
-            strokeWidth = borderWidth.toPx(),
-        )
-        // vertical
-        drawLine(
-            color = borderColorAlt,
-            start =
-                Offset(
-                    borderWidth.toPx(),
-                    borderWidth.toPx() + borderWidth.toPx() / 2,
-                ),
-            end =
-                Offset(
-                    x = borderWidth.toPx(),
-                    y = size.height - (borderWidth / 2).toPx(),
-                ),
-            strokeWidth = borderWidth.toPx(),
-        )
-    }
-
 @Composable
-fun Modifier.bar(
+fun Modifier.yacrukBorder(
     textStyle: TextStyle,
     borderWidth: Dp,
     backgroundColor: Color,
     borderColor: Color,
-    borderColorAlt: Color,
     text: String,
 ): Modifier {
     val textMeasurer = rememberTextMeasurer()
@@ -262,11 +216,6 @@ fun Modifier.bar(
                 ),
             color = borderColor,
         )
-
-//        drawRect(
-//            color = borderColor,
-//            style = Stroke(width = borderWidth.toPx()),
-//        )
     }
 }
 

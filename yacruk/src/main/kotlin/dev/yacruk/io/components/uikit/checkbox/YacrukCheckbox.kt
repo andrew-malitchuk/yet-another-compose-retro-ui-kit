@@ -97,17 +97,14 @@ fun YacrukCheckbox(
                     interactions.remove(interaction.press)
                 }
 
-                is PressInteraction.Cancel -> {
+                is PressInteraction.Cancel ->
                     interactions.remove(interaction.press)
-                }
 
-                is DragInteraction.Start -> {
+                is DragInteraction.Start ->
                     interactions.add(interaction)
-                }
 
-                is DragInteraction.Stop -> {
+                is DragInteraction.Stop ->
                     interactions.remove(interaction.start)
-                }
 
                 is DragInteraction.Cancel -> {
                     clickState = YacrukCheckboxClickState.Disabled

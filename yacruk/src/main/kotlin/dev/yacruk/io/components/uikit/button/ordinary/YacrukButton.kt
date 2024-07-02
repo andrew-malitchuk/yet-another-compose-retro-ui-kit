@@ -41,7 +41,7 @@ import dev.yacruk.io.R
 import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
-import dev.yacruk.io.core.ext.yacrukBorder
+import dev.yacruk.io.core.ext.yacrukBorderAlt
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
@@ -94,9 +94,8 @@ fun YacrukButton(
             hoverStateState = YacrukButtonHoverState.Disabled
         }
 
-        !isDisabled -> {
+        !isDisabled ->
             hoverStateState = YacrukButtonHoverState.Default
-        }
     }
 
     val offset by animateDpAsState(
@@ -151,9 +150,7 @@ fun YacrukButton(
                 is Release -> {
                     hoverStateState = YacrukButtonHoverState.Default
                     clickState = clickState.toggleClick()
-//                    if (!isDisabled) {
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-//                    }
                     interactions.remove(interaction.press)
                 }
 
@@ -162,13 +159,11 @@ fun YacrukButton(
                     interactions.remove(interaction.press)
                 }
 
-                is DragInteraction.Start -> {
+                is DragInteraction.Start ->
                     interactions.add(interaction)
-                }
 
-                is DragInteraction.Stop -> {
+                is DragInteraction.Stop ->
                     interactions.remove(interaction.start)
-                }
 
                 is DragInteraction.Cancel -> {
                     hoverStateState = YacrukButtonHoverState.Default
@@ -194,7 +189,7 @@ fun YacrukButton(
                         }
                     },
                 )
-                .yacrukBorder(
+                .yacrukBorderAlt(
                     borderWidth = borderWidth,
                     borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,

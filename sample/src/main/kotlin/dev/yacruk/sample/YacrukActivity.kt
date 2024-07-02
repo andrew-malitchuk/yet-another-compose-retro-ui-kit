@@ -149,10 +149,6 @@ class YacrukActivity : ComponentActivity() {
                         iconOffset = 4.dp,
                         leadingIcon = R.drawable.icon_check_24,
                         tailingIcon = R.drawable.icon_times_circle_24,
-                        backgroundColor = renkon_beige,
-                        borderColor = black_mesa,
-                        borderColorAlt = rustling_leaves,
-                        disableColor = jambalaya,
                     )
 
                     YacrukChip(
@@ -161,11 +157,6 @@ class YacrukActivity : ComponentActivity() {
                         iconOffset = 4.dp,
                         text = "foo",
                         textStyle = YacrukTheme.typography.headline,
-                        backgroundColor = renkon_beige,
-                        borderColor = black_mesa,
-                        borderColorAlt = rustling_leaves,
-                        hoverColor = stone_craft,
-                        disableColor = jambalaya,
                         leadingIcon = {
                             Icon(
                                 painterResource(id = R.drawable.icon_check_24),
@@ -202,8 +193,6 @@ class YacrukActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxWidth(),
                                 progress = 0.5f,
                                 height = 8.dp,
-                                backgroundColor = black_mesa,
-                                progressColor = true_navy
                             )
                         }
 

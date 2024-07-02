@@ -44,7 +44,7 @@ import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.R
 import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.core.ext.clearFocusOnKeyboardDismiss
-import dev.yacruk.io.core.ext.foo
+import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.ext.noRippleClickable
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
@@ -104,13 +104,11 @@ fun YaaumBasicTextField(
     }
 
     when {
-        isDisabled -> {
+        isDisabled ->
             state = YaaumBasicTextFieldState.Disabled
-        }
 
-        !isDisabled -> {
+        !isDisabled ->
             state = YaaumBasicTextFieldState.Enabled
-        }
     }
 
     var textState by remember { mutableStateOf(text) }
@@ -162,7 +160,7 @@ fun YaaumBasicTextField(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .foo(
+                .yacrukBorder(
                     borderWidth = borderWidth,
                     borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,

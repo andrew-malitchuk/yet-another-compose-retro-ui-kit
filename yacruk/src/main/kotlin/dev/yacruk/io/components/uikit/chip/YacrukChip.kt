@@ -42,7 +42,7 @@ import dev.yacruk.io.R
 import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.chip.YacrukChipClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
-import dev.yacruk.io.core.ext.yacrukBorder
+import dev.yacruk.io.core.ext.yacrukBorderAlt
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
@@ -98,9 +98,8 @@ fun YacrukChip(
             hoverStateState = YacrukChipHoverState.Disabled
         }
 
-        !isDisabled -> {
+        !isDisabled ->
             hoverStateState = YacrukChipHoverState.Default
-        }
     }
 
     val offset by animateDpAsState(
@@ -155,9 +154,7 @@ fun YacrukChip(
                 is Release -> {
                     hoverStateState = YacrukChipHoverState.Default
                     clickState = clickState.toggleClick()
-//                    if (!isDisabled) {
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-//                    }
                     interactions.remove(interaction.press)
                 }
 
@@ -166,13 +163,11 @@ fun YacrukChip(
                     interactions.remove(interaction.press)
                 }
 
-                is DragInteraction.Start -> {
+                is DragInteraction.Start ->
                     interactions.add(interaction)
-                }
 
-                is DragInteraction.Stop -> {
+                is DragInteraction.Stop ->
                     interactions.remove(interaction.start)
-                }
 
                 is DragInteraction.Cancel -> {
                     hoverStateState = YacrukChipHoverState.Default
@@ -198,7 +193,7 @@ fun YacrukChip(
                         }
                     },
                 )
-                .yacrukBorder(
+                .yacrukBorderAlt(
                     borderWidth = borderWidth,
                     borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,
