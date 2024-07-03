@@ -7,6 +7,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -56,9 +57,9 @@ fun YacrukSlider(
 
     val haptic = LocalHapticFeedback.current
 
-    var pressed by remember { mutableStateOf(false) }
-    var canvasSize by remember { mutableStateOf(Size(0f, 0f)) }
-    var downX by remember { mutableStateOf(0f) }
+    var pressed by rememberSaveable { mutableStateOf(false) }
+    var canvasSize by rememberSaveable { mutableStateOf(Size(0f, 0f)) }
+    var downX by rememberSaveable { mutableStateOf(0f) }
 
     Canvas(
         modifier =

@@ -23,7 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -60,7 +60,7 @@ fun YacrukChip(
     borderWidth: Dp,
     primaryState: YacrukChipClickState = YacrukChipClickState.Enabled,
     onClick: (() -> Unit)? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource = rememberSaveable { MutableInteractionSource() },
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
     leadingIcon: (@Composable () -> Unit)? = null,
@@ -85,10 +85,10 @@ fun YacrukChip(
 
     val haptic = LocalHapticFeedback.current
 
-    var clickState: YacrukChipClickState by remember {
+    var clickState: YacrukChipClickState by rememberSaveable {
         mutableStateOf(primaryState)
     }
-    var hoverStateState: YacrukChipHoverState by remember {
+    var hoverStateState: YacrukChipHoverState by rememberSaveable {
         mutableStateOf(YacrukChipHoverState.Default)
     }
 
@@ -141,7 +141,7 @@ fun YacrukChip(
         label = "borderColorAltState",
     )
 
-    val interactions = remember { mutableStateListOf<Interaction>() }
+    val interactions = rememberSaveable { mutableStateListOf<Interaction>() }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             when (interaction) {

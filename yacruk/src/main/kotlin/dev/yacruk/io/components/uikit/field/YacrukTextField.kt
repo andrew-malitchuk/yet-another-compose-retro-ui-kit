@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,8 +44,8 @@ import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.R
 import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.core.ext.clearFocusOnKeyboardDismiss
-import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.ext.noRippleClickable
+import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
@@ -97,9 +97,9 @@ fun YaaumBasicTextField(
             ),
     )
 
-    val focusRequester = remember { FocusRequester() }
+    val focusRequester = rememberSaveable { FocusRequester() }
 
-    var state by remember {
+    var state by rememberSaveable {
         mutableStateOf(primaryState)
     }
 
@@ -111,9 +111,9 @@ fun YaaumBasicTextField(
             state = YaaumBasicTextFieldState.Enabled
     }
 
-    var textState by remember { mutableStateOf(text) }
+    var textState by rememberSaveable { mutableStateOf(text) }
 
-    var isOnFocus by remember { mutableStateOf(true) }
+    var isOnFocus by rememberSaveable { mutableStateOf(true) }
 
     if (isOnFocus) {
         if (isDisabled) {
@@ -148,7 +148,7 @@ fun YaaumBasicTextField(
         label = "backgroundColorAltState",
     )
 
-    val interactionSource = remember { MutableInteractionSource() }
+    val interactionSource = rememberSaveable { MutableInteractionSource() }
     val customTextSelectionColors =
         TextSelectionColors(
             handleColor = Color.Transparent,
