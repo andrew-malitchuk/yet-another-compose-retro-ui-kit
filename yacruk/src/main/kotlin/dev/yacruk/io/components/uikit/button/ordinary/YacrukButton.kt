@@ -23,7 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,7 +61,7 @@ fun YacrukButton(
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
     colors: YacrukButtonColors = YacrukButtonDefaults.colors(),
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource = rememberSaveable { MutableInteractionSource() },
     onClick: (() -> Unit)? = null,
 ) {
     Rebugger(
@@ -81,10 +81,10 @@ fun YacrukButton(
 
     val haptic = LocalHapticFeedback.current
 
-    var clickState: YacrukButtonClickState by remember {
+    var clickState: YacrukButtonClickState by rememberSaveable {
         mutableStateOf(primaryState)
     }
-    var hoverStateState: YacrukButtonHoverState by remember {
+    var hoverStateState: YacrukButtonHoverState by rememberSaveable {
         mutableStateOf(YacrukButtonHoverState.Default)
     }
 
@@ -137,7 +137,7 @@ fun YacrukButton(
         label = "borderColorAltState",
     )
 
-    val interactions = remember { mutableStateListOf<Interaction>() }
+    val interactions = rememberSaveable { mutableStateListOf<Interaction>() }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             when (interaction) {
