@@ -41,7 +41,7 @@ import dev.yacruk.io.R
 import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButtonClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
-import dev.yacruk.io.core.ext.yacrukBorder
+import dev.yacruk.io.core.ext.yacrukBorderAlt
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
@@ -54,20 +54,21 @@ import io.github.serpro69.kfaker.Faker
 @Composable
 fun YacrukButton(
     modifier: Modifier = Modifier,
-    strokeWidth: Dp,
-    primaryState: YacrukButtonClickState = YacrukButtonClickState.Enabled,
+    borderWidth: Dp,
     text: String,
-    onClick: (() -> Unit)? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    primaryState: YacrukButtonClickState = YacrukButtonClickState.Enabled,
     icon: (@Composable () -> Unit)? = null,
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
+    colors: YacrukButtonColors = YacrukButtonDefaults.colors(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: (() -> Unit)? = null,
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
-                "strokeWidth" to strokeWidth,
+                "borderWidth" to borderWidth,
                 "primaryState" to primaryState,
                 "text" to text,
                 "onClick" to onClick,
@@ -93,23 +94,16 @@ fun YacrukButton(
             hoverStateState = YacrukButtonHoverState.Disabled
         }
 
-        !isDisabled -> {
+        !isDisabled ->
             hoverStateState = YacrukButtonHoverState.Default
-        }
     }
-
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = jambalaya
 
     val offset by animateDpAsState(
         targetValue =
             when (clickState) {
-                YacrukButtonClickState.Clicked -> (strokeWidth * 2) + strokeWidth
-                YacrukButtonClickState.Enabled -> (strokeWidth * 2)
-                else -> (strokeWidth * 2)
+                YacrukButtonClickState.Clicked -> (borderWidth * 2) + borderWidth
+                YacrukButtonClickState.Enabled -> (borderWidth * 2)
+                else -> (borderWidth * 2)
             },
         label = "offset",
     )
@@ -117,8 +111,8 @@ fun YacrukButton(
     val borderColorAltState by animateColorAsState(
         targetValue =
             when (clickState) {
-                YacrukButtonClickState.Clicked -> borderColorAlt
-                YacrukButtonClickState.Disabled -> disableColor
+                YacrukButtonClickState.Clicked -> colors.borderColorAlt
+                YacrukButtonClickState.Disabled -> colors.disableColor
                 else -> Color.Transparent
             },
         label = "borderColorAltState",
@@ -127,9 +121,9 @@ fun YacrukButton(
     val backgroundColorState by animateColorAsState(
         targetValue =
             when (hoverStateState) {
-                YacrukButtonHoverState.Hovered -> hoverColor
-                YacrukButtonHoverState.Disabled -> disableColor
-                else -> backgroundColor
+                YacrukButtonHoverState.Hovered -> colors.hoverColor
+                YacrukButtonHoverState.Disabled -> colors.disableColor
+                else -> colors.backgroundColor
             },
         label = "backgroundColorAltState",
     )
@@ -156,9 +150,7 @@ fun YacrukButton(
                 is Release -> {
                     hoverStateState = YacrukButtonHoverState.Default
                     clickState = clickState.toggleClick()
-//                    if (!isDisabled) {
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-//                    }
                     interactions.remove(interaction.press)
                 }
 
@@ -167,13 +159,11 @@ fun YacrukButton(
                     interactions.remove(interaction.press)
                 }
 
-                is DragInteraction.Start -> {
+                is DragInteraction.Start ->
                     interactions.add(interaction)
-                }
 
-                is DragInteraction.Stop -> {
+                is DragInteraction.Stop ->
                     interactions.remove(interaction.start)
-                }
 
                 is DragInteraction.Cancel -> {
                     hoverStateState = YacrukButtonHoverState.Default
@@ -199,9 +189,9 @@ fun YacrukButton(
                         }
                     },
                 )
-                .yacrukBorder(
-                    strokeWidth = strokeWidth,
-                    borderColor = borderColor,
+                .yacrukBorderAlt(
+                    borderWidth = borderWidth,
+                    borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,
                     borderColorAlt = borderColorAltState,
                 ),
@@ -212,8 +202,8 @@ fun YacrukButton(
                     .fillMaxWidth()
                     .padding(
                         start = offset,
-                        bottom = strokeWidth * 2,
-                        top = strokeWidth * 2,
+                        bottom = borderWidth * 2,
+                        top = borderWidth * 2,
                     ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -273,13 +263,38 @@ sealed class YacrukButtonHoverState {
     data object Default : YacrukButtonHoverState()
 }
 
+class YacrukButtonColors internal constructor(
+    val backgroundColor: Color,
+    val borderColor: Color,
+    val borderColorAlt: Color,
+    val hoverColor: Color,
+    val disableColor: Color,
+)
+
+object YacrukButtonDefaults {
+    @Composable
+    fun colors(
+        backgroundColor: Color = renkon_beige,
+        borderColor: Color = black_mesa,
+        borderColorAlt: Color = rustling_leaves,
+        hoverColor: Color = stone_craft,
+        disableColor: Color = jambalaya,
+    ) = YacrukButtonColors(
+        backgroundColor = backgroundColor,
+        borderColor = borderColor,
+        borderColorAlt = borderColorAlt,
+        hoverColor = hoverColor,
+        disableColor = disableColor,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYacrukButton() {
     val faker = Faker()
     YacrukTheme {
         YacrukButton(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             icon = {
                 Icon(
                     painterResource(id = R.drawable.icon_check_24),

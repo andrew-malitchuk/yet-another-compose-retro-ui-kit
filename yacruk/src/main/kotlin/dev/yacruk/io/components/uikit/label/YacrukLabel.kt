@@ -5,18 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
-import dev.yacruk.io.R
 import dev.yacruk.io.components.internal.preview.YacrukPreview
-import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
@@ -83,16 +78,6 @@ private fun PreviewYacrukLabel() {
             title = faker.cowboyBebop.quote(),
             textStyle = YacrukTheme.typography.body,
         ) {
-            YacrukButton(
-                strokeWidth = 4.dp,
-                icon = {
-                    Icon(
-                        painterResource(id = R.drawable.icon_check_24),
-                        contentDescription = "",
-                    )
-                },
-                text = faker.cowboyBebop.quote(),
-            )
         }
     }
 }

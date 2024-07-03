@@ -34,28 +34,27 @@ import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
-import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
-import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
 
 @Composable
 fun YacrukIconButton(
     modifier: Modifier = Modifier,
-    strokeWidth: Dp,
+    borderWidth: Dp,
     iconSize: Dp,
+    icon: Int,
     primaryState: YacrukIconButtonClickState = YacrukIconButtonClickState.Enabled,
     onClick: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    icon: Int,
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
+    colors: YacrukIconButtonColors = YacrukIconButtonDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
-                "strokeWidth" to strokeWidth,
+                "borderWidth" to borderWidth,
                 "iconSize" to iconSize,
                 "primaryState" to primaryState,
                 "onClick" to onClick,
@@ -63,6 +62,7 @@ fun YacrukIconButton(
                 "icon" to icon,
                 "iconOffset" to iconOffset,
                 "isDisabled" to isDisabled,
+                "colors" to colors,
             ),
     )
 
@@ -72,29 +72,22 @@ fun YacrukIconButton(
         mutableStateOf(primaryState)
     }
 
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = rustling_leaves
-    val borderColorClicked = true_navy
-
     val borderColorState by animateColorAsState(
         targetValue =
             when (clickState) {
                 YacrukIconButtonClickState.Clicked ->
                     if (!isDisabled) {
-                        borderColorClicked
+                        colors.borderColorClicked
                     } else {
-                        borderColorAlt
+                        colors.borderColorAlt
                     }
 
                 YacrukIconButtonClickState.Disabled -> Color.Cyan
                 YacrukIconButtonClickState.Enabled ->
                     if (!isDisabled) {
-                        borderColor
+                        colors.borderColor
                     } else {
-                        borderColorAlt
+                        colors.borderColorAlt
                     }
             },
         label = "borderColorState",
@@ -115,17 +108,14 @@ fun YacrukIconButton(
                     interactions.remove(interaction.press)
                 }
 
-                is PressInteraction.Cancel -> {
+                is PressInteraction.Cancel ->
                     interactions.remove(interaction.press)
-                }
 
-                is DragInteraction.Start -> {
+                is DragInteraction.Start ->
                     interactions.add(interaction)
-                }
 
-                is DragInteraction.Stop -> {
+                is DragInteraction.Stop ->
                     interactions.remove(interaction.start)
-                }
 
                 is DragInteraction.Cancel -> {
                     clickState = YacrukIconButtonClickState.Disabled
@@ -150,7 +140,7 @@ fun YacrukIconButton(
                     },
                 )
                 .yacrukIconBorder(
-                    strokeWidth = strokeWidth,
+                    borderWidth = borderWidth,
                     borderColor = borderColorState,
                     backgroundColor = Color.Transparent,
                 )
@@ -181,12 +171,31 @@ sealed class YacrukIconButtonClickState {
     }
 }
 
+class YacrukIconButtonColors internal constructor(
+    val borderColor: Color,
+    val borderColorAlt: Color,
+    val borderColorClicked: Color,
+)
+
+object YacrukIconButtonDefaults {
+    @Composable
+    fun colors(
+        borderColor: Color = black_mesa,
+        borderColorAlt: Color = rustling_leaves,
+        borderColorClicked: Color = true_navy,
+    ) = YacrukIconButtonColors(
+        borderColor = borderColor,
+        borderColorAlt = borderColorAlt,
+        borderColorClicked = borderColorClicked,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYacrukIconButton() {
     YacrukTheme {
         YacrukIconButton(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             icon = R.drawable.icon_check_24,
             iconSize = 48.dp,
             iconOffset = 2.dp,

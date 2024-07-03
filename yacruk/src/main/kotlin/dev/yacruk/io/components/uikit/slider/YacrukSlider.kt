@@ -6,7 +6,6 @@ import android.view.MotionEvent
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -30,33 +29,32 @@ import kotlin.math.abs
 @ExperimentalComposeUiApi
 @Composable
 fun YacrukSlider(
+    modifier: Modifier = Modifier,
     value: Float,
     onValueChanged: (Float) -> Unit,
-    modifier: Modifier = Modifier,
+    borderWidth: Dp,
+    pointerSize: Dp,
     enabled: Boolean = true,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     stepSize: Float = 0.01f,
-    strokeWidth: Dp,
-    pointerSize: Dp,
+    colors: YacrukBarColors = YacrukBarColorsDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
             mapOf(
+                "modifier" to modifier,
                 "value" to value,
                 "onValueChanged" to onValueChanged,
-                "modifier" to modifier,
+                "borderWidth" to borderWidth,
+                "pointerSize" to pointerSize,
                 "enabled" to enabled,
                 "valueRange" to valueRange,
                 "stepSize" to stepSize,
-                "strokeWidth" to strokeWidth,
-                "pointerSize" to pointerSize,
+                "colors" to colors,
             ),
     )
 
     val haptic = LocalHapticFeedback.current
-
-    val borderColor = true_navy
-    val dotColor = black_mesa
 
     var pressed by remember { mutableStateOf(false) }
     var canvasSize by remember { mutableStateOf(Size(0f, 0f)) }
@@ -123,22 +121,22 @@ fun YacrukSlider(
         // after
         val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
         drawLine(
-            color = dotColor,
+            color = colors.dotColor,
             start = Offset(0f, center.y),
             end = Offset(width, center.y),
-            strokeWidth = strokeWidth.toPx(),
+            strokeWidth = borderWidth.toPx(),
             pathEffect = pathEffect,
         )
         // before
         drawLine(
-            color = borderColor,
+            color = colors.borderColor,
             start = Offset(0f, center.y),
             end = point,
-            strokeWidth = strokeWidth.toPx(),
+            strokeWidth = borderWidth.toPx(),
         )
         // pin
         drawRect(
-            color = borderColor,
+            color = colors.borderColor,
             topLeft =
                 Offset(
                     (value - valueRange.start) / (valueRange.endInclusive - valueRange.start) * width,
@@ -152,13 +150,13 @@ fun YacrukSlider(
         )
         // pin border
         drawRect(
-            color = dotColor,
+            color = colors.dotColor,
             topLeft =
                 Offset(
                     (value - valueRange.start) / (valueRange.endInclusive - valueRange.start) * width,
                     (center.y - (pointerSize.toPx() / 2)),
                 ),
-            style = Stroke(width = strokeWidth.toPx()),
+            style = Stroke(width = borderWidth.toPx()),
             size =
                 Size(
                     width = pointerSize.toPx(),
@@ -176,18 +174,18 @@ private fun toPx(dp: Dp) =
     )
 
 class YacrukBarColors internal constructor(
-    val colorPrimary: Color,
-    val colorTrack: Color,
+    val borderColor: Color,
+    val dotColor: Color,
 )
 
 object YacrukBarColorsDefaults {
     @Composable
     fun colors(
-        colorPrimary: Color = MaterialTheme.colors.primary,
-        colorTrack: Color = MaterialTheme.colors.onBackground,
+        borderColor: Color = true_navy,
+        dotColor: Color = black_mesa,
     ) = YacrukBarColors(
-        colorPrimary = colorPrimary,
-        colorTrack = colorTrack,
+        borderColor = borderColor,
+        dotColor = dotColor,
     )
 }
 
@@ -206,7 +204,7 @@ private fun PreviewYacrukSlider() {
                     .fillMaxWidth(),
             valueRange = 0f..30f,
             stepSize = 2f,
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             pointerSize = 12.dp,
         )
     }

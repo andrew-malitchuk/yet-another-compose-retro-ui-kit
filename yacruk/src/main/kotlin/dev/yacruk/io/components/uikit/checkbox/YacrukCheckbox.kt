@@ -31,77 +31,52 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.components.uikit.checkbox.YacrukCheckboxClickState.Clicked.toggleClick
 import dev.yacruk.io.components.uikit.text.YacrukText
 import dev.yacruk.io.core.ext.yacrukIconBorder
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
-import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
-import dev.yacruk.io.core.theme.source.color.stone_craft
 import dev.yacruk.io.core.theme.source.color.true_navy
 import io.github.serpro69.kfaker.Faker
 
 @Composable
 fun YacrukCheckbox(
     modifier: Modifier = Modifier,
-    strokeWidth: Dp,
+    borderWidth: Dp,
+    iconSize: Dp,
+    textStyle: TextStyle,
     primaryState: YacrukCheckboxClickState = YacrukCheckboxClickState.Enabled,
-    onClick: (() -> Unit)? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     isDisabled: Boolean = false,
     text: String? = null,
-    textStyle: TextStyle,
-    iconSize: Dp,
     textSpacing: Dp = 0.dp,
+    colors: YacrukCheckboxColors = YacrukCheckboxDefaults.colors(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: (() -> Unit)? = null,
 ) {
-    Rebugger(
-        trackMap =
-            mapOf(
-                "modifier" to modifier,
-                "strokeWidth" to strokeWidth,
-                "primaryState" to primaryState,
-                "onClick" to onClick,
-                "interactionSource" to interactionSource,
-                "isDisabled" to isDisabled,
-                "text" to text,
-                "textStyle" to textStyle,
-                "iconSize" to iconSize,
-                "textSpacing" to textSpacing,
-            ),
-    )
-
     val haptic = LocalHapticFeedback.current
 
     var clickState: YacrukCheckboxClickState by remember {
         mutableStateOf(primaryState)
     }
 
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = rustling_leaves
-    val borderColorClicked = true_navy
-
     val borderColorState by animateColorAsState(
         targetValue =
             when (clickState) {
                 YacrukCheckboxClickState.Clicked ->
                     if (!isDisabled) {
-                        borderColorClicked
+                        colors.borderColorClicked
                     } else {
-                        borderColorAlt
+                        colors.borderColorAlt
                     }
 
                 YacrukCheckboxClickState.Disabled -> Color.Cyan
                 YacrukCheckboxClickState.Enabled ->
                     if (!isDisabled) {
-                        borderColor
+                        colors.borderColor
                     } else {
-                        borderColorAlt
+                        colors.borderColorAlt
                     }
             },
         label = "borderColorState",
@@ -122,17 +97,14 @@ fun YacrukCheckbox(
                     interactions.remove(interaction.press)
                 }
 
-                is PressInteraction.Cancel -> {
+                is PressInteraction.Cancel ->
                     interactions.remove(interaction.press)
-                }
 
-                is DragInteraction.Start -> {
+                is DragInteraction.Start ->
                     interactions.add(interaction)
-                }
 
-                is DragInteraction.Stop -> {
+                is DragInteraction.Stop ->
                     interactions.remove(interaction.start)
-                }
 
                 is DragInteraction.Cancel -> {
                     clickState = YacrukCheckboxClickState.Disabled
@@ -163,11 +135,11 @@ fun YacrukCheckbox(
                 modifier
                     .size(iconSize)
                     .yacrukIconBorder(
-                        strokeWidth = strokeWidth,
+                        borderWidth = borderWidth,
                         borderColor = borderColorState,
                         backgroundColor = Color.Transparent,
                     )
-                    .padding((strokeWidth.value * 1.5).dp),
+                    .padding((borderWidth.value * 1.5).dp),
         ) {
             Box(
                 modifier =
@@ -207,13 +179,32 @@ sealed class YacrukCheckboxClickState {
     }
 }
 
+class YacrukCheckboxColors internal constructor(
+    val borderColor: Color,
+    val borderColorAlt: Color,
+    val borderColorClicked: Color,
+)
+
+object YacrukCheckboxDefaults {
+    @Composable
+    fun colors(
+        borderColor: Color = black_mesa,
+        borderColorAlt: Color = rustling_leaves,
+        borderColorClicked: Color = true_navy,
+    ) = YacrukCheckboxColors(
+        borderColor = borderColor,
+        borderColorAlt = borderColorAlt,
+        borderColorClicked = borderColorClicked,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYacrukCheckbox() {
     val faker = Faker()
     YacrukTheme {
         YacrukCheckbox(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             textStyle = dev.yacruk.io.core.theme.common.YacrukTheme.typography.headline,
             iconSize = 24.dp,
             text = faker.cowboyBebop.character(),

@@ -44,7 +44,7 @@ import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.R
 import dev.yacruk.io.components.internal.preview.YacrukPreview
 import dev.yacruk.io.core.ext.clearFocusOnKeyboardDismiss
-import dev.yacruk.io.core.ext.foo
+import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.ext.noRippleClickable
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
@@ -52,7 +52,6 @@ import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.jambalaya
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
-import dev.yacruk.io.core.theme.source.color.stone_craft
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -67,12 +66,13 @@ fun YaaumBasicTextField(
     minLines: Int = 1,
     textStyle: TextStyle,
     onCleanTextClick: (() -> Unit)? = null,
-    strokeWidth: Dp,
+    borderWidth: Dp,
     primaryState: YaaumBasicTextFieldState = YaaumBasicTextFieldState.Enabled,
     isDisabled: Boolean = false,
     leadingIcon: Int?,
     tailingIcon: Int?,
     iconOffset: Dp = 0.dp,
+    colors: YaaumBasicTextFieldColors = YaaumBasicTextFieldColorsDefaults.colors(),
 ) {
     Rebugger(
         trackMap =
@@ -87,12 +87,13 @@ fun YaaumBasicTextField(
                 "minLines" to minLines,
                 "textStyle" to textStyle,
                 "onCleanTextClick" to onCleanTextClick,
-                "strokeWidth" to strokeWidth,
+                "borderWidth" to borderWidth,
                 "primaryState" to primaryState,
                 "isDisabled" to isDisabled,
                 "leadingIcon" to leadingIcon,
                 "tailingIcon" to tailingIcon,
                 "iconOffset" to iconOffset,
+                "colors" to colors,
             ),
     )
 
@@ -102,20 +103,12 @@ fun YaaumBasicTextField(
         mutableStateOf(primaryState)
     }
 
-    val backgroundColor = renkon_beige
-    val borderColor = black_mesa
-    val borderColorAlt = rustling_leaves
-    val hoverColor = stone_craft
-    val disableColor = jambalaya
-
     when {
-        isDisabled -> {
+        isDisabled ->
             state = YaaumBasicTextFieldState.Disabled
-        }
 
-        !isDisabled -> {
+        !isDisabled ->
             state = YaaumBasicTextFieldState.Enabled
-        }
     }
 
     var textState by remember { mutableStateOf(text) }
@@ -139,8 +132,8 @@ fun YaaumBasicTextField(
     val borderColorAltState by animateColorAsState(
         targetValue =
             when (state) {
-                YaaumBasicTextFieldState.Focused -> borderColorAlt
-                YaaumBasicTextFieldState.Disabled -> disableColor
+                YaaumBasicTextFieldState.Focused -> colors.borderColorAlt
+                YaaumBasicTextFieldState.Disabled -> colors.disableColor
                 else -> Color.Transparent
             },
         label = "borderColorAltState",
@@ -149,8 +142,8 @@ fun YaaumBasicTextField(
     val backgroundColorState by animateColorAsState(
         targetValue =
             when (state) {
-                YaaumBasicTextFieldState.Disabled -> disableColor
-                else -> backgroundColor
+                YaaumBasicTextFieldState.Disabled -> colors.disableColor
+                else -> colors.backgroundColor
             },
         label = "backgroundColorAltState",
     )
@@ -159,7 +152,7 @@ fun YaaumBasicTextField(
     val customTextSelectionColors =
         TextSelectionColors(
             handleColor = Color.Transparent,
-            backgroundColor = borderColorAlt,
+            backgroundColor = colors.borderColorAlt,
         )
 
     Row(
@@ -167,17 +160,17 @@ fun YaaumBasicTextField(
             Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .foo(
-                    strokeWidth = strokeWidth,
-                    borderColor = borderColor,
+                .yacrukBorder(
+                    borderWidth = borderWidth,
+                    borderColor = colors.borderColor,
                     backgroundColor = backgroundColorState,
                     borderColorAlt = borderColorAltState,
                 )
                 .padding(
-                    start = strokeWidth,
-                    end = strokeWidth,
-                    bottom = strokeWidth,
-                    top = strokeWidth,
+                    start = borderWidth,
+                    end = borderWidth,
+                    bottom = borderWidth,
+                    top = borderWidth,
                 ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
@@ -255,8 +248,8 @@ fun YaaumBasicTextField(
                             interactionSource = interactionSource,
                             contentPadding =
                                 PaddingValues(
-                                    horizontal = strokeWidth * 2,
-                                    vertical = strokeWidth,
+                                    horizontal = borderWidth * 2,
+                                    vertical = borderWidth,
                                 ),
                         )
                     }
@@ -274,6 +267,7 @@ fun YaaumBasicTextField(
                             .size(textStyle.fontSize.value.dp)
                             .noRippleClickable {
                                 textState = ""
+                                onCleanTextClick?.invoke()
                             }
                             .padding(all = 0.dp),
                 )
@@ -291,12 +285,34 @@ sealed class YaaumBasicTextFieldState {
     data object Disabled : YaaumBasicTextFieldState()
 }
 
+class YaaumBasicTextFieldColors internal constructor(
+    val backgroundColor: Color,
+    val borderColor: Color,
+    val borderColorAlt: Color,
+    val disableColor: Color,
+)
+
+object YaaumBasicTextFieldColorsDefaults {
+    @Composable
+    fun colors(
+        backgroundColor: Color = renkon_beige,
+        borderColor: Color = black_mesa,
+        borderColorAlt: Color = rustling_leaves,
+        disableColor: Color = jambalaya,
+    ) = YaaumBasicTextFieldColors(
+        backgroundColor = backgroundColor,
+        borderColor = borderColor,
+        borderColorAlt = borderColorAlt,
+        disableColor = disableColor,
+    )
+}
+
 @YacrukPreview
 @Composable
 private fun PreviewYaaumBasicTextField() {
     YacrukTheme {
         YaaumBasicTextField(
-            strokeWidth = 4.dp,
+            borderWidth = 4.dp,
             textStyle = YacrukTheme.typography.headline,
             iconOffset = 4.dp,
             leadingIcon = R.drawable.icon_check_24,

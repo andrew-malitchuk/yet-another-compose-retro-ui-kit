@@ -1,7 +1,6 @@
 package dev.yacruk.io.components.uikit.text
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,38 +19,36 @@ import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.fontSize
 import io.github.serpro69.kfaker.Faker
 
-// TODO: preview
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun YacrukText(
     modifier: Modifier = Modifier,
     text: String,
-    color: Color = Color.Unspecified,
     textStyle: TextStyle,
+    color: Color = Color.Unspecified,
     fontSize: TextUnit? = null,
     lineHeight: TextUnit? = null,
     textAlign: TextAlign? = null,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
+    isMarqueeEnabled: Boolean = true,
     onTextLayout: ((TextLayoutResult) -> Unit)? = null,
     onClick: (() -> Unit)? = null,
-    isMarqueeEnabled: Boolean = true,
 ) {
     Rebugger(
         trackMap =
             mapOf(
                 "modifier" to modifier,
                 "text" to text,
-                "color" to color,
                 "textStyle" to textStyle,
+                "color" to color,
                 "fontSize" to fontSize,
                 "lineHeight" to lineHeight,
                 "textAlign" to textAlign,
                 "maxLines" to maxLines,
                 "minLines" to minLines,
+                "isMarqueeEnabled" to isMarqueeEnabled,
                 "onTextLayout" to onTextLayout,
                 "onClick" to onClick,
-                "isMarqueeEnabled" to isMarqueeEnabled,
             ),
     )
 
@@ -72,7 +69,6 @@ fun YacrukText(
     )
 }
 
-// TODO: preview
 @Composable
 fun YacrukText(
     modifier: Modifier = Modifier,
