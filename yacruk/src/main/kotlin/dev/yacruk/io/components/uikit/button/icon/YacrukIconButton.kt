@@ -37,6 +37,21 @@ import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.true_navy
 
+/**
+ * A composable function that displays a clickable icon button with customizable size, border,
+ * icon resource, interaction states, and colors.
+ *
+ * @param modifier [Optional] Modifier to apply to the button. Defaults to an empty Modifier.
+ * @param borderWidth The width of the border in dp.
+ * @param iconSize The size of the button in dp.
+ * @param icon The resource ID of the icon to be displayed inside the button.
+ * @param primaryState The initial state of the button (Enabled, Clicked, Disabled). Defaults to Enabled.
+ * @param onClick The callback function to be invoked when the button is clicked. Can be null.
+ * @param interactionSource A source for handling user interactions with the button.
+ * @param iconOffset The padding applied inside the border. Defaults to YacrukTheme.spacing.small.
+ * @param isDisabled Whether the button is disabled and not clickable. Defaults to false.
+ * @param colors The color scheme for the button's border and icon tint. Defaults to the colors defined in `YacrukIconButtonDefaults.colors()`.
+ */
 @Composable
 fun YacrukIconButton(
     modifier: Modifier = Modifier,

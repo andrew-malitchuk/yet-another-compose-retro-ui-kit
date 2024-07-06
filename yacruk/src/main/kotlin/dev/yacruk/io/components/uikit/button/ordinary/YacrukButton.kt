@@ -51,6 +51,21 @@ import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable function that displays a clickable button with customizable size, border, text,
+ * optional icon, interaction states, and colors.
+ *
+ * @param modifier [Optional] Modifier to apply to the button. Defaults to an empty Modifier.
+ * @param borderWidth The width of the border in dp.
+ * @param text The text to be displayed on the button.
+ * @param primaryState The initial state of the button (Enabled, Clicked, Disabled). Defaults to Enabled.
+ * @param icon [Optional] A composable lambda representing the icon to be displayed on the button.
+ * @param iconOffset The padding applied between the icon and the text content. Defaults to YacrukTheme.spacing.small.
+ * @param isDisabled Whether the button is disabled and not clickable. Defaults to false.
+ * @param colors The color scheme for the button's border, text, and background. Defaults to the colors defined in `YacrukButtonDefaults.colors()`.
+ * @param interactionSource A source for handling user interactions with the button.
+ * @param onClick The callback function to be invoked when the button is clicked. Can be null.
+ */
 @Composable
 fun YacrukButton(
     modifier: Modifier = Modifier,
