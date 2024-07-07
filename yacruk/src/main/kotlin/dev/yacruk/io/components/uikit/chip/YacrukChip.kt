@@ -52,6 +52,24 @@ import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable that implements a clickable chip with customizable appearance and behavior.
+ *
+ * This composable offers visual feedback on hover and click interactions and supports
+ * leading icons and custom click behavior.
+ *
+ * @param modifier [Optional] Modifier to apply to the chip. Defaults to an empty Modifier.
+ * @param text The text displayed within the chip.
+ * @param textStyle The text style to apply to the chip text.
+ * @param borderWidth The width of the border around the chip in dp.
+ * @param primaryState The initial state of the chip (Enabled, Clicked, or Disabled). Defaults to YacrukChipClickState.Enabled.
+ * @param onClick A callback lambda invoked when the chip is clicked (if enabled).
+ * @param interactionSource A mutable interaction source for handling user interactions. Defaults to a new `rememberSaveable` MutableInteractionSource.
+ * @param iconOffset The horizontal offset for the leading icon in dp. Defaults to YacrukTheme.spacing.small.
+ * @param isDisabled Whether the chip is currently disabled for user interaction. Defaults to false.
+ * @param leadingIcon A lambda composable that defines the content for the leading icon. Can be null.
+ * @param colors The color scheme for the chip's various states (background, border, etc.). Defaults to the colors defined in `YacrukChipColorsDefaults.colors()`.
+ */
 @Composable
 fun YacrukChip(
     modifier: Modifier = Modifier,

@@ -41,6 +41,22 @@ import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.true_navy
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable function that displays a clickable checkbox with customizable size, border,
+ * text, styling, interaction states, and colors.
+ *
+ * @param modifier [Optional] Modifier to apply to the checkbox. Defaults to an empty Modifier.
+ * @param borderWidth The width of the border in dp.
+ * @param iconSize The size of the checkbox icon in dp.
+ * @param textStyle The text style for the optional text label.
+ * @param primaryState The initial state of the checkbox (Enabled, Clicked, Disabled). Defaults to Enabled.
+ * @param isDisabled Whether the checkbox is disabled and not clickable. Defaults to false.
+ * @param text [Optional] The text label to be displayed next to the checkbox icon.
+ * @param textSpacing The spacing between the checkbox icon and the text label. Defaults to 0.dp.
+ * @param colors The color scheme for the checkbox's border, text, and background. Defaults to the colors defined in `YacrukCheckboxDefaults.colors()`.
+ * @param interactionSource A source for handling user interactions with the checkbox.
+ * @param onClick The callback function to be invoked when the checkbox is clicked. Can be null.
+ */
 @Composable
 fun YacrukCheckbox(
     modifier: Modifier = Modifier,
