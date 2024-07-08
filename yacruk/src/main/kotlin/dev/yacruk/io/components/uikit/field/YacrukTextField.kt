@@ -53,6 +53,32 @@ import dev.yacruk.io.core.theme.source.color.jambalaya
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
 
+/**
+ * A composable that implements a basic text field with customizable appearance and behavior.
+ *
+ * This composable uses the Material Design `BasicTextField` under the hood with extensive
+ * configuration options.
+ *
+ * @OptIn(ExperimentalMaterialApi::class) This function uses an experimental Material API.
+ *
+ * @param modifier [Optional] Modifier to apply to the text field. Defaults to an empty Modifier.
+ * @param text The current text content of the field. Can be null.
+ * @param onTextChanged A callback lambda invoked when the text content changes.
+ * @param keyboardOptions Options that specify the type of keyboard and its behavior. Defaults to KeyboardOptions.Default.
+ * @param keyboardActions Actions to be performed when specific keys are pressed on the software keyboard. Defaults to KeyboardActions.Default.
+ * @param singleLine Whether the text field should allow for only a single line of text. Defaults to true.
+ * @param maxLines The maximum number of lines to display for the text field. Defaults to 1 if singleLine is true, otherwise Int.MAX_VALUE.
+ * @param minLines The minimum number of lines to display for the text field. Defaults to 1.
+ * @param textStyle The text style to apply to the text content.
+ * @param onCleanTextClick A callback lambda invoked when the clear text icon is clicked.
+ * @param borderWidth The width of the border around the text field in dp.
+ * @param primaryState The initial state of the text field (Enabled, Focused, or Disabled). Defaults to YaaumBasicTextFieldState.Enabled.
+ * @param isDisabled Whether the text field is currently disabled for user interaction. Defaults to false.
+ * @param leadingIcon Resource ID for an icon to be displayed at the beginning of the text field. Can be null.
+ * @param tailingIcon Resource ID for an icon to be displayed at the end of the text field. Can be null.
+ * @param iconOffset The horizontal offset for the leading and trailing icons in dp. Defaults to 0.dp.
+ * @param colors The color scheme for the text field's various states (background, border, etc.). Defaults to the colors defined in `YaaumBasicTextFieldColorsDefaults.colors()`.
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun YaaumBasicTextField(
