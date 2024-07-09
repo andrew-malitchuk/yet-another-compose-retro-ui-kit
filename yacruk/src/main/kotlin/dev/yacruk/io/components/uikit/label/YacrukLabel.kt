@@ -17,6 +17,17 @@ import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable function that displays a labeled section with a title, optional padding,
+ * and a content slot for additional composables.
+ *
+ * @param modifier [Optional] Modifier to apply to the label composable. Defaults to an empty Modifier.
+ * @param title The text displayed as the label title.
+ * @param padding [Optional] The spacing between the title and the content in dp. Defaults to YacrukTheme.spacing.small.
+ * @param textStyle The text style to apply to the title.
+ * @param color [Optional] The text color for the title. Defaults to Color.Unspecified.
+ * @param content A lambda composable that defines the content to be placed below the title.
+ */
 @Composable
 fun YacrukLabel(
     modifier: Modifier = Modifier,
@@ -49,6 +60,18 @@ fun YacrukLabel(
     }
 }
 
+/**
+ * A variant of the `YacrukLabel` composable that retrieves the title text from a string resource.
+ *
+ * This function offers the same behavior for `padding`, `textStyle`, `color`, and `content` as the original `YacrukLabel` function. Refer to its documentation for detailed information about these parameters.
+ *
+ * @param modifier [Optional] Modifier to apply to the label composable. Defaults to an empty Modifier.
+ * @param titleResId The resource ID for the string to be displayed as the label title.
+ * @param padding [Optional] The spacing between the title and the content in dp. Defaults to YacrukTheme.spacing.small.
+ * @param textStyle The text style to apply to the title.
+ * @param color [Optional] The text color for the title. Defaults to Color.Unspecified.
+ * @param content A lambda composable that defines the content to be placed below the title.
+ */
 @Composable
 fun YacrukLabel(
     modifier: Modifier = Modifier,
