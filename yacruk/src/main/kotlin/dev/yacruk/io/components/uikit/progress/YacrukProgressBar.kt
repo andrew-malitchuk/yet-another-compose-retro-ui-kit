@@ -23,6 +23,15 @@ import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.true_navy
 
+/**
+ * A composable function that displays a determinate progress bar with a background and customizable colors.
+ *
+ * @param modifier [Optional] Modifier to apply to the progress bar. Defaults to an empty Modifier.
+ * @param progress A value between 0.0 and 1.0 representing the current progress level.
+ * @param height The height of the progress bar in dp.
+ * @param clipShape The shape used to clip the progress bar (defaults to RectangleShape).
+ * @param colors The color scheme for the progress bar's background and progress color. Defaults to the colors defined in `YacrukProgressBarColorsDefaults.colors()`.
+ */
 @Composable
 fun YacrukProgressBar(
     modifier: Modifier = Modifier,
