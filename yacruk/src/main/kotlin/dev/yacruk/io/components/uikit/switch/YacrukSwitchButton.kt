@@ -30,6 +30,21 @@ import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.true_navy
 
+/**
+ * A composable function that displays a Material Design-style switch button with customizable
+ * size, colors, and behavior.
+ *
+ * @param modifier [Optional] Modifier to apply to the switch button. Defaults to an empty Modifier.
+ * @param width The width of the switch button in dp. Defaults to 72.dp.
+ * @param height The height of the switch button in dp. Defaults to 40.dp.
+ * @param gapBetweenThumbAndTrackEdge The spacing between the thumb and the edges of the track in dp. Defaults to YacrukTheme.spacing.small.
+ * @param borderWidth The width of the border around the switch button track in dp. Defaults to 2.dp.
+ * @param iconInnerPadding The padding applied inside the thumb icon in dp. Defaults to YacrukTheme.spacing.extraSmall.
+ * @param thumbSize The size of the thumb icon in dp. Defaults to 8.dp.
+ * @param initValue The initial state of the switch (On or Off). Defaults to false.
+ * @param onStateChange [Optional] A callback lambda to be invoked when the switch state changes.
+ * @param colors The color scheme for the switch button's track and thumb. Defaults to the colors defined in `YacrukSwitchButtonDefaults.colors()`.
+ */
 @Composable
 fun YacrukSwitchButton(
     modifier: Modifier = Modifier,
