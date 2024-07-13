@@ -19,6 +19,22 @@ import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.fontSize
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable function that displays formatted text with customization options.
+ *
+ * @param modifier [Optional] Modifier to apply to the text layout. Defaults to an empty Modifier.
+ * @param text The text content to be displayed.
+ * @param textStyle The text style defining font, size, and other visual properties.
+ * @param color The text color. Defaults to [Color.Unspecified].
+ * @param fontSize [Optional] The font size for the text. Defaults to the font size defined in the textStyle.
+ * @param lineHeight [Optional] The line height for the text. Defaults to the line height defined in the textStyle.
+ * @param textAlign [Optional] The horizontal alignment of the text. Defaults to null (left-aligned).
+ * @param maxLines The maximum number of lines to display. Defaults to Int.MAX_VALUE (unlimited).
+ * @param minLines The minimum number of lines to display. Defaults to 1.
+ * @param isMarqueeEnabled Whether to enable marquee behavior (text scrolls if it overflows). Defaults to true.
+ * @param onTextLayout [Optional] A callback lambda to receive information about the text layout after it's placed.
+ * @param onClick [Optional] A callback lambda to be invoked when the text is clicked.
+ */
 @Composable
 fun YacrukText(
     modifier: Modifier = Modifier,
