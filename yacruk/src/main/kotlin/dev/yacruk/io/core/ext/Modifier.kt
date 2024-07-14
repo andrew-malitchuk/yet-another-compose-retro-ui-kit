@@ -27,6 +27,15 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 
+/**
+ * Creates a new modifier that applies a clickable behavior to the composable without the
+ * default ripple effect.
+ *
+ * @param onClick An optional lambda function that defines the action to be performed when the
+ *        user clicks on the composable. Can be null if click behavior is not desired.
+ * @return A new `Modifier` instance with the clickable behavior applied (if `onClick` is not
+ *         null) or the original modifier unchanged (if `onClick` is null).
+ */
 fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
     composed {
         if (onClick != null) {
@@ -41,6 +50,16 @@ fun Modifier.noRippleClickable(onClick: (() -> Unit)? = null): Modifier =
         }
     }
 
+/**
+ * Creates a new modifier that draws a custom border with an inner background and
+ * accented lines on a composable.
+ *
+ * @param borderWidth The width of the border in dp.
+ * @param backgroundColor The color used to fill the inner area of the border.
+ * @param borderColor The color used for the outer edge of the border.
+ * @param borderColorAlt The color used for the accented lines within the border.
+ * @return A new `Modifier` with the custom border drawn behind the composable content.
+ */
 fun Modifier.yacrukBorderAlt(
     borderWidth: Dp,
     backgroundColor: Color,
@@ -97,6 +116,16 @@ fun Modifier.yacrukBorderAlt(
         )
     }
 
+/**
+ * Creates a new modifier that draws a custom border with an inner background on a composable.
+ *
+ * This border might be a simpler version of `yacrukBorderAlt` without the accented lines.
+ *
+ * @param borderWidth The width of the border in dp.
+ * @param backgroundColor The color used to fill the inner area of the border.
+ * @param borderColor The color used for the outer edge of the border.
+ * @return A new `Modifier` with the custom border drawn behind the composable content.
+ */
 fun Modifier.yacrukBorder(
     borderWidth: Dp,
     backgroundColor: Color,
@@ -153,6 +182,19 @@ fun Modifier.yacrukBorder(
         )
     }
 
+/**
+ * Creates a new modifier that draws a custom border with an inner background and positions
+ * provided text within the border.
+ *
+ * This function likely represents a specialized border specifically designed for displaying text.
+ *
+ * @param textStyle The text style to apply to the displayed text.
+ * @param borderWidth The width of the border in dp.
+ * @param backgroundColor The color used to fill the inner area of the border.
+ * @param borderColor The color used for the outer edge of the border.
+ * @param text The string content to be displayed within the border.
+ * @return A new `Modifier` with the custom border and positioned text drawn behind the composable content.
+ */
 @Composable
 fun Modifier.yacrukBorder(
     textStyle: TextStyle,
@@ -219,6 +261,15 @@ fun Modifier.yacrukBorder(
     }
 }
 
+/**
+ * Creates a new modifier that draws a custom border with an inner background around a composable,
+ * likely intended for use with icons.
+ *
+ * @param borderWidth The width of the border in dp.
+ * @param backgroundColor The color used to fill the inner area of the border.
+ * @param borderColor The color used for the outer edge of the border.
+ * @return A new `Modifier` with the custom border drawn behind the composable content.
+ */
 fun Modifier.yacrukIconBorder(
     borderWidth: Dp,
     backgroundColor: Color,
@@ -244,6 +295,18 @@ fun Modifier.yacrukIconBorder(
         )
     }
 
+/**
+ * Creates a new modifier that conditionally applies a marquee effect to the composable.
+ *
+ * The marquee effect animates the content horizontally to simulate scrolling text
+ * that doesn't fit within the available width.
+ *
+ * @param isEnabled A flag indicating whether to enable the marquee effect.
+ * @return A new `Modifier` with the marquee effect applied if `isEnabled` is true,
+ *         otherwise the original modifier is returned.
+ *
+ * @OptIn(ExperimentalFoundationApi::class) This function uses an experimental Foundation API.
+ */
 @OptIn(ExperimentalFoundationApi::class)
 fun Modifier.marquee(isEnabled: Boolean): Modifier {
     return if (isEnabled) {
@@ -254,7 +317,16 @@ fun Modifier.marquee(isEnabled: Boolean): Modifier {
 }
 
 /**
- * Remove focus from keyboard
+ * Creates a new modifier that clears focus from the composable when the software keyboard
+ * is dismissed.
+ *
+ * This function is useful for composables that should lose focus when the user hides
+ * the keyboard, preventing accidental interaction after typing.
+ *
+ * @param initial [Optional] Whether the composable should be initially focused (defaults to false).
+ * @return A new `Modifier` that manages focus based on keyboard visibility.
+ *
+ * @OptIn(ExperimentalLayoutApi::class) This function uses an experimental Layout API.
  */
 @OptIn(ExperimentalLayoutApi::class)
 fun Modifier.clearFocusOnKeyboardDismiss(initial: Boolean = false): Modifier =
