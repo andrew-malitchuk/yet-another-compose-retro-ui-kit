@@ -21,7 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -68,12 +68,12 @@ fun YacrukCheckbox(
     text: String? = null,
     textSpacing: Dp = 0.dp,
     colors: YacrukCheckboxColors = YacrukCheckboxDefaults.colors(),
-    interactionSource: MutableInteractionSource = rememberSaveable { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: (() -> Unit)? = null,
 ) {
     val haptic = LocalHapticFeedback.current
 
-    var clickState: YacrukCheckboxClickState by rememberSaveable {
+    var clickState: YacrukCheckboxClickState by remember {
         mutableStateOf(primaryState)
     }
 
@@ -98,7 +98,7 @@ fun YacrukCheckbox(
         label = "borderColorState",
     )
 
-    val interactions = rememberSaveable { mutableStateListOf<Interaction>() }
+    val interactions = remember { mutableStateListOf<Interaction>() }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             when (interaction) {

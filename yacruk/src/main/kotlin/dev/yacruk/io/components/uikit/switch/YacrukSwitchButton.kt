@@ -14,7 +14,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -75,10 +75,10 @@ fun YacrukSwitchButton(
     )
 
     val interactionSource =
-        rememberSaveable {
+        remember {
             MutableInteractionSource()
         }
-    var onSideChangeState by rememberSaveable {
+    var onSideChangeState by remember {
         mutableStateOf(initValue)
     }
 
@@ -128,7 +128,7 @@ fun YacrukSwitchButton(
 @Composable
 private fun animateAlignmentAsState(targetBiasValue: Float): State<BiasAlignment> {
     val bias by animateFloatAsState(targetBiasValue, label = "")
-    return rememberSaveable { derivedStateOf { BiasAlignment(horizontalBias = bias, verticalBias = 0f) } }
+    return remember { derivedStateOf { BiasAlignment(horizontalBias = bias, verticalBias = 0f) } }
 }
 
 class YacrukSwitchButtonColors internal constructor(

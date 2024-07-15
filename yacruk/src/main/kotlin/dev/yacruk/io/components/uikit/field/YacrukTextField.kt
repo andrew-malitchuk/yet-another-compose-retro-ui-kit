@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -123,9 +123,9 @@ fun YaaumBasicTextField(
             ),
     )
 
-    val focusRequester = rememberSaveable { FocusRequester() }
+    val focusRequester = remember { FocusRequester() }
 
-    var state by rememberSaveable {
+    var state by remember {
         mutableStateOf(primaryState)
     }
 
@@ -137,9 +137,9 @@ fun YaaumBasicTextField(
             state = YaaumBasicTextFieldState.Enabled
     }
 
-    var textState by rememberSaveable { mutableStateOf(text) }
+    var textState by remember { mutableStateOf(text) }
 
-    var isOnFocus by rememberSaveable { mutableStateOf(true) }
+    var isOnFocus by remember { mutableStateOf(true) }
 
     if (isOnFocus) {
         if (isDisabled) {
@@ -174,7 +174,7 @@ fun YaaumBasicTextField(
         label = "backgroundColorAltState",
     )
 
-    val interactionSource = rememberSaveable { MutableInteractionSource() }
+    val interactionSource = remember { MutableInteractionSource() }
     val customTextSelectionColors =
         TextSelectionColors(
             handleColor = Color.Transparent,

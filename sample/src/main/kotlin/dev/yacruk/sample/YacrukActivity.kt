@@ -35,6 +35,7 @@ import dev.yacruk.io.components.uikit.button.icon.YacrukIconButton
 import dev.yacruk.io.components.uikit.button.ordinary.YacrukButton
 import dev.yacruk.io.components.uikit.checkbox.YacrukCheckbox
 import dev.yacruk.io.components.uikit.chip.YacrukChip
+import dev.yacruk.io.components.uikit.demo.Demo
 import dev.yacruk.io.components.uikit.field.YaaumBasicTextField
 import dev.yacruk.io.components.uikit.label.YacrukLabel
 import dev.yacruk.io.components.uikit.progress.YacrukProgressBar
@@ -57,9 +58,6 @@ class YacrukActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val coroutineContext = rememberCoroutineScope()
-            val context = LocalContext.current
-
             YacrukTheme {
                 Column(
                     Modifier
@@ -71,132 +69,7 @@ class YacrukActivity : ComponentActivity() {
                         .navigationBarsPadding()
                         .padding(YacrukTheme.spacing.medium)
                 ) {
-                    var foo by remember {
-                        mutableStateOf(true)
-                    }
-                    YacrukLabel(
-                        title = "foobar",
-                        textStyle = YacrukTheme.typography.body,
-                    ) {
-                        YacrukButton(
-                            borderWidth = 4.dp,
-                            icon = {
-                                Icon(
-                                    painterResource(id = R.drawable.icon_check_24),
-                                    contentDescription = ""
-                                )
-                            },
-                            text = "foobarfoobarfoobarfoobarfoobarfoobar",
-                            isDisabled = foo,
-                            onClick = {
-                                coroutineContext.launch {
-                                    Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                        )
-                    }
-                    Switch(checked = foo, onCheckedChange = {
-                        foo = it
-                    })
-
-                    var foobar by remember {
-                        mutableFloatStateOf(0f)
-                    }
-
-                    YacrukSlider(
-                        value = foobar,
-                        onValueChanged = { foobar = it },
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(),
-                        valueRange = 0f..30f,
-                        stepSize = 2f,
-                        borderWidth = 4.dp,
-                        pointerSize = 12.dp,
-                    )
-
-                    YacrukIconButton(
-                        borderWidth = 4.dp,
-                        icon = R.drawable.icon_check_24,
-                        isDisabled = foo,
-                        iconSize = 48.dp,
-                        iconOffset = 2.dp,
-                        onClick = {
-                            coroutineContext.launch {
-                                Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    )
-                    YacrukContentButton(
-                        borderWidth = 4.dp,
-                        isDisabled = foo,
-                        contentSize = 48.dp,
-                        contentOffset = 2.dp,
-                        onClick = {
-                            coroutineContext.launch {
-                                Toast.makeText(context, "foo", Toast.LENGTH_SHORT).show()
-                            }
-                        },
-                        content = {
-                            YacrukText(text = "10", textStyle = YacrukTheme.typography.headline)
-                        }
-                    )
-
-                    YaaumBasicTextField(
-                        borderWidth = 4.dp,
-                        isDisabled = foo,
-                        textStyle = YacrukTheme.typography.headline,
-                        iconOffset = 4.dp,
-                        leadingIcon = R.drawable.icon_check_24,
-                        tailingIcon = R.drawable.icon_times_circle_24,
-                    )
-
-                    YacrukChip(
-                        borderWidth = 4.dp,
-                        isDisabled = foo,
-                        iconOffset = 4.dp,
-                        text = "foo",
-                        textStyle = YacrukTheme.typography.headline,
-                        leadingIcon = {
-                            Icon(
-                                painterResource(id = R.drawable.icon_check_24),
-                                contentDescription = ""
-                            )
-                        },
-                    )
-                    YacrukCheckbox(
-                        borderWidth = 4.dp,
-                        textStyle = YacrukTheme.typography.headline,
-                        iconSize = 24.dp,
-                        text = "foobar",
-                        textSpacing = 4.dp,
-                        isDisabled = foo,
-                    )
-                    YacrukBorder(
-                        textStyle = YacrukTheme.typography.body,
-                        borderWidth = 4.dp,
-                        text = "lorem ipsum",
-                        padding = 8.dp,
-                    ) {
-                        Column {
-                            YacrukBadge(
-                                text = "1",
-                                textStyle = YacrukTheme.typography.headline,
-                                padding = 4.dp,
-                                shape = RectangleShape
-                            )
-                            YacrukSwitchButton(
-                                borderWidth = 4.dp,
-                                thumbSize = 24.dp,
-                            )
-                            YacrukProgressBar(
-                                modifier = Modifier.fillMaxWidth(),
-                                progress = 0.5f,
-                                height = 8.dp,
-                            )
-                        }
-
-                    }
+                    Demo()
 
                 }
             }
