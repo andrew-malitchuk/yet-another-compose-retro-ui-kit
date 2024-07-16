@@ -42,9 +42,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun Demo(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(YacrukTheme.spacing.medium)
+        modifier =
+            modifier
+                .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(YacrukTheme.spacing.medium),
     ) {
         val coroutineContext = rememberCoroutineScope()
         val context = LocalContext.current
@@ -61,7 +62,7 @@ fun Demo(modifier: Modifier = Modifier) {
                 icon = {
                     Icon(
                         painterResource(id = R.drawable.icon_check_24),
-                        contentDescription = ""
+                        contentDescription = "",
                     )
                 },
                 text = faker.fmaBrotherhood.cities(),
@@ -70,7 +71,7 @@ fun Demo(modifier: Modifier = Modifier) {
                     coroutineContext.launch {
                         Toast.makeText(context, faker.cowboyBebop.episode(), Toast.LENGTH_SHORT).show()
                     }
-                }
+                },
             )
         }
 
@@ -81,9 +82,10 @@ fun Demo(modifier: Modifier = Modifier) {
         YacrukSlider(
             value = sliderState,
             onValueChanged = { sliderState = it },
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
             valueRange = 0f..30f,
             stepSize = 2f,
             borderWidth = 4.dp,
@@ -100,7 +102,7 @@ fun Demo(modifier: Modifier = Modifier) {
                 coroutineContext.launch {
                     Toast.makeText(context, faker.cowboyBebop.episode(), Toast.LENGTH_SHORT).show()
                 }
-            }
+            },
         )
         YacrukContentButton(
             borderWidth = 4.dp,
@@ -114,7 +116,7 @@ fun Demo(modifier: Modifier = Modifier) {
             },
             content = {
                 YacrukText(text = faker.idNumber.invalid(), textStyle = YacrukTheme.typography.headline)
-            }
+            },
         )
 
         YaaumBasicTextField(
@@ -135,7 +137,7 @@ fun Demo(modifier: Modifier = Modifier) {
             leadingIcon = {
                 Icon(
                     painterResource(id = R.drawable.icon_check_24),
-                    contentDescription = ""
+                    contentDescription = "",
                 )
             },
         )
@@ -150,17 +152,17 @@ fun Demo(modifier: Modifier = Modifier) {
         YacrukBorder(
             textStyle = YacrukTheme.typography.body,
             borderWidth = 4.dp,
-                    text = faker.fmaBrotherhood.cities(),
+            text = faker.fmaBrotherhood.cities(),
             padding = 8.dp,
         ) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(YacrukTheme.spacing.medium)
+                verticalArrangement = Arrangement.spacedBy(YacrukTheme.spacing.medium),
             ) {
                 YacrukBadge(
                     text = faker.idNumber.invalid(),
                     textStyle = YacrukTheme.typography.headline,
                     padding = 4.dp,
-                    shape = RectangleShape
+                    shape = RectangleShape,
                 )
 
                 YacrukSwitchButton(
@@ -169,7 +171,7 @@ fun Demo(modifier: Modifier = Modifier) {
                     initValue = enabled,
                     onStateChange = {
                         enabled = it
-                    }
+                    },
                 )
                 YacrukProgressBar(
                     modifier = Modifier.fillMaxWidth(),
@@ -177,8 +179,6 @@ fun Demo(modifier: Modifier = Modifier) {
                     height = 8.dp,
                 )
             }
-
         }
     }
-
 }
