@@ -38,6 +38,16 @@ import dev.yacruk.io.core.theme.common.YacrukTheme
 import io.github.serpro69.kfaker.Faker
 import kotlinx.coroutines.launch
 
+/**
+ * A composable function that serves as a demonstration component.
+ *
+ * This function likely showcases some functionality or UI component using potentially
+ * experimental features from Jetpack Compose UI.
+ *
+ * @param modifier [Optional] Modifier to apply to the composable content. Defaults to an empty Modifier.
+ *
+ * @OptIn(ExperimentalComposeUiApi::class) This function uses an experimental API from Jetpack Compose UI.
+ */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Demo(modifier: Modifier = Modifier) {
