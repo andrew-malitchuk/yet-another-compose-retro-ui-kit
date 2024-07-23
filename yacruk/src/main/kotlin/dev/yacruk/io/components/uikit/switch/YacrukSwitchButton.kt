@@ -14,7 +14,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -30,6 +30,21 @@ import dev.yacruk.io.core.theme.source.YacrukTheme
 import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.true_navy
 
+/**
+ * A composable function that displays a Material Design-style switch button with customizable
+ * size, colors, and behavior.
+ *
+ * @param modifier [Optional] Modifier to apply to the switch button. Defaults to an empty Modifier.
+ * @param width The width of the switch button in dp. Defaults to 72.dp.
+ * @param height The height of the switch button in dp. Defaults to 40.dp.
+ * @param gapBetweenThumbAndTrackEdge The spacing between the thumb and the edges of the track in dp. Defaults to YacrukTheme.spacing.small.
+ * @param borderWidth The width of the border around the switch button track in dp. Defaults to 2.dp.
+ * @param iconInnerPadding The padding applied inside the thumb icon in dp. Defaults to YacrukTheme.spacing.extraSmall.
+ * @param thumbSize The size of the thumb icon in dp. Defaults to 8.dp.
+ * @param initValue The initial state of the switch (On or Off). Defaults to false.
+ * @param onStateChange [Optional] A callback lambda to be invoked when the switch state changes.
+ * @param colors The color scheme for the switch button's track and thumb. Defaults to the colors defined in `YacrukSwitchButtonDefaults.colors()`.
+ */
 @Composable
 fun YacrukSwitchButton(
     modifier: Modifier = Modifier,
@@ -60,10 +75,10 @@ fun YacrukSwitchButton(
     )
 
     val interactionSource =
-        rememberSaveable {
+        remember {
             MutableInteractionSource()
         }
-    var onSideChangeState by rememberSaveable {
+    var onSideChangeState by remember {
         mutableStateOf(initValue)
     }
 
@@ -113,7 +128,7 @@ fun YacrukSwitchButton(
 @Composable
 private fun animateAlignmentAsState(targetBiasValue: Float): State<BiasAlignment> {
     val bias by animateFloatAsState(targetBiasValue, label = "")
-    return rememberSaveable { derivedStateOf { BiasAlignment(horizontalBias = bias, verticalBias = 0f) } }
+    return remember { derivedStateOf { BiasAlignment(horizontalBias = bias, verticalBias = 0f) } }
 }
 
 class YacrukSwitchButtonColors internal constructor(

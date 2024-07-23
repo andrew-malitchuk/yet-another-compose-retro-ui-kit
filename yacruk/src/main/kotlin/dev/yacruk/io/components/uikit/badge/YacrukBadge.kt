@@ -24,6 +24,16 @@ import dev.yacruk.io.core.theme.source.color.bittersweet
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable function that displays a badge with customizable text, style, shape, and colors.
+ *
+ * @param modifier [Optional] Modifier to apply to the badge. Defaults to an empty Modifier.
+ * @param text The text to display inside the badge.
+ * @param textStyle The text style for the badge text.
+ * @param shape The shape of the badge.
+ * @param padding [Optional] Padding to apply inside the badge. Defaults to 2dp.
+ * @param colors The color scheme for the badge. Defaults to the colors defined in `YacrukBadgeDefaults.colors()`.
+ */
 @Composable
 fun YacrukBadge(
     modifier: Modifier = Modifier,

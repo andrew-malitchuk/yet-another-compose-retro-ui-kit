@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +53,32 @@ import dev.yacruk.io.core.theme.source.color.jambalaya
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import dev.yacruk.io.core.theme.source.color.rustling_leaves
 
+/**
+ * A composable that implements a basic text field with customizable appearance and behavior.
+ *
+ * This composable uses the Material Design `BasicTextField` under the hood with extensive
+ * configuration options.
+ *
+ * @OptIn(ExperimentalMaterialApi::class) This function uses an experimental Material API.
+ *
+ * @param modifier [Optional] Modifier to apply to the text field. Defaults to an empty Modifier.
+ * @param text The current text content of the field. Can be null.
+ * @param onTextChanged A callback lambda invoked when the text content changes.
+ * @param keyboardOptions Options that specify the type of keyboard and its behavior. Defaults to KeyboardOptions.Default.
+ * @param keyboardActions Actions to be performed when specific keys are pressed on the software keyboard. Defaults to KeyboardActions.Default.
+ * @param singleLine Whether the text field should allow for only a single line of text. Defaults to true.
+ * @param maxLines The maximum number of lines to display for the text field. Defaults to 1 if singleLine is true, otherwise Int.MAX_VALUE.
+ * @param minLines The minimum number of lines to display for the text field. Defaults to 1.
+ * @param textStyle The text style to apply to the text content.
+ * @param onCleanTextClick A callback lambda invoked when the clear text icon is clicked.
+ * @param borderWidth The width of the border around the text field in dp.
+ * @param primaryState The initial state of the text field (Enabled, Focused, or Disabled). Defaults to YaaumBasicTextFieldState.Enabled.
+ * @param isDisabled Whether the text field is currently disabled for user interaction. Defaults to false.
+ * @param leadingIcon Resource ID for an icon to be displayed at the beginning of the text field. Can be null.
+ * @param tailingIcon Resource ID for an icon to be displayed at the end of the text field. Can be null.
+ * @param iconOffset The horizontal offset for the leading and trailing icons in dp. Defaults to 0.dp.
+ * @param colors The color scheme for the text field's various states (background, border, etc.). Defaults to the colors defined in `YaaumBasicTextFieldColorsDefaults.colors()`.
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun YaaumBasicTextField(
@@ -97,9 +123,9 @@ fun YaaumBasicTextField(
             ),
     )
 
-    val focusRequester = rememberSaveable { FocusRequester() }
+    val focusRequester = remember { FocusRequester() }
 
-    var state by rememberSaveable {
+    var state by remember {
         mutableStateOf(primaryState)
     }
 
@@ -111,9 +137,9 @@ fun YaaumBasicTextField(
             state = YaaumBasicTextFieldState.Enabled
     }
 
-    var textState by rememberSaveable { mutableStateOf(text) }
+    var textState by remember { mutableStateOf(text) }
 
-    var isOnFocus by rememberSaveable { mutableStateOf(true) }
+    var isOnFocus by remember { mutableStateOf(true) }
 
     if (isOnFocus) {
         if (isDisabled) {
@@ -148,7 +174,7 @@ fun YaaumBasicTextField(
         label = "backgroundColorAltState",
     )
 
-    val interactionSource = rememberSaveable { MutableInteractionSource() }
+    val interactionSource = remember { MutableInteractionSource() }
     val customTextSelectionColors =
         TextSelectionColors(
             handleColor = Color.Transparent,

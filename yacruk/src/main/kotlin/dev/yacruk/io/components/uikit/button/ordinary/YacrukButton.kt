@@ -23,7 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,6 +51,21 @@ import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable function that displays a clickable button with customizable size, border, text,
+ * optional icon, interaction states, and colors.
+ *
+ * @param modifier [Optional] Modifier to apply to the button. Defaults to an empty Modifier.
+ * @param borderWidth The width of the border in dp.
+ * @param text The text to be displayed on the button.
+ * @param primaryState The initial state of the button (Enabled, Clicked, Disabled). Defaults to Enabled.
+ * @param icon [Optional] A composable lambda representing the icon to be displayed on the button.
+ * @param iconOffset The padding applied between the icon and the text content. Defaults to YacrukTheme.spacing.small.
+ * @param isDisabled Whether the button is disabled and not clickable. Defaults to false.
+ * @param colors The color scheme for the button's border, text, and background. Defaults to the colors defined in `YacrukButtonDefaults.colors()`.
+ * @param interactionSource A source for handling user interactions with the button.
+ * @param onClick The callback function to be invoked when the button is clicked. Can be null.
+ */
 @Composable
 fun YacrukButton(
     modifier: Modifier = Modifier,
@@ -61,7 +76,7 @@ fun YacrukButton(
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
     colors: YacrukButtonColors = YacrukButtonDefaults.colors(),
-    interactionSource: MutableInteractionSource = rememberSaveable { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: (() -> Unit)? = null,
 ) {
     Rebugger(
@@ -81,10 +96,10 @@ fun YacrukButton(
 
     val haptic = LocalHapticFeedback.current
 
-    var clickState: YacrukButtonClickState by rememberSaveable {
+    var clickState: YacrukButtonClickState by remember {
         mutableStateOf(primaryState)
     }
-    var hoverStateState: YacrukButtonHoverState by rememberSaveable {
+    var hoverStateState: YacrukButtonHoverState by remember {
         mutableStateOf(YacrukButtonHoverState.Default)
     }
 
@@ -137,7 +152,7 @@ fun YacrukButton(
         label = "borderColorAltState",
     )
 
-    val interactions = rememberSaveable { mutableStateListOf<Interaction>() }
+    val interactions = remember { mutableStateListOf<Interaction>() }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             when (interaction) {

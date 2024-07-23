@@ -20,6 +20,18 @@ import dev.yacruk.io.core.theme.source.color.black_mesa
 import dev.yacruk.io.core.theme.source.color.renkon_beige
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable function that displays a bordered container with customizable text, style, colors,
+ * and inner content.
+ *
+ * @param modifier [Optional] Modifier to apply to the container. Defaults to an empty Modifier.
+ * @param borderWidth The width of the border in dp.
+ * @param text The text to display above the content.
+ * @param padding The padding applied inside the border.
+ * @param textStyle The text style for the displayed text.
+ * @param colors The color scheme for the border and background. Defaults to the colors defined in `YacrukBorderDefaults.colors()`.
+ * @param content The composable content to be displayed inside the border.
+ */
 @Composable
 fun YacrukBorder(
     modifier: Modifier = Modifier,

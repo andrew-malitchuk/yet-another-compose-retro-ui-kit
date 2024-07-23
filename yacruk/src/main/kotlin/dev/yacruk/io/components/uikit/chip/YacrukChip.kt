@@ -23,7 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,6 +52,24 @@ import dev.yacruk.io.core.theme.source.color.rustling_leaves
 import dev.yacruk.io.core.theme.source.color.stone_craft
 import io.github.serpro69.kfaker.Faker
 
+/**
+ * A composable that implements a clickable chip with customizable appearance and behavior.
+ *
+ * This composable offers visual feedback on hover and click interactions and supports
+ * leading icons and custom click behavior.
+ *
+ * @param modifier [Optional] Modifier to apply to the chip. Defaults to an empty Modifier.
+ * @param text The text displayed within the chip.
+ * @param textStyle The text style to apply to the chip text.
+ * @param borderWidth The width of the border around the chip in dp.
+ * @param primaryState The initial state of the chip (Enabled, Clicked, or Disabled). Defaults to YacrukChipClickState.Enabled.
+ * @param onClick A callback lambda invoked when the chip is clicked (if enabled).
+ * @param interactionSource A mutable interaction source for handling user interactions. Defaults to a new `remember` MutableInteractionSource.
+ * @param iconOffset The horizontal offset for the leading icon in dp. Defaults to YacrukTheme.spacing.small.
+ * @param isDisabled Whether the chip is currently disabled for user interaction. Defaults to false.
+ * @param leadingIcon A lambda composable that defines the content for the leading icon. Can be null.
+ * @param colors The color scheme for the chip's various states (background, border, etc.). Defaults to the colors defined in `YacrukChipColorsDefaults.colors()`.
+ */
 @Composable
 fun YacrukChip(
     modifier: Modifier = Modifier,
@@ -60,7 +78,7 @@ fun YacrukChip(
     borderWidth: Dp,
     primaryState: YacrukChipClickState = YacrukChipClickState.Enabled,
     onClick: (() -> Unit)? = null,
-    interactionSource: MutableInteractionSource = rememberSaveable { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     iconOffset: Dp = YacrukTheme.spacing.small,
     isDisabled: Boolean = false,
     leadingIcon: (@Composable () -> Unit)? = null,
@@ -85,10 +103,10 @@ fun YacrukChip(
 
     val haptic = LocalHapticFeedback.current
 
-    var clickState: YacrukChipClickState by rememberSaveable {
+    var clickState: YacrukChipClickState by remember {
         mutableStateOf(primaryState)
     }
-    var hoverStateState: YacrukChipHoverState by rememberSaveable {
+    var hoverStateState: YacrukChipHoverState by remember {
         mutableStateOf(YacrukChipHoverState.Default)
     }
 
@@ -141,7 +159,7 @@ fun YacrukChip(
         label = "borderColorAltState",
     )
 
-    val interactions = rememberSaveable { mutableStateListOf<Interaction>() }
+    val interactions = remember { mutableStateListOf<Interaction>() }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             when (interaction) {
