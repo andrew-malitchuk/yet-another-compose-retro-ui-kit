@@ -7,17 +7,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.theapache64.rebugger.Rebugger
 import dev.yacruk.io.components.internal.preview.YacrukPreview
+import dev.yacruk.io.components.uikit.board.core.YacrukBorderColors
+import dev.yacruk.io.components.uikit.board.core.YacrukBorderDefaults
 import dev.yacruk.io.core.ext.yacrukBorder
 import dev.yacruk.io.core.theme.common.YacrukTheme
 import dev.yacruk.io.core.theme.source.YacrukTheme
-import dev.yacruk.io.core.theme.source.color.black_mesa
-import dev.yacruk.io.core.theme.source.color.renkon_beige
 import io.github.serpro69.kfaker.Faker
 
 /**
@@ -79,22 +78,6 @@ fun YacrukBorder(
     ) {
         content()
     }
-}
-
-class YacrukBorderColors internal constructor(
-    val borderColor: Color,
-    val backgroundColor: Color,
-)
-
-object YacrukBorderDefaults {
-    @Composable
-    fun colors(
-        borderColor: Color = black_mesa,
-        backgroundColor: Color = renkon_beige,
-    ) = YacrukBorderColors(
-        borderColor = borderColor,
-        backgroundColor = backgroundColor,
-    )
 }
 
 @YacrukPreview
