@@ -33,7 +33,6 @@ class YacrukActivity : ComponentActivity() {
                         .padding(YacrukTheme.spacing.medium)
                 ) {
                     Demo()
-
                 }
             }
         }
