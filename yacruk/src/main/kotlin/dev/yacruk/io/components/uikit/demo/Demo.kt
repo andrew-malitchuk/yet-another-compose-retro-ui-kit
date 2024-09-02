@@ -57,12 +57,18 @@ fun Demo(modifier: Modifier = Modifier) {
                 .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(YacrukTheme.spacing.medium),
     ) {
+        //region core
         val coroutineContext = rememberCoroutineScope()
         val context = LocalContext.current
         var enabled by remember {
             mutableStateOf(true)
         }
         val faker = Faker()
+        var sliderState by remember {
+            mutableFloatStateOf(0f)
+        }
+        //endregion core
+
         YacrukLabel(
             title = faker.cowboyBebop.quote(),
             textStyle = YacrukTheme.typography.body,
@@ -83,10 +89,6 @@ fun Demo(modifier: Modifier = Modifier) {
                     }
                 },
             )
-        }
-
-        var sliderState by remember {
-            mutableFloatStateOf(0f)
         }
 
         YacrukSlider(
