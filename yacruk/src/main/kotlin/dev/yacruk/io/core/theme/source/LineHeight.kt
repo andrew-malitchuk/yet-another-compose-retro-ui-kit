@@ -13,4 +13,3 @@ val lineHeight =
         caption = 16.sp,
         button = 16.sp,
     )
-

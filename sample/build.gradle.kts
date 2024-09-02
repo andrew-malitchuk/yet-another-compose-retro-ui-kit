@@ -51,5 +51,6 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(project(":yacruk"))
+//    implementation("com.github.andrew-malitchuk:yet-another-compose-retro-ui-kit:0.0.1-a.1")
 
 }
