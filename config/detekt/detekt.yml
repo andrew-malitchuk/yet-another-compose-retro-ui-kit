@@ -1,0 +1,88 @@
+# https://github.com/detekt/detekt/blob/main/detekt-core/src/main/resources/default-detekt-config.yml
+
+config:
+  validation: true
+  warningsAsErrors: false
+  checkExhaustiveness: false
+
+complexity:
+  active: true
+  LongParameterList:
+    active: true
+    functionThreshold: 10
+    constructorThreshold: 10
+    ignoreDefaultParameters: true
+    ignoreDataClasses: true
+    ignoreAnnotatedParameter: [ ]
+    ignoreAnnotated: [ "javax.inject.Inject,javax.annotation.Generated" ]
+  LongMethod:
+    active: true
+    threshold: 100
+  NestedBlockDepth:
+    active: true
+    threshold: 10
+  TooManyFunctions:
+    active: true
+    excludes: [
+      "**/test/**",
+      "**/androidTest/**",
+      "**/commonTest/**",
+      "**/jvmTest/**",
+      "**/androidUnitTest/**",
+      "**/androidInstrumentedTest/**",
+      "**/jsTest/**",
+      "**/iosTest/**"
+    ]
+    thresholdInFiles: 25
+    thresholdInClasses: 25
+    thresholdInInterfaces: 25
+    thresholdInObjects: 25
+    thresholdInEnums: 25
+    ignoreDeprecated: false
+    ignorePrivate: false
+    ignoreOverridden: true
+  CyclomaticComplexMethod:
+    active: true
+    threshold: 25
+    ignoreSingleWhenExpression: false
+    ignoreSimpleWhenEntries: false
+    ignoreNestingFunctions: false
+    nestingFunctions:
+      - "also"
+      - "apply"
+      - "forEach"
+      - "isNotNull"
+      - "ifNull"
+      - "let"
+      - "run"
+      - "use"
+      - "with"
+
+exceptions:
+  active: true
+  TooGenericExceptionCaught:
+    active: false
+  SwallowedException:
+    active: false
+
+style:
+  active: true
+  ReturnCount:
+    active: false
+  WildcardImport:
+    active: false
+  ForbiddenComment:
+    active: false
+  UnnecessaryAbstractClass:
+    active: false
+
+naming:
+  active: true
+  MemberNameEqualsClassName:
+    active: false
+  FunctionNaming:
+    active: false
+    aliases: [ 'FunctionName' ]
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**' ]
+    functionPattern: '[a-z][a-zA-Z0-9]*'
+    excludeClassPattern: '$^'
