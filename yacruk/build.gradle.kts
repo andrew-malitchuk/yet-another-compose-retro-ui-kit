@@ -1,10 +1,10 @@
 import dev.yaghm.plugin.internal.core.dsl.bash.Interpreter
-import dev.yaghm.plugin.internal.core.dsl.githook.action
 import dev.yaghm.plugin.internal.core.dsl.githook.doFirst
 import dev.yaghm.plugin.internal.core.dsl.githook.doLast
 import dev.yaghm.plugin.internal.core.dsl.githook.gradle
 import dev.yaghm.plugin.internal.core.dsl.githook.preCommit
 import dev.yaghm.plugin.internal.core.dsl.githook.useShebang
+import java.util.Properties
 
 plugins {
     id("com.android.library")
@@ -13,6 +13,7 @@ plugins {
     id("org.jmailen.kotlinter") version "4.3.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
     id("org.jetbrains.dokka") version "1.9.20"
+    id("maven-publish")
 }
 
 android {
@@ -64,13 +65,11 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-
-    implementation("androidx.compose.material:material")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.foundation)
+    implementation(libs.ui)
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -78,9 +77,66 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.foundation.android)
+    dokkaPlugin(libs.android.documentation.plugin)
+    implementation(libs.rebugger)
+    implementation(libs.kotlin.faker)
+}
 
-    dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.20")
+publishing {
+    publications {
+        create<MavenPublication>("release") {
 
-    implementation("io.github.theapache64:rebugger:1.0.0-rc03")
-    implementation("io.github.serpro69:kotlin-faker:1.14.0")
+            groupId = "io.github.andrew-malitchuk"
+            artifactId = "yacruk"
+            version = "0.0.1-a.3"
+
+            pom {
+                name.set("YACRUK")
+                description.set("Designed to emulate the look and feel of classic digital screens")
+                url.set("https://github.com/andrew-malitchuk/yet-another-compose-retro-ui-kit")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://spdx.org/licenses/MIT.html")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("andrew-malitchuk")
+                        name.set("Andrew Malitchuk")
+                        email.set("andrew.malitchuk@gmail.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/andrew-malitchuk/yet-another-compose-retro-ui-kit.git")
+                    developerConnection.set("scm:git:ssh://github.com/andrew-malitchuk/yet-another-compose-retro-ui-kit.git")
+                    url.set("https://github.com/andrew-malitchuk/yet-another-compose-retro-ui-kit")
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url =
+                uri("https://maven.pkg.github.com/andrew-malitchuk/yet-another-compose-retro-ui-kit")
+            credentials {
+                username = getLocalProperty("username", project)
+                password = getLocalProperty("githubToken", project)
+            }
+        }
+    }
+}
+
+fun getLocalProperty(propertyName: String, project: Project): String {
+    val properties = Properties()
+    val localPropertiesFile = project.rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        properties.load(localPropertiesFile.inputStream())
+    } else {
+        throw GradleException("local.properties file not found!")
+    }
+
+    return properties.getProperty(propertyName)
+        ?: throw GradleException("Property $propertyName not found in local.properties")
 }

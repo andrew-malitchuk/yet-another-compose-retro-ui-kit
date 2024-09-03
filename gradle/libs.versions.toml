@@ -1,15 +1,18 @@
 [versions]
-agp = "8.5.1"
+agp = "8.5.2"
+androidDocumentationPlugin = "1.9.20"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.7.0"
+kotlinFaker = "1.14.0"
 material = "1.12.0"
 lifecycleRuntimeKtx = "2.8.1"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
+rebugger = "1.0.0-rc03"
 yaghm = "0.0.1-a.2"
 detektGradlePlugin = "1.23.1"
 kotlinterGradle = "3.16.0"
@@ -17,11 +20,15 @@ foundationAndroid = "1.6.8"
 foundationText = "1.0.0-alpha07"
 
 [libraries]
+android-documentation-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "androidDocumentationPlugin" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-material = { module = "androidx.compose.material:material" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlin-faker = { module = "io.github.serpro69:kotlin-faker", version.ref = "kotlinFaker" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -39,6 +46,10 @@ detekt-gradle-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-g
 kotlinter-gradle = { group = "org.jmailen.gradle", name = "kotlinter-gradle", version.ref = "kotlinterGradle" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 androidx-foundation-text = { group = "androidx.compose.foundation", name = "foundation-text", version.ref = "foundationText" }
+rebugger = { module = "io.github.theapache64:rebugger", version.ref = "rebugger" }
+ui = { module = "androidx.compose.ui:ui" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
 
 [plugins]
