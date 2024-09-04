@@ -2,20 +2,21 @@
 
 # YACRUK
 
+![Maven Central Version](https://img.shields.io/maven-central/v/io.github.andrew-malitchuk/yacruk)
+
 ## Overview
 
-__YACRUK__ 
+__YACRUK__
 
 ## Components
-
 
 ## Installation
 
 <details open><summary>Kotlin</summary>
 
 ```kt
-plugins {
-    id("io.github.andrew-malitchuk.yacruk") version "0.0.1-a.1"
+dependencies {
+    implementation("io.github.andrew-malitchuk:yacruk:0.0.1-a.3")
 }
 ```
 
@@ -24,9 +25,8 @@ plugins {
 <details><summary>Groovy</summary>
 
 ```groovy
-plugins {
-    id 'com.android.application'
-    id 'io.github.andrew-malitchuk.yacruk' version '0.0.1-a.1'
+dependencies {
+    implementation "io.github.andrew-malitchuk:yacruk:0.0.1-a.3"
 }
 ```
 
@@ -34,9 +34,7 @@ plugins {
 
 ## Usage
 
-
 ## Configuration
-
 
 ## Troubleshooting
 
