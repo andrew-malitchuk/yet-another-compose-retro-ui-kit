@@ -10,7 +10,11 @@ __YACRUK__
 
 ## Components
 
-
+| ![img_badge.png](docs%2Fimg%2Fimg_badge.png)  |  ![img_border.png](docs%2Fimg%2Fimg_border.png) | ![img_button.png](docs%2Fimg%2Fimg_button.png)  |
+|---|---|---|
+|  ![img_checkbox.png](docs%2Fimg%2Fimg_checkbox.png) | ![img_chip.png](docs%2Fimg%2Fimg_chip.png)  | ![img_field.png](docs%2Fimg%2Fimg_field.png)  |
+| ![img_icon.png](docs%2Fimg%2Fimg_icon.png)  | ![img_label.png](docs%2Fimg%2Fimg_label.png)  |![img_progress.png](docs%2Fimg%2Fimg_progress.png)   |
+| ![img_slider.png](docs%2Fimg%2Fimg_slider.png)  | ![img_switch.png](docs%2Fimg%2Fimg_switch.png)  |  ![img_text.png](docs%2Fimg%2Fimg_text.png) |
 
 ## Installation
 
