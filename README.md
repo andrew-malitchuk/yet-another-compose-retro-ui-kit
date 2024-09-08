@@ -40,6 +40,8 @@ dependencies {
 
 ## Usage
 
+Take a look at `@YacrukPreview` to see how to use each component.
+
 ## Configuration
 
 ## Troubleshooting
