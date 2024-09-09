@@ -44,6 +44,8 @@ Take a look at `@YacrukPreview` to see how to use each component.
 
 ## Configuration
 
+All color schemes, fonts, etc are located in `core/theme/common`.
+
 ## Troubleshooting
 
 Encountering issues while using YACRUK? Check out the troubleshooting section for common problems
